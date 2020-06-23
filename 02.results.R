@@ -176,7 +176,8 @@ sig_vars2 <- sig_vars %>%
 
 sig_vars2 %>%
   filter(coef != "s") %>%
-  mutate(coef2 = ifelse(coef == "cov", "Co-variance", "Variance intercept")) %>%
+  mutate(coef2 = ifelse(coef == "cov",
+                        "Co-variance", "Variance intercept")) %>%
   group_by(grp, coef2, modes) %>%
   summarise(mean(est))
 
@@ -184,7 +185,8 @@ sig_vars2 %>%
 sig_vars2 %>%
   filter(coef != "s") %>%
   filter(var %in% c("jbhas", "mobuse")) %>%
-  mutate(coef2 = ifelse(coef == "cov", "Co-variance", "Variance intercept")) %>%
+  mutate(coef2 = ifelse(coef == "cov",
+                        "Co-variance", "Variance intercept")) %>%
   select(grp, var, coef2, modes, est) %>%
   arrange(grp, var, coef2, modes)
 

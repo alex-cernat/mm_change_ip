@@ -13,7 +13,8 @@ rm(list = ls())
 
 # use packrat to install packages localy
 
-pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
+pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet",
+         "knitr", "texreg")
 
 sapply(pkg, library, character.only = T)
 
@@ -39,13 +40,15 @@ fit_tab3 <- read_csv("./output/fit_tab1_mlr.csv")
 sig_vars2<-read_csv("./output/sig_vars.csv")
 
 
-knitr::opts_chunk$set(echo = F)
+knitr::opts_chunk$set(echo = F, message = F, warning = F, error = F)
 ```
 
 
 
 
 ## Some descriptives on the variables we selected to analyse
+
+These are the variables we selected after we went through all possible variables available. Add detailed description from Charlotte.
 
 ```{r}
 cont_vars <- c("finnow", "fiyrdia", "howlng", "netpuse", "scsf1",
@@ -59,14 +62,77 @@ cat_vars <- c("aidxhh", "caruse", "finfut", "j2has", "jbhas",
               "scghql", "scsf2a", "scsf2b", "smoker", "vote1",
               "vote6", "xpmove")
 
-vars_desc
+
+vars_desc %>% 
+  select(Code, Label, `Type of Variable`, Wave) %>% 
+  kable()
 
 ```
 
 # Models
 
+## Sequence of models
+
+We looked ath 4 models that add increasing restrictions:
+
+1. Base LGM with no differences
+2. We restrict the mean of the Slope to be the same across groups
+3. We restrict the variance of the slope to be the same
+4. We restrict the co-variance between the intercept and slope as well as the variance of the intercept to be the same
+
+We compare two groups:
+
+a. Single versus mixed mode
+b. Face to face versus Web (where we create weights for selection)
+
+
 ## Nominal models used for weighting
 
+Here are the models we used to creating the weight:
+
+- Education
+- Age (categorical)
+- Female
+- Having a partner
+- General health
+- Long time illness
+- Live in London
+- Live in the North
+- Live in urban area
+- Refreshment sample
+
+We have 4 patterns depnding when the variables are present:
+
+- all the waves ("all")
+- all the waves except wave 9 ("no9")
+- waves 5, 6 and 7 ("p567")
+- waves 7, 8, 9 and 10 ("p7")
+
+We create weights for each pattern as we also have different respondents selection.
+
+```{r results='asis'}
+pred <- c("edu", "agecat", "female", "partner",
+          "sf1", "longill", "london", "north",
+          "urban", "refresh")
+
+outcomes <- c("all", "no9", "p567", "p7")
+
+reg_out <- map(outcomes, function(x) {
+  form <- str_c(x, " ~ ", str_c(pred,
+                                      collapse = " + "))
+
+  data <- wide_data3 %>%
+    mutate_at(x, as.factor)
+
+  # run logistic
+  mod <- glm(form, data, family = binomial(link = 'logit'))
+
+  mod
+})
+  
+htmlreg(reg_out, html.tag = F, head.tag = F,
+        custom.model.names = outcomes)
+```
 
 ## Estimation issues
 
@@ -80,13 +146,76 @@ jbsemp_mm_config
 - nine models had convergence issues that were fixed by restricting the mean and variance of the inctercept to 0 and increasing the number of iterations: jbsemp_all_config, jbsemp_mm_cor, jbsemp_mm_var, lkmove_mm_var, lkmove_no9_var,
 mobuse_mm_var, smoker_mm_mean, smoker_p7_config, smoker_p7_mean, caruse_all_var, caruse_mm_var. For these models we rerun the models in the series (4 model group comparison) with the same options in order to insure comparability.
 
-## Distribution of coefficients by mode
+## Fit models 
 
-## Fit models table
+Decrease in fit with new models
 
+```{r}
+# distribution of delta bic
+fit_tab3 %>%
+  filter(model != "config") %>%
+  filter(dif_bic > 0) %>% # keep only positive delta bic to help reading
+  mutate(model2 = as.factor(model),
+         model2 = fct_relevel(model2, "mean", "var")) %>% 
+  ggplot(aes(dif_bic)) +
+  geom_histogram() +
+  facet_wrap( ~ model2, scales = "free") +
+  geom_vline(xintercept = 10, color = "red") +
+  theme_bw() +
+  labs(y = "Count", x = "Difference in BIC")
+
+```
+
+The largest difference is from caruse in the mixed mode comparison.
 
 ### Show coefficients that are significantly different
 
+Average differences
+
+```{r results='asis'}
+# average differences
+sig_vars2 %>%
+  filter(coef != "s") %>%
+  mutate(coef2 = ifelse(coef == "cov", 
+                        "Co-variance", "Variance intercept")) %>%
+  group_by(grp, coef2, modes) %>%
+  summarise(mean(est)) %>% 
+  kable(digits = 2)
+```
+
+Large differences can be found for:
+
+```{r results='asis'}
+# largest difference
+# biggest differences
+sig_vars2 %>%
+  filter(coef != "s") %>%
+  filter(var %in% c("jbhas", "mobuse")) %>%
+  mutate(coef2 = ifelse(coef == "cov", 
+                        "Co-variance", "Variance intercept")) %>%
+  select(grp, var, coef2, modes, est) %>%
+  arrange(grp, var, coef2, modes) %>% 
+  kable(digits = 2)
+```
+
+This is the distribution for the rest of the variables that are significantly different.
+
+```{r}
+## the rest
+sig_vars2 %>%
+  filter(coef != "s") %>%
+  filter(var != "jbhas") %>% # largest diffence
+  filter(var != "mobuse") %>% # largest diffence
+  mutate(coef2 = ifelse(coef == "cov", "Co-variance", "Variance intercept")) %>%
+  ggplot(aes(fct_reorder(var, est), est, color = modes)) +
+  geom_point(position = position_dodge()) +
+  facet_grid(grp ~ coef2, scales = "free") +
+  coord_flip() +
+  labs(y = "Estimates", x = "Variables")
+
+
+
+```
 
 # Descriptives statistics?
 
