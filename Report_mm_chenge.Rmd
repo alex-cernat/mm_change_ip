@@ -1,0 +1,99 @@
+---
+title: "Report_mm_chenge"
+author: "Alexandru Cernat"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+# clear working space
+rm(list = ls())
+
+
+# use packrat to install packages localy
+
+pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
+
+sapply(pkg, library, character.only = T)
+
+# load local functions
+map(str_c("./functions/",
+          list.files("./functions/")),
+    source)
+
+
+
+# Import data -------------------------------------------------------------
+
+load("./data/out/identifier_vars_data_charlotte.RData")
+load("./data/out/overlap_vars_data_charlotte.RData")
+
+
+vars_desc <- read_csv("./data/out/vars_desc.csv")
+
+wide_data3 <- read_rds("./data/wide_data3.RDS")
+wide_data5 <- read_rds("./data/clean_data.RDS")
+
+fit_tab3 <- read_csv("./output/fit_tab1_mlr.csv")
+sig_vars2<-read_csv("./output/sig_vars.csv")
+
+
+knitr::opts_chunk$set(echo = F)
+```
+
+
+
+
+## Some descriptives on the variables we selected to analyse
+
+```{r}
+cont_vars <- c("finnow", "fiyrdia", "howlng", "netpuse", "scsf1",
+               "scsf3a", "scsf3b", "scsf4a", "scsf4b", "scsf5",
+               "scsf6a", "scsf6b", "scsf6c", "scsf7")
+
+cat_vars <- c("aidxhh", "caruse", "finfut", "j2has", "jbhas",
+              "jbsemp", "jbterm1", "lkmove", "mobuse", "scghqa",
+              "scghqb", "scghqc", "scghqd", "scghqe", "scghqf",
+              "scghqg", "scghqh", "scghqi", "scghqj", "scghqk",
+              "scghql", "scsf2a", "scsf2b", "smoker", "vote1",
+              "vote6", "xpmove")
+
+vars_desc
+
+```
+
+# Models
+
+## Nominal models used for weighting
+
+
+## Estimation issues
+
+ A total of 328 models were fit (41 variables x 8 models each)  
+
+- eight models failed to converge: all "fiyrdia" models failed to converged and were excluded
+- ten models had warnings due to convergence and will be ignored in the analysis: jbsemp_all_cor, jbsemp_all_var, jbsemp_mm_mean, smoker_mm_config, smoker_mm_cor, smoker_mm_var, smoker_p7_cor, smoker_p7_var,  jbsemp_all_mean,
+jbsemp_mm_config
+
+
+- nine models had convergence issues that were fixed by restricting the mean and variance of the inctercept to 0 and increasing the number of iterations: jbsemp_all_config, jbsemp_mm_cor, jbsemp_mm_var, lkmove_mm_var, lkmove_no9_var,
+mobuse_mm_var, smoker_mm_mean, smoker_p7_config, smoker_p7_mean, caruse_all_var, caruse_mm_var. For these models we rerun the models in the series (4 model group comparison) with the same options in order to insure comparability.
+
+## Distribution of coefficients by mode
+
+## Fit models table
+
+
+### Show coefficients that are significantly different
+
+
+# Descriptives statistics?
+
+### Descriptives for modes
+
+
+### Descriptives for variables used in weighting
+
+
+

@@ -1,0 +1,670 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+02/28/2020  11:08 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   scghqd_5
+   scghqd_6
+   scghqd_7
+   scghqd_8
+   scghqd_10;
+
+   CATEGORICAL ARE
+   scghqd_5
+   scghqd_6
+   scghqd_7
+   scghqd_8
+   scghqd_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(no9= 1 2);
+  WEIGHT IS pred_no9_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 400 100;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | scghqd_5@0 scghqd_6@1 scghqd_7@2 scghqd_8@3 scghqd_10@5;
+
+   %c#1%
+  [s] ;
+   s ;
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] ;
+   s ;
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  Data set contains unknown or missing values for variable NO9.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  111
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  102
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1844
+
+Number of dependent variables                                    5
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   SCGHQD_5    SCGHQD_6    SCGHQD_7    SCGHQD_8    SCGHQD_1
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_NO9
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        400
+  Number of final stage optimizations                          100
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            31
+     Number of y missing data patterns           0
+     Number of u missing data patterns          31
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              SCGHQD_5      SCGHQD_6      SCGHQD_7      SCGHQD_8      SCGHQD_1
+              ________      ________      ________      ________      ________
+ SCGHQD_5       0.386
+ SCGHQD_6       0.292         0.457
+ SCGHQD_7       0.265         0.338         0.595
+ SCGHQD_8       0.252         0.326         0.472         0.581
+ SCGHQD_1       0.223         0.287         0.400         0.435         0.648
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    SCGHQD_5
+      Category 1    0.051           57.679
+      Category 2    0.851          967.476
+      Category 3    0.085           96.564
+      Category 4    0.014           15.635
+    SCGHQD_6
+      Category 1    0.058           80.115
+      Category 2    0.838         1158.891
+      Category 3    0.092          127.235
+      Category 4    0.012           16.284
+    SCGHQD_7
+      Category 1    0.047           56.417
+      Category 2    0.877         1055.879
+      Category 3    0.059           70.622
+      Category 4    0.017           20.517
+    SCGHQD_8
+      Category 1    0.064           72.694
+      Category 2    0.850          969.025
+      Category 3    0.072           81.823
+      Category 4    0.014           16.272
+    SCGHQD_1
+      Category 1    0.040           40.022
+      Category 2    0.851          848.691
+      Category 3    0.090           89.528
+      Category 4    0.019           19.104
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -4325.790  642909           251
+           -4325.791  674171           195
+           -4325.791  987090           70
+           -4325.791  545140           278
+           -4325.791  691234           250
+           -4325.791  399848           220
+           -4325.791  392407           221
+           -4325.791  27071            15
+           -4325.791  960438           116
+           -4325.791  120506           45
+           -4325.791  765392           382
+           -4325.791  930323           267
+           -4325.791  484687           306
+           -4325.791  49221            254
+           -4325.791  723775           97
+           -4325.791  650371           14
+           -4325.791  25127            107
+           -4325.791  520177           262
+           -4325.791  576596           99
+           -4325.791  695155           150
+           -4325.792  319144           176
+           -4325.792  915642           40
+           -4325.792  173440           328
+           -4325.792  717754           180
+           -4325.792  715561           125
+           -4325.793  197223           332
+           -4325.793  992389           77
+           -4325.793  12477            155
+           -4325.793  153053           378
+           -4325.793  232559           136
+           -4325.793  903369           134
+           -4325.793  563002           360
+           -4325.793  192071           142
+           -4325.794  801717           364
+           -4325.794  105435           265
+           -4325.794  821011           161
+           -4325.794  544048           87
+           -4325.794  625191           350
+           -4325.794  264081           186
+           -4325.794  777045           377
+           -4325.794  667250           318
+           -4325.794  576220           115
+           -4325.794  569833           85
+           -4325.794  311214           64
+           -4325.794  871722           355
+           -4325.794  749453           33
+           -4325.794  436460           89
+           -4325.794  963053           43
+           -4325.794  595153           230
+           -4325.794  36714            201
+           -4325.794  804561           59
+           -4325.794  629320           222
+           -4325.794  602797           336
+           -4325.794  76451            211
+           -4325.794  282464           283
+           -4325.794  626891           32
+           -4325.794  798839           312
+           -4325.794  377504           294
+           -4325.794  137305           379
+           -4325.794  318230           46
+           -4325.794  284109           82
+           -4325.794  82357            339
+           -4325.794  127215           9
+           -4325.794  848163           47
+           -4325.794  165853           105
+           -4325.794  70118            104
+           -4325.794  793035           187
+           -4325.794  835767           210
+           -4325.794  182524           373
+           -4325.794  609185           181
+           -4325.794  488125           368
+           -4325.794  575700           100
+           -4325.794  215353           164
+           -4325.795  404426           344
+           -4325.795  608496           4
+           -4325.795  286735           175
+           -4325.795  402224           91
+           -4325.795  840078           203
+           -4325.795  146900           391
+           -4325.795  360419           356
+           -4325.795  848331           137
+           -4325.795  900268           327
+           -4325.795  220454           288
+           -4325.795  411615           171
+           -4325.795  694303           282
+           -4325.795  329127           185
+           -4325.795  405079           68
+           -4325.795  unperturbed      0
+           -4325.795  655497           376
+           -4325.795  939021           8
+           -4325.795  499150           216
+           -4325.795  391949           295
+           -4325.795  970689           266
+           -4325.795  267983           228
+           -4325.795  514326           325
+           -4325.795  794236           127
+           -4325.795  529496           343
+           -4325.795  939709           112
+           -4325.795  415502           194
+           -4325.795  673496           218
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       13
+
+Loglikelihood
+
+          H0 Value                       -4325.790
+          H0 Scaling Correction Factor      2.2245
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    8677.580
+          Bayesian (BIC)                  8749.336
+          Sample-Size Adjusted BIC        8708.035
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes**
+
+          Pearson Chi-Square
+
+          Value                           1724.870
+          Degrees of Freedom                  2021
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            663.851
+          Degrees of Freedom                  2021
+          P-Value                           1.0000
+
+** Of the 3124 cells in the latent class indicator table, 4
+   were deleted in the calculation of chi-square due to extreme values.
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                           1730.854
+          Degrees of Freedom                  4139
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                           1317.093
+          Degrees of Freedom                  4139
+          P-Value                           1.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1180.56004          0.64022
+       2        663.43996          0.35978
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SCGHQD_5           1.000      0.000    999.000    999.000
+    SCGHQD_6           1.000      0.000    999.000    999.000
+    SCGHQD_7           1.000      0.000    999.000    999.000
+    SCGHQD_8           1.000      0.000    999.000    999.000
+    SCGHQD_10          1.000      0.000    999.000    999.000
+
+ S        |
+    SCGHQD_5           0.000      0.000    999.000    999.000
+    SCGHQD_6           1.000      0.000    999.000    999.000
+    SCGHQD_7           2.000      0.000    999.000    999.000
+    SCGHQD_8           3.000      0.000    999.000    999.000
+    SCGHQD_10          5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.387      0.256     -1.510      0.131
+
+ Means
+    I                 -0.046      0.220     -0.207      0.836
+    S                  0.048      0.057      0.843      0.399
+
+ Thresholds
+    SCGHQD_5$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_5$2         3.022      0.187     16.122      0.000
+    SCGHQD_5$3         5.258      0.292     18.005      0.000
+    SCGHQD_6$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_6$2         3.022      0.187     16.122      0.000
+    SCGHQD_6$3         5.258      0.292     18.005      0.000
+    SCGHQD_7$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_7$2         3.022      0.187     16.122      0.000
+    SCGHQD_7$3         5.258      0.292     18.005      0.000
+    SCGHQD_8$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_8$2         3.022      0.187     16.122      0.000
+    SCGHQD_8$3         5.258      0.292     18.005      0.000
+    SCGHQD_1$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_1$2         3.022      0.187     16.122      0.000
+    SCGHQD_1$3         5.258      0.292     18.005      0.000
+
+ Variances
+    I                  2.761      0.799      3.457      0.001
+    S                  0.146      0.092      1.596      0.111
+
+Latent Class 2 (2)
+
+ I        |
+    SCGHQD_5           1.000      0.000    999.000    999.000
+    SCGHQD_6           1.000      0.000    999.000    999.000
+    SCGHQD_7           1.000      0.000    999.000    999.000
+    SCGHQD_8           1.000      0.000    999.000    999.000
+    SCGHQD_10          1.000      0.000    999.000    999.000
+
+ S        |
+    SCGHQD_5           0.000      0.000    999.000    999.000
+    SCGHQD_6           1.000      0.000    999.000    999.000
+    SCGHQD_7           2.000      0.000    999.000    999.000
+    SCGHQD_8           3.000      0.000    999.000    999.000
+    SCGHQD_10          5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.001      0.055     -0.009      0.992
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.000      0.040     -0.007      0.994
+
+ Thresholds
+    SCGHQD_5$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_5$2         3.022      0.187     16.122      0.000
+    SCGHQD_5$3         5.258      0.292     18.005      0.000
+    SCGHQD_6$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_6$2         3.022      0.187     16.122      0.000
+    SCGHQD_6$3         5.258      0.292     18.005      0.000
+    SCGHQD_7$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_7$2         3.022      0.187     16.122      0.000
+    SCGHQD_7$3         5.258      0.292     18.005      0.000
+    SCGHQD_8$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_8$2         3.022      0.187     16.122      0.000
+    SCGHQD_8$3         5.258      0.292     18.005      0.000
+    SCGHQD_1$1        -3.702      0.214    -17.283      0.000
+    SCGHQD_1$2         3.022      0.187     16.122      0.000
+    SCGHQD_1$3         5.258      0.292     18.005      0.000
+
+ Variances
+    I                  2.095      0.486      4.307      0.000
+    S                  0.000      0.000      0.315      0.753
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.576      0.068      8.468      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SCGHQD_5           0.676      0.053     12.719      0.000
+    SCGHQD_6           0.713      0.076      9.371      0.000
+    SCGHQD_7           0.737      0.095      7.760      0.000
+    SCGHQD_8           0.740      0.102      7.217      0.000
+    SCGHQD_10          0.688      0.086      7.966      0.000
+
+ S        |
+    SCGHQD_5           0.000      0.000    999.000    999.000
+    SCGHQD_6           0.164      0.049      3.359      0.001
+    SCGHQD_7           0.339      0.108      3.151      0.002
+    SCGHQD_8           0.511      0.164      3.119      0.002
+    SCGHQD_10          0.791      0.221      3.574      0.000
+
+ S        WITH
+    I                 -0.608      0.154     -3.957      0.000
+
+ Means
+    I                 -0.027      0.133     -0.207      0.836
+    S                  0.126      0.152      0.827      0.408
+
+ Thresholds
+    SCGHQD_5$1        -1.505      0.097    -15.525      0.000
+    SCGHQD_5$2         1.229      0.087     14.132      0.000
+    SCGHQD_5$3         2.138      0.145     14.719      0.000
+    SCGHQD_6$1        -1.590      0.081    -19.705      0.000
+    SCGHQD_6$2         1.298      0.075     17.278      0.000
+    SCGHQD_6$3         2.258      0.120     18.768      0.000
+    SCGHQD_7$1        -1.641      0.083    -19.703      0.000
+    SCGHQD_7$2         1.340      0.077     17.403      0.000
+    SCGHQD_7$3         2.331      0.120     19.440      0.000
+    SCGHQD_8$1        -1.648      0.086    -19.173      0.000
+    SCGHQD_8$2         1.345      0.079     17.028      0.000
+    SCGHQD_8$3         2.341      0.120     19.453      0.000
+    SCGHQD_1$1        -1.532      0.092    -16.692      0.000
+    SCGHQD_1$2         1.251      0.084     14.969      0.000
+    SCGHQD_1$3         2.176      0.127     17.071      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    SCGHQD_5           0.624      0.044     14.100      0.000
+    SCGHQD_6           0.624      0.047     13.144      0.000
+    SCGHQD_7           0.624      0.051     12.170      0.000
+    SCGHQD_8           0.624      0.056     11.236      0.000
+    SCGHQD_10          0.624      0.065      9.591      0.000
+
+ S        |
+    SCGHQD_5           0.000      0.000    999.000    999.000
+    SCGHQD_6           0.001      0.002      0.634      0.526
+    SCGHQD_7           0.003      0.004      0.630      0.529
+    SCGHQD_8           0.004      0.006      0.626      0.531
+    SCGHQD_10          0.006      0.010      0.619      0.536
+
+ S        WITH
+    I                 -0.121     12.574     -0.010      0.992
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                 -0.099     13.587     -0.007      0.994
+
+ Thresholds
+    SCGHQD_5$1        -1.595      0.082    -19.339      0.000
+    SCGHQD_5$2         1.302      0.081     16.126      0.000
+    SCGHQD_5$3         2.266      0.115     19.740      0.000
+    SCGHQD_6$1        -1.595      0.077    -20.727      0.000
+    SCGHQD_6$2         1.303      0.078     16.722      0.000
+    SCGHQD_6$3         2.266      0.108     20.966      0.000
+    SCGHQD_7$1        -1.596      0.075    -21.385      0.000
+    SCGHQD_7$2         1.303      0.077     16.875      0.000
+    SCGHQD_7$3         2.266      0.106     21.375      0.000
+    SCGHQD_8$1        -1.596      0.076    -21.080      0.000
+    SCGHQD_8$2         1.303      0.079     16.546      0.000
+    SCGHQD_8$3         2.267      0.109     20.818      0.000
+    SCGHQD_1$1        -1.596      0.087    -18.281      0.000
+    SCGHQD_1$2         1.303      0.088     14.828      0.000
+    SCGHQD_1$3         2.267      0.127     17.792      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCGHQD_5           0.456      0.072      6.359      0.000
+    SCGHQD_6           0.393      0.054      7.318      0.000
+    SCGHQD_7           0.354      0.048      7.298      0.000
+    SCGHQD_8           0.348      0.049      7.160      0.000
+    SCGHQD_1           0.437      0.063      6.889      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCGHQD_5           0.389      0.055      7.050      0.000
+    SCGHQD_6           0.389      0.051      7.664      0.000
+    SCGHQD_7           0.389      0.049      7.918      0.000
+    SCGHQD_8           0.389      0.051      7.692      0.000
+    SCGHQD_1           0.389      0.061      6.338      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.828E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  23:08:12
+        Ending Time:  23:11:13
+       Elapsed Time:  00:03:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen

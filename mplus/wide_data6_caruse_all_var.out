@@ -1,0 +1,700 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+06/22/2020  11:19 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   caruse_5
+   caruse_6
+   caruse_7
+   caruse_8;
+
+   CATEGORICAL ARE
+   caruse_5
+   caruse_6
+   caruse_7
+   caruse_8;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(all= 1 2);
+  WEIGHT IS pred_all_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | caruse_5@0 caruse_6@1 caruse_7@2 caruse_8@3;
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING
+  Data set contains unknown or missing values for variable ALL.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  91
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  708
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1258
+
+Number of dependent variables                                    4
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   CARUSE_5    CARUSE_6    CARUSE_7    CARUSE_8
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_ALL
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            15
+     Number of y missing data patterns           0
+     Number of u missing data patterns          15
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              CARUSE_5      CARUSE_6      CARUSE_7      CARUSE_8
+              ________      ________      ________      ________
+ CARUSE_5       0.649
+ CARUSE_6       0.566         0.642
+ CARUSE_7       0.476         0.508         0.757
+ CARUSE_8       0.449         0.483         0.627         0.726
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    CARUSE_5
+      Category 1    0.093          100.518
+      Category 2    0.907          984.573
+    CARUSE_6
+      Category 1    0.092           97.825
+      Category 2    0.908          967.575
+    CARUSE_7
+      Category 1    0.088           79.589
+      Category 2    0.912          827.758
+    CARUSE_8
+      Category 1    0.078           67.719
+      Category 2    0.922          799.783
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -1677.482  315029           471
+           -1677.485  383979           603
+           -1677.500  618000           190
+           -1677.513  646573           741
+           -1677.516  35191            703
+           -1677.522  371246           101
+           -1677.531  746978           410
+           -1677.541  153053           378
+           -1677.544  373505           88
+           -1677.553  602797           336
+           -1677.555  505879           424
+           -1677.579  232226           235
+           -1677.588  629320           222
+           -1677.591  512836           289
+           -1677.596  170954           86
+           -1677.600  724519           333
+           -1677.610  605358           321
+           -1677.610  748692           204
+           -1677.622  161421           519
+           -1677.643  761633           50
+           -1677.649  194143           510
+           -1677.665  563002           360
+           -1677.668  267983           228
+           -1677.681  435287           623
+           -1677.688  551340           766
+           -1677.689  383986           159
+           -1677.709  14262            781
+           -1677.714  113138           585
+           -1677.722  327140           678
+           -1677.722  728038           177
+           -1677.724  891531           206
+           -1677.726  965639           463
+           -1677.736  140442           500
+           -1677.739  456213           160
+           -1677.749  852283           616
+           -1677.751  991329           182
+           -1677.768  682718           733
+           -1677.772  754100           56
+           -1677.779  124999           96
+           -1677.782  723775           97
+           -1677.786  68850            462
+           -1677.788  606576           151
+           -1677.793  580539           786
+           -1677.809  15270            610
+           -1677.820  824126           287
+           -1677.826  836066           372
+           -1677.829  4091             548
+           -1677.829  499150           216
+           -1677.839  263268           165
+           -1677.845  58507            793
+           -1677.849  153942           31
+           -1677.850  995875           547
+           -1677.854  723035           538
+           -1677.867  928287           197
+           -1677.873  106561           686
+           -1677.890  915107           54
+           -1677.896  85462            51
+           -1677.902  497522           502
+           -1677.912  193847           354
+           -1677.919  888905           444
+           -1677.925  123985           248
+           -1677.933  478421           311
+           -1677.942  320494           465
+           -1677.944  370957           554
+           -1677.945  107446           12
+           -1677.946  391949           295
+           -1677.951  364676           27
+           -1677.952  791396           243
+           -1677.963  294811           637
+           -1677.970  650354           577
+           -1677.981  373815           618
+           -1677.982  848356           602
+           -1677.989  69413            472
+           -1677.991  371737           532
+           -1678.005  783102           433
+           -1678.009  823392           479
+           -1678.018  411615           171
+           -1678.020  131856           90
+           -1678.023  77210            712
+           -1678.027  545140           278
+           -1678.030  973369           202
+           -1678.031  789985           67
+           -1678.032  137305           379
+           -1678.041  769907           457
+           -1678.046  165853           105
+           -1678.049  260953           589
+           -1678.059  172913           557
+           -1678.061  85734            411
+           -1678.067  308582           752
+           -1678.070  902278           21
+           -1678.072  692169           308
+           -1678.074  155622           507
+           -1678.078  831410           567
+           -1678.079  710445           792
+           -1678.084  659832           754
+           -1678.091  192071           142
+           -1678.092  879211           453
+           -1678.094  915642           40
+           -1678.097  97300            640
+           -1678.101  978061           488
+           -1678.102  659773           663
+           -1678.107  695155           150
+           -1678.108  195763           358
+           -1678.114  378393           509
+           -1678.130  714997           399
+           -1678.131  777045           377
+           -1678.135  117731           570
+           -1678.138  343926           624
+           -1678.142  937225           394
+           -1678.149  unperturbed      0
+           -1678.162  404426           344
+           -1678.168  741888           138
+           -1678.170  441191           361
+           -1678.174  982520           737
+           -1678.188  383902           673
+           -1678.192  638977           643
+           -1678.195  377584           630
+           -1678.195  466971           109
+           -1678.197  354208           196
+           -1678.197  217130           443
+           -1678.210  278692           342
+           -1678.224  535063           329
+           -1678.227  694303           282
+           -1678.229  641794           591
+           -1678.232  213189           605
+           -1678.249  157351           579
+           -1678.260  802256           477
+           -1678.264  281558           184
+           -1678.266  17896            592
+           -1678.271  850840           232
+           -1678.280  644297           340
+           -1678.282  965994           396
+           -1678.288  471398           74
+           -1678.298  765392           382
+           -1678.307  853781           716
+           -1678.312  360419           356
+           -1678.315  972430           491
+           -1678.336  418686           338
+           -1678.336  997222           229
+           -1678.339  502157           799
+           -1678.345  566687           597
+           -1678.360  27071            15
+           -1678.373  392407           221
+           -1678.386  72866            692
+           -1678.402  303834           798
+           -1678.402  341519           653
+           -1678.416  76451            211
+           -1678.417  403801           762
+           -1678.425  464179           106
+           -1678.426  787985           482
+           -1678.433  763285           620
+           -1678.437  551639           55
+           -1678.453  840078           203
+           -1678.471  576726           280
+           -1678.477  742609           531
+           -1678.481  399848           220
+           -1678.484  760531           550
+           -1678.487  533738           11
+           -1678.498  73576            213
+           -1678.500  303634           169
+           -1678.515  508482           446
+           -1678.526  173191           422
+           -1678.529  352277           42
+           -1678.548  156536           245
+           -1678.608  547702           767
+           -1678.629  966014           37
+           -1678.648  668003           647
+           -1678.650  231281           542
+           -1678.653  455617           242
+           -1678.654  609089           241
+           -1678.655  568859           49
+           -1678.657  340112           126
+           -1678.659  580181           691
+           -1678.669  440368           797
+           -1678.690  802682           419
+           -1678.707  51375            148
+           -1678.716  85114            385
+           -1678.723  617658           660
+           -1678.757  314084           81
+           -1678.773  910224           580
+           -1678.876  476393           705
+           -1678.891  563584           657
+           -1678.896  765586           709
+           -1678.906  114433           708
+           -1678.923  941525           609
+           -1678.923  232559           136
+           -1678.977  848969           173
+           -1679.008  961454           665
+           -1679.030  88437            761
+           -1679.059  848890           95
+           -1679.129  700349           401
+           -1679.184  163110           584
+           -1679.191  926797           406
+           -1679.196  520865           763
+           -1679.200  407108           366
+           -1679.216  847088           750
+           -1679.375  3307             735
+           -1679.570  937885           426
+
+2 perturbed starting value run(s) did not converge.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        9
+
+Loglikelihood
+
+          H0 Value                       -1677.482
+          H0 Scaling Correction Factor     11.6812
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3372.963
+          Bayesian (BIC)                  3419.199
+          Sample-Size Adjusted BIC        3390.611
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                             24.917
+          Degrees of Freedom                    22
+          P-Value                           0.3010
+
+          Likelihood Ratio Chi-Square
+
+          Value                             29.314
+          Degrees of Freedom                    22
+          P-Value                           0.1361
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                            134.527
+          Degrees of Freedom                    99
+          P-Value                           0.0102
+
+          Likelihood Ratio Chi-Square
+
+          Value                            101.222
+          Degrees of Freedom                    99
+          P-Value                           0.4192
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        777.05111          0.61769
+       2        480.94889          0.38231
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    CARUSE_5           1.000      0.000    999.000    999.000
+    CARUSE_6           1.000      0.000    999.000    999.000
+    CARUSE_7           1.000      0.000    999.000    999.000
+    CARUSE_8           1.000      0.000    999.000    999.000
+
+ S        |
+    CARUSE_5           0.000      0.000    999.000    999.000
+    CARUSE_6           1.000      0.000    999.000    999.000
+    CARUSE_7           2.000      0.000    999.000    999.000
+    CARUSE_8           3.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  0.963     13.371      0.072      0.943
+
+ Means
+    I                 -1.031     18.375     -0.056      0.955
+    S                  0.460      5.324      0.086      0.931
+
+ Thresholds
+    CARUSE_5$1        -7.023     39.081     -0.180      0.857
+    CARUSE_6$1        -7.023     39.081     -0.180      0.857
+    CARUSE_7$1        -7.023     39.081     -0.180      0.857
+    CARUSE_8$1        -7.023     39.081     -0.180      0.857
+
+ Variances
+    I                 23.986    177.709      0.135      0.893
+    S                  0.256      5.920      0.043      0.966
+
+Latent Class 2 (2)
+
+ I        |
+    CARUSE_5           1.000      0.000    999.000    999.000
+    CARUSE_6           1.000      0.000    999.000    999.000
+    CARUSE_7           1.000      0.000    999.000    999.000
+    CARUSE_8           1.000      0.000    999.000    999.000
+
+ S        |
+    CARUSE_5           0.000      0.000    999.000    999.000
+    CARUSE_6           1.000      0.000    999.000    999.000
+    CARUSE_7           2.000      0.000    999.000    999.000
+    CARUSE_8           3.000      0.000    999.000    999.000
+
+ S        WITH
+    I                  0.887      8.186      0.108      0.914
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.460      5.324      0.086      0.931
+
+ Thresholds
+    CARUSE_5$1        -7.023     39.081     -0.180      0.857
+    CARUSE_6$1        -7.023     39.081     -0.180      0.857
+    CARUSE_7$1        -7.023     39.081     -0.180      0.857
+    CARUSE_8$1        -7.023     39.081     -0.180      0.857
+
+ Variances
+    I                 21.706    252.078      0.086      0.931
+    S                  0.256      5.920      0.043      0.966
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.480      0.071      6.730      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    CARUSE_5           0.938      0.419      2.238      0.025
+    CARUSE_6           0.902      1.120      0.806      0.420
+    CARUSE_7           0.864      1.847      0.468      0.640
+    CARUSE_8           0.824      2.533      0.325      0.745
+
+ S        |
+    CARUSE_5           0.000      0.000    999.000    999.000
+    CARUSE_6           0.093      1.308      0.071      0.943
+    CARUSE_7           0.178      2.343      0.076      0.939
+    CARUSE_8           0.255      3.113      0.082      0.935
+
+ S        WITH
+    I                  0.389      2.335      0.167      0.868
+
+ Means
+    I                 -0.211      2.979     -0.071      0.944
+    S                  0.910      0.429      2.121      0.034
+
+ Thresholds
+    CARUSE_5$1        -1.345      3.122     -0.431      0.667
+    CARUSE_6$1        -1.294      4.029     -0.321      0.748
+    CARUSE_7$1        -1.239      4.966     -0.249      0.803
+    CARUSE_8$1        -1.181      5.842     -0.202      0.840
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    CARUSE_5           0.932      0.712      1.308      0.191
+    CARUSE_6           0.896      1.391      0.644      0.519
+    CARUSE_7           0.857      2.135      0.401      0.688
+    CARUSE_8           0.816      2.859      0.285      0.775
+
+ S        |
+    CARUSE_5           0.000      0.000    999.000    999.000
+    CARUSE_6           0.097      1.540      0.063      0.950
+    CARUSE_7           0.186      2.770      0.067      0.946
+    CARUSE_8           0.266      3.687      0.072      0.943
+
+ S        WITH
+    I                  0.377      1.352      0.279      0.780
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.910      0.429      2.121      0.034
+
+ Thresholds
+    CARUSE_5$1        -1.405      0.741     -1.897      0.058
+    CARUSE_6$1        -1.351      1.773     -0.762      0.446
+    CARUSE_7$1        -1.292      2.908     -0.444      0.657
+    CARUSE_8$1        -1.230      4.013     -0.306      0.759
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    CARUSE_5           0.879      0.786      1.119      0.263
+    CARUSE_6           0.888      0.551      1.613      0.107
+    CARUSE_7           0.898      0.322      2.788      0.005
+    CARUSE_8           0.907      0.122      7.426      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    CARUSE_5           0.868      1.327      0.654      0.513
+    CARUSE_6           0.878      1.036      0.848      0.397
+    CARUSE_7           0.889      0.738      1.204      0.229
+    CARUSE_8           0.899      0.466      1.931      0.054
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.196E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for Mixture analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  11:19:18
+        Ending Time:  11:27:07
+       Elapsed Time:  00:07:49
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen
