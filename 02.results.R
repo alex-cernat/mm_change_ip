@@ -9,6 +9,20 @@
 # clear working space
 rm(list = ls())
 
+
+
+# use local packages on work machine
+if (Sys.getenv("USERNAME") == "msassac6") {.libPaths(c(
+  paste0(
+    "C:/Users/",
+    Sys.getenv("USERNAME"),
+    "/Dropbox (The University of Manchester)/R/package"
+  ),
+  .libPaths()[-1]
+))}
+
+
+
 pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
 sapply(pkg, library, character.only = T)
 
@@ -60,7 +74,7 @@ table(converged) # 8 models did not converge
 warning <- res %>%
   map(function(x) x$warnings %>% map(str_detect, "SADDLE") %>%
         map(sum) %>%
-        reduce(sum)> 0) %>%
+        reduce(sum) > 0) %>%
   unlist()
 
 table(warning)
@@ -202,7 +216,7 @@ sig_vars2 %>%
   labs(y = "Estimates", x = "Variables")
 
 
-ggsave("./output/diff_var.png", dpi = 500, height = 7)
+ggsave("./output/diff_var.png", dpi = 500, height = 8)
 
 
 

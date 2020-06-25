@@ -11,10 +11,22 @@ output: html_document
 rm(list = ls())
 
 
+
+# use local packages on work machine
+if (Sys.getenv("USERNAME") == "msassac6") {.libPaths(c(
+  paste0(
+    "C:/Users/",
+    Sys.getenv("USERNAME"),
+    "/Dropbox (The University of Manchester)/R/package"
+  ),
+  .libPaths()[-1]
+))}
+
+
 # use packrat to install packages localy
 
 pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet",
-         "knitr", "texreg")
+         "knitr", "texreg", "pander")
 
 sapply(pkg, library, character.only = T)
 
@@ -37,7 +49,8 @@ wide_data3 <- read_rds("./data/wide_data3.RDS")
 wide_data5 <- read_rds("./data/clean_data.RDS")
 
 fit_tab3 <- read_csv("./output/fit_tab1_mlr.csv")
-sig_vars2<-read_csv("./output/sig_vars.csv")
+sig_vars2 <- read_csv("./output/sig_vars.csv")
+
 
 
 knitr::opts_chunk$set(echo = F, message = F, warning = F, error = F)
@@ -168,6 +181,82 @@ fit_tab3 %>%
 
 The largest difference is from caruse in the mixed mode comparison.
 
+```{r results='asis'}
+
+sig_fit <- fit_tab3 %>% 
+  filter(dif_bic > 10)
+
+sig_fit_mm <- sig_fit %>% 
+  filter(group == "mm")
+
+sig_fit_mode <- sig_fit %>% 
+  filter(group != "mm")
+
+vars_desc <- vars_desc %>% 
+  mutate(sig_mm = vars_desc$Code %in% sig_fit_mm$var,
+         sig_mode = vars_desc$Code %in% sig_fit_mode$var)
+
+health_labs <- c("Caring", "Smoking", 
+                 str_subset(vars_desc$`Topic of Variable - Module`, "Self-"))
+work_labs <- c("Household Finance", "Housework", 
+               "Second Jobs", "Current Employment")
+
+
+vars_desc <- vars_desc %>% 
+  mutate(topic = 
+           case_when(`Topic of Variable - Module` %in% work_labs ~ "Work",
+                     `Topic of Variable - Module` %in% health_labs ~ "Health",
+                     TRUE ~ `Topic of Variable - Module`),
+         topic2 = ifelse(topic == "Health", "Health", "Other"),
+         type = ifelse(`Type of Variable` == "binary", 
+                       "Binary", "Ordinal/continious")) 
+
+
+
+nice_cross <- function(x, y, x_name = "", y_name = "") {
+  tab <- table(x_name = x, y_name = y)
+  
+  tab_prop <- tab %>%
+    prop.table(1) %>%
+    round(2)
+  
+  tab_labs <- table(x)
+  
+  rownames(tab_prop) <- str_c(names(tab_labs), " (", tab_labs, ")")
+  names(attributes(tab_prop)$dimnames) <- c(x_name, y_name)
+  
+  tab_prop
+}
+
+```
+
+
+```{r}
+nice_cross(vars_desc$type, vars_desc$sig_mm, 
+           x_name = "Type") %>% 
+  kable(caption = "Significant mode design")
+```
+
+
+```{r}
+nice_cross(vars_desc$type, vars_desc$sig_mode, 
+           x_name = "Type", "Significant mode") %>% 
+  kable(caption = "Significant mode")
+
+nice_cross(vars_desc$topic2, vars_desc$sig_mm, 
+           x_name = "Topic", "Significant mode design") %>% 
+  kable(caption = "Significant mode design")
+
+nice_cross(vars_desc$topic2, vars_desc$sig_mode, 
+           x_name = "Type", "Significant mode") %>% 
+  kable(caption = "Significant mode")
+
+
+
+```
+
+
+
 ### Show coefficients that are significantly different
 
 Average differences
@@ -200,7 +289,7 @@ sig_vars2 %>%
 
 This is the distribution for the rest of the variables that are significantly different.
 
-```{r}
+```{r fig.height=8.5, fig.width=7.5}
 ## the rest
 sig_vars2 %>%
   filter(coef != "s") %>%
