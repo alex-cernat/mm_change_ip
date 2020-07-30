@@ -9,13 +9,6 @@
 # clear working space
 rm(list = ls())
 
-
-# TO DO
-#
-# - check models that did notconverged or had warnings
-# - do tables and figures
-
-
 # Admin -------------------------------------------------------------------
 
 # folders for installed packages
@@ -31,9 +24,6 @@ rm(list = ls())
 
 
 # install packages and load
-
-# use packrat to install packages localy
-
 pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
 
 sapply(pkg, library, character.only = T)
@@ -113,9 +103,6 @@ hh_data_path <-
 
 ind_data_list <- map(ind_data_path, read_dta)
 hh_data_list <- map(hh_data_path, read_dta)
-
-
-
 
 ind_vars_int <- c("hidp", "indmode")
 
@@ -379,7 +366,7 @@ ind_data4 <- ind_data3 %>%
                          hiqual %in% 5:9 ~ "Other"),
          edu = as.factor(edu),
          edu = factor(edu,levels(edu)[c(3, 1, 2, 4)]),
-         agecat = cut(dvage, breaks = c(16, 35, 55, 75, 102),
+         agecat = cut(dvage, breaks = c(15, 35, 55, 75, 102),
                       labels = c("age_35", "age_55",
                                  "age_75", "age_102")),
          female = sex - 1,
@@ -397,7 +384,7 @@ ind_data4 <- ind_data3 %>%
          sf1, longill, london, north, urban, refresh)
 
 
-# make dummies in case we need late
+# make dummies in case we need later
 ind_data5 <- cbind(ind_data4,
                    dummyfy(ind_data4$edu),
                    dummyfy(ind_data4$agecat)) %>%
@@ -570,4 +557,4 @@ vars_desc4 <- vars_desc3 %>%
 
 
 # run models using known classes and MLR + integration
-# pmap(vars_desc4, LGM_simple_mixture, df_use = wide_data6)
+pmap(vars_desc4, LGM_simple_mixture, df_use = wide_data6)
