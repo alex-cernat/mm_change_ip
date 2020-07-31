@@ -1,0 +1,599 @@
+Mplus VERSION 8.3
+MUTHEN & MUTHEN
+07/31/2020  12:15 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   smoker_7
+   smoker_8
+   smoker_9
+   smoker_10;
+
+   CATEGORICAL ARE
+   smoker_7
+   smoker_8
+   smoker_9
+   smoker_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(mm= 1 2);
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 400 100;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | smoker_7@2 smoker_8@3 smoker_9@4 smoker_10@5;
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  Data set contains unknown or missing values for variable MM.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  458
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  324
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1275
+
+Number of dependent variables                                    4
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   SMOKER_7    SMOKER_8    SMOKER_9    SMOKER_1
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        400
+  Number of final stage optimizations                          100
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            15
+     Number of y missing data patterns           0
+     Number of u missing data patterns          15
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              SMOKER_7      SMOKER_8      SMOKER_9      SMOKER_1
+              ________      ________      ________      ________
+ SMOKER_7       0.772
+ SMOKER_8       0.609         0.740
+ SMOKER_9       0.573         0.622         0.716
+ SMOKER_1       0.515         0.562         0.579         0.671
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    SMOKER_7
+      Category 1    0.840          827.000
+      Category 2    0.160          157.000
+    SMOKER_8
+      Category 1    0.838          790.000
+      Category 2    0.162          153.000
+    SMOKER_9
+      Category 1    0.848          774.000
+      Category 2    0.152          139.000
+    SMOKER_1
+      Category 1    0.855          731.000
+      Category 2    0.145          124.000
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -1796.816  281462           285
+           -1796.907  595153           230
+           -1797.010  939709           112
+           -1797.020  97158            205
+           -1797.052  856536           144
+           -1797.066  65651            214
+           -1797.070  12477            155
+           -1797.089  830570           369
+           -1797.149  931874           141
+           -1797.170  836515           341
+           -1797.201  565819           65
+           -1797.223  314757           345
+           -1797.224  614009           317
+           -1797.226  650371           14
+           -1797.229  849670           347
+           -1797.269  215353           164
+           -1797.300  784664           75
+           -1797.307  22089            143
+           -1797.317  383986           159
+           -1797.327  57226            208
+           -1797.359  788796           145
+           -1797.364  405079           68
+           -1797.367  597614           284
+           -1797.427  777045           377
+           -1797.427  458181           189
+           -1797.436  285380           1
+           -1797.456  392418           28
+           -1797.460  576220           115
+           -1797.479  76337            76
+           -1797.488  341041           34
+           -1797.498  701525           239
+           -1797.499  970689           266
+           -1797.521  467339           66
+           -1797.535  967902           52
+           -1797.542  621542           375
+           -1797.542  173440           328
+           -1797.550  529455           268
+           -1797.584  437181           135
+           -1797.586  286735           175
+           -1797.604  273992           349
+           -1797.626  483369           270
+           -1797.652  642909           251
+           -1797.662  804561           59
+           -1797.684  349263           263
+           -1797.694  260601           36
+           -1797.694  414284           158
+           -1797.706  181293           212
+           -1797.718  579995           183
+           -1797.734  182524           373
+           -1797.756  794236           127
+           -1797.767  153053           378
+           -1797.771  264081           186
+           -1797.782  570908           98
+           -1797.792  164305           128
+           -1797.793  387701           275
+           -1797.809  210870           383
+           -1797.822  567165           319
+           -1797.826  526324           178
+           -1797.831  105435           265
+           -1797.842  717754           180
+           -1797.927  603842           61
+           -1797.999  948615           140
+           -1798.037  127215           9
+           -1798.091  645664           39
+           -1798.134  195353           225
+           -1798.190  185071           370
+           -1798.218  797594           234
+           -1798.231  268896           124
+           -1798.243  436460           89
+           -1798.268  297518           166
+           -1798.416  364676           27
+           -1798.462  732596           320
+           -1798.559  923437           398
+           -1798.592  679832           302
+           -1798.713  195873           6
+           -1798.771  264935           281
+           -1798.942  991329           182
+           -1798.952  92689            304
+           -1798.972  50887            389
+           -1798.975  967237           48
+           -1799.140  915642           40
+           -1799.205  965994           396
+           -1799.206  608849           224
+           -1799.229  520177           262
+           -1799.385  150531           154
+           -1799.424  192071           142
+           -1799.435  259507           53
+           -1799.718  939021           8
+           -1799.842  836066           372
+           -1799.999  576726           280
+           -1800.012  347515           24
+           -1801.366  996231           310
+           -1802.373  801717           364
+           -1806.326  278692           342
+           -1807.860  178475           231
+           -1809.739  123985           248
+
+4 perturbed starting value run(s) did not converge.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+     WARNING: THE MODEL ESTIMATION HAS REACHED A SADDLE POINT OR A POINT WHERE THE
+     OBSERVED AND THE EXPECTED INFORMATION MATRICES DO NOT MATCH.
+     AN ADJUSTMENT TO THE ESTIMATION OF THE INFORMATION MATRIX HAS BEEN MADE.
+     THE CONDITION NUMBER IS      -0.887D-01.
+     THE PROBLEM MAY ALSO BE RESOLVED BY DECREASING THE VALUE OF THE
+     MCONVERGENCE OR LOGCRITERION OPTIONS OR BY CHANGING THE STARTING VALUES
+     OR BY INCREASING THE NUMBER OF INTEGRATION POINTS OR BY USING THE MLF ESTIMATOR.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        9
+
+Loglikelihood
+
+          H0 Value                       -1796.816
+          H0 Scaling Correction Factor      0.8486
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3611.631
+          Bayesian (BIC)                  3657.988
+          Sample-Size Adjusted BIC        3629.399
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                              4.135
+          Degrees of Freedom                    22
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                             15.817
+          Degrees of Freedom                    22
+          P-Value                           0.8249
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                            148.104
+          Degrees of Freedom                    99
+          P-Value                           0.0010
+
+          Likelihood Ratio Chi-Square
+
+          Value                            113.484
+          Degrees of Freedom                    99
+          P-Value                           0.1515
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        747.00000          0.58588
+       2        528.00000          0.41412
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SMOKER_7           1.000      0.000    999.000    999.000
+    SMOKER_8           1.000      0.000    999.000    999.000
+    SMOKER_9           1.000      0.000    999.000    999.000
+    SMOKER_10          1.000      0.000    999.000    999.000
+
+ S        |
+    SMOKER_7           2.000      0.000    999.000    999.000
+    SMOKER_8           3.000      0.000    999.000    999.000
+    SMOKER_9           4.000      0.000    999.000    999.000
+    SMOKER_10          5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                -19.785      6.623     -2.988      0.003
+
+ Means
+    I                  2.363      1.888      1.252      0.211
+    S                  0.483      0.305      1.581      0.114
+
+ Thresholds
+    SMOKER_7$1        15.300      0.635     24.100      0.000
+    SMOKER_8$1        15.300      0.635     24.100      0.000
+    SMOKER_9$1        15.300      0.635     24.100      0.000
+    SMOKER_1$1        15.300      0.635     24.100      0.000
+
+ Variances
+    I                244.879     62.339      3.928      0.000
+    S                  2.443      0.637      3.832      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    SMOKER_7           1.000      0.000    999.000    999.000
+    SMOKER_8           1.000      0.000    999.000    999.000
+    SMOKER_9           1.000      0.000    999.000    999.000
+    SMOKER_10          1.000      0.000    999.000    999.000
+
+ S        |
+    SMOKER_7           2.000      0.000    999.000    999.000
+    SMOKER_8           3.000      0.000    999.000    999.000
+    SMOKER_9           4.000      0.000    999.000    999.000
+    SMOKER_10          5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                -20.246      6.189     -3.272      0.001
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.483      0.305      1.581      0.114
+
+ Thresholds
+    SMOKER_7$1        15.300      0.635     24.100      0.000
+    SMOKER_8$1        15.300      0.635     24.100      0.000
+    SMOKER_9$1        15.300      0.635     24.100      0.000
+    SMOKER_1$1        15.300      0.635     24.100      0.000
+
+ Variances
+    I                335.369     50.335      6.663      0.000
+    S                  2.443      0.637      3.832      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.347      0.057      6.103      0.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SMOKER_7           1.170      0.044     26.807      0.000
+    SMOKER_8           1.272      0.080     15.817      0.000
+    SMOKER_9           1.378      0.131     10.505      0.000
+    SMOKER_10          1.483      0.197      7.513      0.000
+
+ S        |
+    SMOKER_7           0.234      0.029      8.173      0.000
+    SMOKER_8           0.381      0.054      7.115      0.000
+    SMOKER_9           0.550      0.090      6.100      0.000
+    SMOKER_10          0.740      0.143      5.191      0.000
+
+ S        WITH
+    I                 -0.809      0.112     -7.231      0.000
+
+ Means
+    I                  0.151      0.138      1.095      0.273
+    S                  0.309      0.171      1.805      0.071
+
+ Thresholds
+    SMOKER_7$1         1.144      0.146      7.861      0.000
+    SMOKER_8$1         1.243      0.155      8.001      0.000
+    SMOKER_9$1         1.347      0.172      7.841      0.000
+    SMOKER_1$1         1.450      0.200      7.243      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    SMOKER_7           1.120      0.041     27.639      0.000
+    SMOKER_8           1.184      0.068     17.425      0.000
+    SMOKER_9           1.247      0.100     12.470      0.000
+    SMOKER_10          1.304      0.135      9.639      0.000
+
+ S        |
+    SMOKER_7           0.191      0.033      5.739      0.000
+    SMOKER_8           0.303      0.058      5.241      0.000
+    SMOKER_9           0.426      0.089      4.803      0.000
+    SMOKER_10          0.556      0.125      4.434      0.000
+
+ S        WITH
+    I                 -0.707      0.121     -5.843      0.000
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.309      0.171      1.805      0.071
+
+ Thresholds
+    SMOKER_7$1         0.936      0.103      9.049      0.000
+    SMOKER_8$1         0.989      0.115      8.639      0.000
+    SMOKER_9$1         1.042      0.129      8.084      0.000
+    SMOKER_1$1         1.089      0.146      7.474      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SMOKER_7           0.982      0.004    218.527      0.000
+    SMOKER_8           0.978      0.005    181.725      0.000
+    SMOKER_9           0.974      0.007    145.305      0.000
+    SMOKER_1           0.970      0.009    111.701      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SMOKER_7           0.988      0.002    500.594      0.000
+    SMOKER_8           0.986      0.002    404.684      0.000
+    SMOKER_9           0.985      0.003    321.625      0.000
+    SMOKER_1           0.983      0.004    257.353      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix             -0.887E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  12:15:05
+        Ending Time:  12:18:15
+       Elapsed Time:  00:03:10
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen
