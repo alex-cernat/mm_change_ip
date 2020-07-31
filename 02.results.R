@@ -52,8 +52,8 @@ folder <- "./mplus/"
 
 # runModels(folder)
 
-out_path <- list.files(folder, pattern = "out", full.names = T)
-res <- map(out_path, readModels)
+out_path <- list.files(folder, pattern = "\\.out", full.names = T)
+ res <- map(out_path, readModels)
 
 
 
@@ -64,6 +64,10 @@ converged <- res %>%
   map(function(x) x$summaries %>%
         names %in% "AIC" %>% sum() > 0) %>%
   unlist()
+
+tibble(models = out_path,
+       converged = converged) %>%
+  View()
 
 table(converged) # 8 models did not converge
 
