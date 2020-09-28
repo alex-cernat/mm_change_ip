@@ -47,13 +47,14 @@ wide_data5 <- read_rds("./data/clean_data.RDS")
 
 
 
-# run in different folder for space issues
+# # run in different folder for space issues
 folder <- "./mplus/"
 
 # runModels(folder)
 
+# read models
 out_path <- list.files(folder, pattern = "\\.out", full.names = T)
- res <- map(out_path, readModels)
+res <- map(out_path, readModels)
 
 
 
@@ -94,7 +95,9 @@ filter(all_models, warning == T) %>% print(n = 25)
 
 res_s <- res[converged]
 
-fit_tab <- map_df(res[converged], read_fit_mlr)
+fit_tab <- map(res_s, read_fit_mlr) %>%
+  reduce(rbind) %>% tbl_df()
+
 fit_tab2 <- full_join(all_models, fit_tab, by = "Filename") %>%
   tbl_df() %>%
   mutate(name = str_remove_all(Filename, "wide_data6_|.out|mode_type_")) %>%
@@ -103,14 +106,17 @@ fit_tab2 <- full_join(all_models, fit_tab, by = "Filename") %>%
            factor(model, levels = c("config", "mean", "var", "cor"))) %>%
   arrange(var, group, model) %>%
   group_by(var, group) %>%
-  mutate(dif_bic = lag(BIC) - BIC) %>%
+  mutate(dif_bic = lag(BIC) - BIC,
+         warn = ifelse(sum(warning) > 0, TRUE, FALSE)) %>%
   ungroup() %>%
   select(var, group, model, everything(), Filename) %>%
   rename_all(~str_remove_all(., "ChiSqM_"))
 
+
+
 # exclude models with convergence issues
-fit_tab3 <- fit_tab2 %>%
-  filter(!str_detect(Filename, "jbsemp|smoker"))
+fit_tab3 <- filter(fit_tab2, warn == F)
+
 
 
 
@@ -128,11 +134,12 @@ fit_tab3 %>%
 
 # what models show differences?
 fit_tab3 %>%
-  filter(warning == F) %>%
+  filter(warn == F) %>%
   filter(dif_bic > 10) %>%
   count(group, model)
 
 fit_tab3 %>%
+  filter(warn == F) %>%
   filter(dif_bic > 10) %>%
   View()
 
@@ -141,10 +148,10 @@ fit_tab3 %>%
 # how big is the difference in coefficients?
 
 # function that get variance and covariance
-get_vars <- function(output) {
+get_vars_unstand <- function(output) {
   output$parameters$unstandardized %>%
     tbl_df() %>%
-    filter(paramHeader %in% c("S.WITH", "Variances")) %>%
+    filter(paramHeader %in% c("Variances")) %>%
     mutate(nms = str_c(paramHeader, ".", param)) %>%
     select(nms, est, LatentClass) %>%
     pivot_wider(
@@ -155,6 +162,23 @@ get_vars <- function(output) {
     )
 
 }
+
+get_vars_stand <- function(output) {
+  output$parameters$stdyx.standardized %>%
+    tbl_df() %>%
+    filter(paramHeader %in% c("S.WITH")) %>%
+    mutate(nms = str_c(paramHeader, ".", param)) %>%
+    select(nms, est, LatentClass) %>%
+    pivot_wider(
+      id_cols = nms,
+      names_from = LatentClass,
+      values_from = est,
+      names_prefix = "est_"
+    )
+
+}
+
+
 
 
 # see what models we want
@@ -174,9 +198,14 @@ names(res_s) <- fit_tab$Filename
 
 
 
-sig_vars <- map_df(sig_models, function(x) res_s[[x]] %>% get_vars()) %>%
-  mutate(nms = rep(sig_models, each = 3),
-         coef = rep(c("cov", "i", "s"), length(sig_models)))
+sig_vars <- map_df(sig_models, function(x) res_s[[x]] %>%
+                     get_vars_unstand()) %>%
+  rbind(map_df(sig_models, function(x) res_s[[x]] %>%
+                 get_vars_stand())) %>%
+  mutate(nms = c(rep(sig_models, each = 2), sig_models),
+         coef = c(rep(c("i", "s"), length(sig_models)),
+                  rep("cor", length(sig_models)))) %>%
+  arrange(nms)
 
 
 sig_vars2 <- sig_vars %>%
@@ -194,17 +223,16 @@ sig_vars2 <- sig_vars %>%
 
 sig_vars2 %>%
   filter(coef != "s") %>%
-  mutate(coef2 = ifelse(coef == "cov",
-                        "Co-variance", "Variance intercept")) %>%
+  mutate(coef2 = ifelse(coef == "cor",
+                        "Correlation", "Variance intercept")) %>%
   group_by(grp, coef2, modes) %>%
   summarise(mean(est))
 
 # biggest differences
 sig_vars2 %>%
   filter(coef != "s") %>%
-  filter(var %in% c("jbhas", "mobuse")) %>%
-  mutate(coef2 = ifelse(coef == "cov",
-                        "Co-variance", "Variance intercept")) %>%
+  mutate(coef2 = ifelse(coef == "cor",
+                        "Correlation", "Variance intercept")) %>%
   select(grp, var, coef2, modes, est) %>%
   arrange(grp, var, coef2, modes)
 
@@ -212,15 +240,17 @@ sig_vars2 %>%
   filter(coef != "s") %>%
   filter(var != "jbhas") %>% # largest diffence
   filter(var != "mobuse") %>% # largest diffence
-  mutate(coef2 = ifelse(coef == "cov", "Co-variance", "Variance intercept")) %>%
+  filter(var != "jbterm1") %>% # largest diffence
+#  filter(var != "vote1") %>% # largest diffence
+  mutate(coef2 = ifelse(coef == "cor", "Correlation", "Variance intercept")) %>%
   ggplot(aes(fct_reorder(var, est), est, color = modes)) +
-  geom_point(position = position_dodge()) +
+  geom_point(position = position_dodge(), alpha = 0.8, size = 2.5) +
   facet_grid(grp ~ coef2, scales = "free") +
   coord_flip() +
-  labs(y = "Estimates", x = "Variables")
+  labs(y = "Estimates", x = "Variables",
+       color = "Group") +
+  theme(text = element_text(size = 16))
 
-
-ggsave("./output/diff_var.png", dpi = 500, height = 8)
 
 
 

@@ -159,13 +159,9 @@ htmlreg(reg_out, html.tag = F, head.tag = F,
 
  A total of 328 models were fit (41 variables x 8 models each). We treated variables with less then 5 categories as ordinal in the modeling while those that had more as continious resulting in 14 continious and 27 cetegorical outcomes.  
 
-- eight models failed to converge: all "fiyrdia" models failed to converged and were excluded
-- ten models had warnings due to convergence and will be ignored in the analysis: jbsemp_all_cor, jbsemp_all_var, jbsemp_mm_mean, smoker_mm_config, smoker_mm_cor, smoker_mm_var, smoker_p7_cor, smoker_p7_var,  jbsemp_all_mean,
-jbsemp_mm_config
+- ten models failed to converge: all "fiyrdia" models failed to converged and were excluded. The models comparing variances for "lkmove" did not converge so all the models were excluded.
+- 18 models had warnings due to convergence. After trying to increase the number of iteration and adding restrictions unsuccesfully we decided to exclude from further analysis the comparison involving: "jpsemp", "smoker", "caruse" and the mode design comparison for "mobuse".
 
-
-- nine models had convergence issues that were fixed by restricting the mean and variance of the inctercept to 0 and increasing the number of iterations: jbsemp_all_config, jbsemp_mm_cor, jbsemp_mm_var, lkmove_mm_var, lkmove_no9_var,
-mobuse_mm_var, smoker_mm_mean, smoker_p7_config, smoker_p7_mean, caruse_all_var, caruse_mm_var. For these models we rerun the models in the series (4 model group comparison) with the same options in order to insure comparability.
 
 ## Fit models 
 
@@ -183,11 +179,11 @@ fit_tab3 %>%
                              "Correlation" = "cor")) %>% 
   ggplot(aes(dif_bic)) +
   geom_histogram() +
-  facet_wrap( ~ model2, scales = "free") +
+  facet_wrap( ~ model2) +
   geom_vline(xintercept = 10, color = "red") +
   theme_bw() +
   labs(y = "Count", x = "Difference in BIC",
-       caption = "Note change of scales\nDistribution restricted to positive differences\n for ease of reading")
+       caption = "Distribution restricted to positive differences\n for ease of reading")
 
 ggsave("./output/BIC_dif.png", dpi = 500)
 ```
@@ -270,19 +266,19 @@ chisq.test(vars_desc$type, vars_desc$sig_mm)
 ```{r}
 nice_cross(vars_desc$type, vars_desc$sig_mode, 
            x_name = "Type", "Significant mode") %>% 
-  kable(caption = "Significant mode")
+  kable(caption = "Non-significant mode difference")
 chisq.test(vars_desc$type, vars_desc$sig_mode)
 
 
 nice_cross(vars_desc$topic2, vars_desc$sig_mm, 
            x_name = "Topic", "Significant mode design") %>% 
-  kable(caption = "Significant mode design")
+  kable(caption = "Non-ignificant mode design difference")
 chisq.test(vars_desc$topic2, vars_desc$sig_mm)
 
 
 nice_cross(vars_desc$topic2, vars_desc$sig_mode, 
            x_name = "Type", "Significant mode") %>% 
-  kable(caption = "Significant mode")
+  kable(caption = "Non-significant mode difference")
 chisq.test(vars_desc$topic2, vars_desc$sig_mode)
 
 
@@ -298,8 +294,8 @@ Average differences
 # average differences
 sig_vars2 %>%
   filter(coef != "s") %>%
-  mutate(coef2 = ifelse(coef == "cov", 
-                        "Co-variance", "Variance intercept")) %>%
+  mutate(coef2 = ifelse(coef == "cor", 
+                        "Correlation", "Variance intercept")) %>%
   group_by(grp, coef2, modes) %>%
   summarise(mean(est)) %>%
   ungroup() %>% 
@@ -315,9 +311,9 @@ Large differences can be found for:
 # biggest differences
 sig_vars2 %>%
   filter(coef != "s") %>%
-  filter(var %in% c("jbhas", "mobuse")) %>%
-  mutate(coef2 = ifelse(coef == "cov", 
-                        "Co-variance", "Variance intercept")) %>%
+  filter(var %in% c("jbhas", "mobuse", "jbterm1")) %>%
+  mutate(coef2 = ifelse(coef == "cor", 
+                        "Correlation", "Variance intercept")) %>%
   select(grp, var, coef2, modes, est) %>%
   arrange(grp, var, coef2, modes) %>% 
   ungroup() %>% 
@@ -332,9 +328,8 @@ This is the distribution for the rest of the variables that are significantly di
 ## the rest
 sig_vars2 %>%
   filter(coef != "s") %>%
-  filter(var != "jbhas") %>% # largest diffence
-  filter(var != "mobuse") %>% # largest diffence
-  mutate(coef2 = ifelse(coef == "cov", "Co-variance", "Variance intercept"),
+  filter(!var %in% c("jbhas", "mobuse", "jbterm1")) %>%
+  mutate(coef2 = ifelse(coef == "cor", "Correlation", "Variance intercept"),
          coef2 = as.factor(coef2) %>% 
            fct_rev(),
          modes = as.factor(modes) %>% 
@@ -344,6 +339,7 @@ sig_vars2 %>%
   facet_grid(grp ~ coef2, scales = "free") +
   coord_flip() +
   theme_bw() +
+  theme(text = element_text(16)) +
   geom_hline(yintercept = 0) +
   labs(y = "Estimates", x = "Variables", color = "Group")
 
