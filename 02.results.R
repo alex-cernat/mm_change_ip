@@ -27,9 +27,7 @@ pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
 sapply(pkg, library, character.only = T)
 
 # load local functions
-map(str_c("./functions/",
-          list.files("./functions/")),
-    source)
+map(list.files("./functions/", full.names = T), source)
 
 
 # Import data -------------------------------------------------------------
@@ -42,6 +40,126 @@ vars_desc <- read_csv("./data/out/vars_desc.csv")
 
 wide_data3 <- read_rds("./data/wide_data3.RDS")
 wide_data5 <- read_rds("./data/clean_data.RDS")
+
+
+
+
+# Look at change patterns -------------------------------------------------
+
+
+
+sdata <- wide_data5 %>%
+  select(pidp, mm, all, no9, p567, p7, matches("indmode")) %>%
+  filter(!is.na(mm))
+
+count(sdata, mm)
+count(sdata, mm, all) %>% na.omit() %>% mutate(prop = n/sum(n))
+count(sdata, mm, no9) %>% na.omit() %>% mutate(prop = n/sum(n))
+count(sdata, mm, p567) %>% na.omit() %>% mutate(prop = n/sum(n))
+count(sdata, mm, p7) %>% na.omit() %>% mutate(prop = n/sum(n))
+
+
+
+
+
+sdata2 <- sdata %>%
+  mutate_at(vars(matches("indmode")),
+           ~ case_when(. == 1 ~ "F2F",
+                        . == 3 ~ "Web")) %>%
+  mutate_at(vars(matches("indmode")),
+            list("miss" = ~ ifelse(is.na(.), 1, 0))) %>%
+  mutate(nrm = indmode_5_miss + indmode_6_miss + indmode_7_miss +
+           indmode_8_miss + indmode_9_miss + indmode_10_miss) %>%
+  filter(nrm < 5) %>%
+  select(-matches("miss")) %>%
+  mutate_at(vars(matches("indmode")),
+            list("f2f" = ~ ifelse(. == "F2F", 1, 0))) %>%
+  rowwise() %>%
+  mutate(f2f_prop = sum(indmode_5_f2f, indmode_6_f2f, indmode_7_f2f,
+                        indmode_8_f2f, indmode_9_f2f, indmode_10_f2f,
+                        na.rm = T)/(6 - nrm),
+         stabil = ifelse(f2f_prop %in% c(0, 1), 1, 0))
+
+sdata2 %>%
+  group_by(all) %>%
+  count(f2f_prop) %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+sdata2 %>%
+  group_by(no9) %>%
+  count(f2f_prop) %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+
+sdata2 %>%
+  group_by(p567) %>%
+  count(f2f_prop) %>% na.omit() %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+
+sdata2 %>%
+  group_by(p7) %>%
+  count(f2f_prop) %>%  na.omit() %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+sdata2 %>%
+  group_by(all) %>%
+  count(f2f_prop) %>%  na.omit() %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+
+sdata2 %>%
+  group_by(mm) %>%
+  count(f2f_prop) %>%  na.omit() %>%
+  mutate(prop = round(n/sum(n), 2)) %>% print(n = 50)
+
+
+# average % only web for "primary web respondents"
+# > (0.57+0.64+0.62+0.61) /4
+# [1] 0.61
+
+# average % only face to face for "primary face to face respondents"
+# > (0.73 + 0.7 + 0.71 + 0.72)/4
+# [1] 0.715
+
+
+
+
+wide_data5$mod
+
+trans_data <- count(wide_data5, indmode_5, indmode_6, indmode_7,
+      indmode_8, indmode_9, indmode_10) %>%
+  mutate_at(vars(matches("indmode")),
+            ~ case_when(. == 1 ~ "F2F",
+                         . == 3 ~ "Web")) %>%
+  arrange(desc(n))
+
+
+trans_data2 <- trans_data %>%
+  mutate_at(vars(matches("indmode")),
+            list("miss" = ~ ifelse(is.na(.), 1, 0))) %>%
+  mutate(nrm = indmode_5_miss + indmode_6_miss + indmode_7_miss +
+           indmode_8_miss + indmode_9_miss + indmode_10_miss) %>%
+  filter(nrm < 5) %>%
+  select(-matches("miss"))
+
+trans_data2 %>%
+  mutate_at(vars(matches("indmode")),
+            list("f2f" = ~ ifelse(. == "F2F", 1, 0))) %>%
+  rowwise() %>%
+  mutate(f2f_prop = sum(indmode_5_f2f, indmode_6_f2f, indmode_7_f2f,
+                         indmode_8_f2f, indmode_9_f2f, indmode_10_f2f,
+                        na.rm = T)/(6 - nrm),
+         stabil = ifelse(f2f_prop %in% c(0, 1), 1, 0)) %>%
+  group_by(as.factor(f2f_prop)) %>%
+  summarise(sum(n))
+
+
+
+trans_data2$indmode_5 == trans_data2$indmode_6 ==  trans_data2$indmode_7
+
+trans_data2 %>%
+  summarise_all(funs(n_distinct(.)))
 
 # run and import ----------------------------------------------------------
 

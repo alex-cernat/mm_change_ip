@@ -176,14 +176,14 @@ fit_tab3 %>%
          model2 = fct_relevel(model2, "mean", "var"),
          model2 = fct_recode(model2, "Mean" = "mean",
                              "Variance" = "var",
-                             "Correlation" = "cor")) %>% 
-  ggplot(aes(dif_bic)) +
+                             "Correlation" = "cor"),
+         group2 = ifelse(group == "mm", "Mode design", "Primary mode")) %>% 
+  ggplot(aes(dif_bic, fill = group2)) +
   geom_histogram() +
   facet_wrap( ~ model2) +
   geom_vline(xintercept = 10, color = "red") +
   theme_bw() +
-  labs(y = "Count", x = "Difference in BIC",
-       caption = "Distribution restricted to positive differences\n for ease of reading")
+  labs(y = "Count", x = "Difference in BIC" , fill= "Group")
 
 ggsave("./output/BIC_dif.png", dpi = 500)
 ```
@@ -333,7 +333,8 @@ sig_vars2 %>%
          coef2 = as.factor(coef2) %>% 
            fct_rev(),
          modes = as.factor(modes) %>% 
-           fct_relevel("Web")) %>%
+           fct_relevel("Web"),
+         grp = ifelse(grp == "Mode", "Primary mode", "Mode design")) %>%
   ggplot(aes(fct_reorder(var, est), est, color = modes)) +
   geom_point(position = position_dodge(), size = 3, alpha = 0.7) +
   facet_grid(grp ~ coef2, scales = "free") +
