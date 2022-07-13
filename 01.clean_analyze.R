@@ -11,11 +11,6 @@ rm(list = ls())
 
 # Admin -------------------------------------------------------------------
 
-# folders for installed packages
-#.libPaths(c(paste0("C:/Users/", Sys.getenv("USERNAME"), "/Dropbox (The University of Manchester)/R/package"), .libPaths()))
-
-
-
 # create folders and unzip
 # dir.create("./output")
 # dir.create("./functions")
@@ -23,8 +18,8 @@ rm(list = ls())
 #
 
 
-# install packages and load
-pkg <- c("tidyverse",  "haven", "lavaan", "MplusAutomation", "nnet")
+# load
+pkg <- c("tidyverse", "haven", "lavaan", "MplusAutomation", "nnet")
 
 sapply(pkg, library, character.only = T)
 
@@ -60,7 +55,7 @@ dat_list <- data_list3_idp %>%
   map(function(x) rename_all(x, ~ str_remove(., "_[a-z]"))) %>%
   map2(vars_interest, select)
 
-# get the continious and categorcal variables
+# get the continuous and categorical variables
 cont_vars <- vars_desc %>%
   filter(`Type of Variable` != "binary",
          `Number of Categories` != 3,
@@ -175,7 +170,7 @@ patterns <- list(all = 5:10,
                  p7 = 7:10)
 grp_mode <- map_df(patterns, make_mode_groups)
 
-mode_data <- cbind(mode_data, grp_mode) %>% tbl_df()
+mode_data <- cbind(mode_data, grp_mode) %>% as_tibble()
 
 
 # make variable for having switched modes
@@ -188,12 +183,6 @@ mode_data <- mode_data %>%
 
 mode_data %>% count(switch_all)
 
-#
-#
-# refreshment in wave 7
-# gridmow7?
-# gridmodew8 - targeted
-# gridmo
 
 
 # get mode design ---------------------------------------------------------
@@ -235,17 +224,7 @@ hh_data <- hh_data %>%
                              gridmodew5_7, gridmodew5))
 
 
-# looking at all the waves there are some inconcistencies:
-#
-# 3 1 1 1; - 258
-# 3 1 1 NA; - 55
-# 3 1 NA NA; - 42
-# 3 NA 1 1; - 15
-# 3 1 NA 1; - 9
-# 3 NA 1 NA; - 7
-# 3 NA NA 1;  - 6
-
-# we take the mode and code incosistent switches as missing
+# we take the mode and code inconsistent switches as missing
 
 
 mode_design_switch <- hh_data %>%
@@ -293,7 +272,7 @@ wide_data2 <- wide_data2 %>%
             log)
 
 
-# get predictors for weigting ---------------------------------------------
+# get predictors for weighting ---------------------------------------------
 
 ind4 <- read_dta("./data/stata13/d_indresp_ip.dta")
 
@@ -429,7 +408,7 @@ saveRDS(wide_data3, "./data/wide_data3.RDS")
 
 vars_to_change <- c(cont_vars, cat_vars)
 
-# recode all variables of interest to missing in the waves people asnwered by
+# recode all variables of interest to missing in the waves people answered by
 # telephone
 wide_data5 <- wide_data4 %>%
   mutate_at(vars(matches(str_c(vars_to_change, "_", 6))),
@@ -494,7 +473,7 @@ qplot(wide_data6$fiyrdia_7)
 qplot(wide_data6$fiyrdia_7, wide_data6$fiyrdia_8)
 
 
-# find more elegent way to do this
+# find more elegant way to do this
 vars_desc2c <- rbind(vars_desc2b,
                      vars_desc2b %>%
                        mutate(
@@ -558,3 +537,11 @@ vars_desc4 <- vars_desc3 %>%
 
 # run models using known classes and MLR + integration
 pmap(vars_desc4, LGM_simple_mixture, df_use = wide_data6)
+
+# MplusAutomation::runModels("./mplus/")
+
+
+
+
+
+

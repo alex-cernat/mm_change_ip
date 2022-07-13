@@ -1,0 +1,845 @@
+Mplus VERSION 8.6
+MUTHEN & MUTHEN
+07/12/2021  11:11 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   netpuse_5
+   netpuse_6
+   netpuse_7
+   netpuse_8
+   netpuse_9
+   netpuse_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(all= 1 2);
+  WEIGHT IS pred_all_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | netpuse_5@0 netpuse_6@1 netpuse_7@2 netpuse_8@3 netpuse_9@4 netpuse_10@5;;
+
+  netpuse_5 (a);
+   netpuse_6 (a);
+   netpuse_7 (a);
+   netpuse_8 (a);
+   netpuse_9 (a);
+   netpuse_10 (a);
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i (c);
+   i (d);
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i (c);
+   i (d);
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.
+*** WARNING
+  Data set contains unknown or missing values for variable ALL.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  91
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  2
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1964
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   NETPUSE_5   NETPUSE_6   NETPUSE_7   NETPUSE_8   NETPUSE_9   NETPUSE_10
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_ALL
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Cholesky                                                       OFF
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            61
+     Number of y missing data patterns          61
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+ NETPUSE_       0.506
+ NETPUSE_       0.428         0.506
+ NETPUSE_       0.354         0.385         0.595
+ NETPUSE_       0.326         0.357         0.481         0.566
+ NETPUSE_       0.309         0.337         0.450         0.477         0.546
+ NETPUSE_       0.287         0.313         0.402         0.428         0.441
+
+
+           Covariance Coverage
+              NETPUSE_
+              ________
+ NETPUSE_       0.631
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 1
+
+
+           Means
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+                3.488         3.348         3.239         3.174         2.995
+
+
+           Means
+              NETPUSE_
+              ________
+                2.947
+
+
+           Covariances
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+ NETPUSE_       6.033
+ NETPUSE_       5.336         5.940
+ NETPUSE_       5.162         5.164         5.819
+ NETPUSE_       5.012         5.036         5.154         6.104
+ NETPUSE_       4.807         4.720         4.672         5.076         5.418
+ NETPUSE_       4.863         4.761         4.556         4.890         4.725
+
+
+           Covariances
+              NETPUSE_
+              ________
+ NETPUSE_       5.329
+
+
+           Correlations
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+ NETPUSE_       1.000
+ NETPUSE_       0.891         1.000
+ NETPUSE_       0.871         0.878         1.000
+ NETPUSE_       0.826         0.836         0.865         1.000
+ NETPUSE_       0.841         0.832         0.832         0.883         1.000
+ NETPUSE_       0.858         0.846         0.818         0.857         0.879
+
+
+           Correlations
+              NETPUSE_
+              ________
+ NETPUSE_       1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 2
+
+
+           Means
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+                1.865         1.799         1.704         1.692         1.714
+
+
+           Means
+              NETPUSE_
+              ________
+                1.606
+
+
+           Covariances
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+ NETPUSE_       2.083
+ NETPUSE_       1.736         2.163
+ NETPUSE_       1.568         1.562         1.730
+ NETPUSE_       1.611         1.621         1.551         1.912
+ NETPUSE_       1.623         1.815         1.565         1.713         2.107
+ NETPUSE_       1.404         1.482         1.455         1.519         1.704
+
+
+           Covariances
+              NETPUSE_
+              ________
+ NETPUSE_       1.706
+
+
+           Correlations
+              NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_      NETPUSE_
+              ________      ________      ________      ________      ________
+ NETPUSE_       1.000
+ NETPUSE_       0.818         1.000
+ NETPUSE_       0.826         0.807         1.000
+ NETPUSE_       0.807         0.797         0.853         1.000
+ NETPUSE_       0.775         0.850         0.820         0.853         1.000
+ NETPUSE_       0.745         0.771         0.847         0.841         0.899
+
+
+           Correlations
+              NETPUSE_
+              ________
+ NETPUSE_       1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     NETPUSE_5             3.115       0.574       1.000   53.22%       1.000      1.000      1.000
+             994.000       5.624      -1.405       7.000    5.94%       2.000      4.000
+     NETPUSE_6             2.905       0.712       1.000   58.35%       1.000      1.000      1.000
+             994.000       5.346      -1.246       7.000    4.53%       2.000      3.000
+     NETPUSE_7             2.686       0.871       1.000   65.15%       1.000      1.000      1.000
+            1168.000       4.918      -0.979       7.000    3.00%       1.000      3.000
+     NETPUSE_8             2.475       1.087       1.000   68.17%       1.000      1.000      1.000
+            1112.000       4.586      -0.548       7.000    2.97%       1.000      2.000
+     NETPUSE_9             2.298       1.242       1.000   72.11%       1.000      1.000      1.000
+            1072.000       4.084      -0.167       7.000    1.49%       1.000      2.000
+     NETPUSE_10            2.129       1.459       1.000   74.60%       1.000      1.000      1.000
+            1240.000       3.657       0.509       7.000    2.10%       1.000      2.000
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+          -14648.858  668003           647
+          -14648.858  617243           237
+          -14648.858  263221           447
+          -14648.858  933578           506
+          -14648.858  724519           333
+          -14648.858  535804           111
+          -14648.858  682718           733
+          -14648.858  72866            692
+          -14648.858  15270            610
+          -14648.858  387701           275
+          -14648.858  237332           661
+          -14648.858  608460           244
+          -14648.858  491970           563
+          -14648.858  55115            408
+          -14648.858  217744           326
+          -14648.858  617658           660
+          -14648.858  193569           440
+          -14648.858  782821           272
+          -14648.858  840031           276
+          -14648.858  192071           142
+          -14648.858  43523            297
+          -14648.858  879338           309
+          -14648.858  127215           9
+          -14648.858  106561           686
+          -14648.858  373505           88
+          -14648.858  360419           356
+          -14648.858  569338           755
+          -14648.858  721392           768
+          -14648.858  626891           32
+          -14648.858  691041           590
+          -14648.858  534864           307
+          -14648.858  857799           315
+          -14648.858  137305           379
+          -14648.858  399848           220
+          -14648.858  379729           512
+          -14648.858  622860           259
+          -14648.858  51375            148
+          -14648.858  316165           299
+          -14648.858  588923           606
+          -14648.858  642386           662
+          -14648.858  383902           673
+          -14648.858  847088           750
+          -14648.858  570681           777
+          -14648.858  415502           194
+          -14648.858  736574           414
+          -14648.858  107446           12
+          -14648.858  408713           450
+          -14648.858  17359            227
+          -14648.858  602032           648
+          -14648.858  514326           325
+          -14648.858  278661           674
+          -14648.858  372176           23
+          -14648.858  751054           117
+          -14648.858  154575           539
+          -14648.858  279850           555
+          -14648.858  478421           311
+          -14648.858  22075            659
+          -14648.858  297518           166
+          -14648.858  563002           360
+          -14648.858  177936           726
+          -14648.858  777045           377
+          -14648.858  253358           2
+          -14648.858  422103           62
+          -14648.858  931874           141
+          -14648.858  947714           573
+          -14648.858  417035           149
+          -14648.858  878749           728
+          -14648.858  308582           752
+          -14648.858  584397           428
+          -14648.858  232559           136
+          -14648.858  574942           558
+          -14648.858  473942           574
+          -14648.858  824126           287
+          -14648.858  62835            642
+          -14648.858  535063           329
+          -14648.858  915642           40
+          -14648.858  303634           169
+          -14648.858  951709           348
+          -14648.858  991329           182
+          -14648.858  462821           745
+          -14648.858  595619           779
+          -14648.858  134830           780
+          -14648.858  39136            226
+          -14648.858  366533           484
+          -14648.858  597614           284
+          -14648.858  93468            3
+          -14648.858  276102           599
+          -14648.858  402699           604
+          -14648.858  692169           308
+          -14648.858  294811           637
+          -14648.858  760850           739
+          -14648.858  726035           191
+          -14648.858  502157           799
+          -14648.858  802256           477
+          -14648.858  618760           489
+          -14648.858  314034           513
+          -14648.858  327475           518
+          -14648.858  349263           263
+          -14648.858  371737           532
+          -14648.858  506886           576
+          -14648.858  369602           146
+          -14648.858  84013            598
+          -14648.858  383979           603
+          -14648.858  193042           316
+          -14648.858  829540           324
+          -14648.858  373702           669
+          -14648.858  677062           680
+          -14648.858  626208           698
+          -14648.858  860029           760
+          -14648.858  801065           393
+          -14648.858  937225           394
+          -14648.858  926797           406
+          -14648.858  840078           203
+          -14648.858  918558           412
+          -14648.858  217130           443
+          -14648.858  364676           27
+          -14648.858  887580           493
+          -14648.858  276696           676
+          -14648.858  677720           681
+          -14648.858  902278           21
+          -14648.858  772131           407
+          -14648.858  216565           474
+          -14648.858  319575           499
+          -14648.858  642909           251
+          -14648.858  715561           125
+          -14648.858  27071            15
+          -14648.858  438144           271
+          -14648.858  562716           300
+          -14648.858  805935           615
+          -14648.858  738393           619
+          -14648.858  377584           630
+          -14648.858  602797           336
+          -14648.858  569833           85
+          -14648.858  14262            781
+          -14648.858  137377           397
+          -14648.858  36714            201
+          -14648.858  761633           50
+          -14648.858  232226           235
+          -14648.858  988761           475
+          -14648.858  53621            483
+          -14648.858  691234           250
+          -14648.858  891347           504
+          -14648.858  194143           510
+          -14648.858  476498           179
+          -14648.858  958107           790
+          -14648.858  570908           98
+          -14648.858  188640           451
+          -14648.858  926283           269
+          -14648.858  92564            583
+          -14648.858  377504           294
+          -14648.858  68985            17
+          -14648.858  685268           596
+          -14648.858  393232           152
+          -14648.858  441191           361
+          -14648.858  836066           372
+          -14648.858  793035           187
+          -14648.858  178181           753
+          -14648.858  547702           767
+          -14648.858  518828           432
+          -14648.858  915107           54
+          -14648.858  922596           456
+          -14648.858  267983           228
+          -14648.858  769907           457
+          -14648.858  802779           122
+          -14648.858  489927           520
+          -14648.858  565819           65
+          -14648.858  15715            274
+          -14648.858  804104           566
+          -14648.858  654136           167
+          -14648.858  971853           402
+          -14648.858  596257           405
+          -14648.858  155622           507
+          -14648.858  462953           7
+          -14648.858  163110           584
+          -14648.858  783110           72
+          -14648.858  260601           36
+          -14648.858  456213           160
+          -14648.858  696773           80
+          -14648.858  314084           81
+          -14648.858  418686           338
+          -14648.858  35191            703
+          -14648.858  940533           764
+          -14648.858  638577           769
+          -14648.858  58507            793
+          -14648.858  700349           401
+          -14648.858  85462            51
+          -14648.858  350608           334
+          -14648.858  717754           180
+          -14648.858  520865           763
+          -14648.858  109946           771
+          -14648.858  291149           536
+          -14648.858  414284           158
+          -14648.858  948615           140
+          -14648.858  972873           157
+          -14648.858  964570           701
+          -14648.858  342019           301
+          -14648.858  118438           601
+          -14648.858  294669           501
+          -14648.858  371246           101
+
+Unperturbed starting value run did not converge or was rejected in the third stage.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+          H0 Value                      -14648.858
+          H0 Scaling Correction Factor      5.4590
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   29311.717
+          Bayesian (BIC)                 29350.796
+          Sample-Size Adjusted BIC       29328.557
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1401.00000          0.71334
+       2        563.00000          0.28666
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    NETPUSE_5          1.000      0.000    999.000    999.000
+    NETPUSE_6          1.000      0.000    999.000    999.000
+    NETPUSE_7          1.000      0.000    999.000    999.000
+    NETPUSE_8          1.000      0.000    999.000    999.000
+    NETPUSE_9          1.000      0.000    999.000    999.000
+    NETPUSE_10         1.000      0.000    999.000    999.000
+
+ S        |
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          1.000      0.000    999.000    999.000
+    NETPUSE_7          2.000      0.000    999.000    999.000
+    NETPUSE_8          3.000      0.000    999.000    999.000
+    NETPUSE_9          4.000      0.000    999.000    999.000
+    NETPUSE_10         5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.499      0.139     -3.580      0.000
+
+ Means
+    I                  2.743      0.194     14.129      0.000
+    S                  0.407      0.033     12.273      0.000
+
+ Intercepts
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.000      0.000    999.000    999.000
+    NETPUSE_7          0.000      0.000    999.000    999.000
+    NETPUSE_8          0.000      0.000    999.000    999.000
+    NETPUSE_9          0.000      0.000    999.000    999.000
+    NETPUSE_10         0.000      0.000    999.000    999.000
+
+ Variances
+    I                  5.118      0.303     16.878      0.000
+    S                  0.302      0.045      6.675      0.000
+
+ Residual Variances
+    NETPUSE_5          0.407      0.033     12.273      0.000
+    NETPUSE_6          0.407      0.033     12.273      0.000
+    NETPUSE_7          0.407      0.033     12.273      0.000
+    NETPUSE_8          0.407      0.033     12.273      0.000
+    NETPUSE_9          0.407      0.033     12.273      0.000
+    NETPUSE_10         0.407      0.033     12.273      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    NETPUSE_5          1.000      0.000    999.000    999.000
+    NETPUSE_6          1.000      0.000    999.000    999.000
+    NETPUSE_7          1.000      0.000    999.000    999.000
+    NETPUSE_8          1.000      0.000    999.000    999.000
+    NETPUSE_9          1.000      0.000    999.000    999.000
+    NETPUSE_10         1.000      0.000    999.000    999.000
+
+ S        |
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          1.000      0.000    999.000    999.000
+    NETPUSE_7          2.000      0.000    999.000    999.000
+    NETPUSE_8          3.000      0.000    999.000    999.000
+    NETPUSE_9          4.000      0.000    999.000    999.000
+    NETPUSE_10         5.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.499      0.139     -3.580      0.000
+
+ Means
+    I                  1.100      0.164      6.701      0.000
+    S                  0.407      0.033     12.273      0.000
+
+ Intercepts
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.000      0.000    999.000    999.000
+    NETPUSE_7          0.000      0.000    999.000    999.000
+    NETPUSE_8          0.000      0.000    999.000    999.000
+    NETPUSE_9          0.000      0.000    999.000    999.000
+    NETPUSE_10         0.000      0.000    999.000    999.000
+
+ Variances
+    I                  5.118      0.303     16.878      0.000
+    S                  0.302      0.045      6.675      0.000
+
+ Residual Variances
+    NETPUSE_5          0.407      0.033     12.273      0.000
+    NETPUSE_6          0.407      0.033     12.273      0.000
+    NETPUSE_7          0.407      0.033     12.273      0.000
+    NETPUSE_8          0.407      0.033     12.273      0.000
+    NETPUSE_9          0.407      0.033     12.273      0.000
+    NETPUSE_10         0.407      0.033     12.273      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.912      0.066     13.880      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.640E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    NETPUSE_5          0.962      0.003    304.903      0.000
+    NETPUSE_6          1.029      0.024     43.661      0.000
+    NETPUSE_7          1.039      0.045     22.903      0.000
+    NETPUSE_8          0.987      0.057     17.359      0.000
+    NETPUSE_9          0.896      0.058     15.570      0.000
+    NETPUSE_10         0.795      0.053     15.061      0.000
+
+ S        |
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.250      0.019     13.354      0.000
+    NETPUSE_7          0.505      0.042     11.899      0.000
+    NETPUSE_8          0.720      0.062     11.583      0.000
+    NETPUSE_9          0.871      0.071     12.217      0.000
+    NETPUSE_10         0.966      0.071     13.538      0.000
+
+ S        WITH
+    I                 -0.401      0.082     -4.883      0.000
+
+ Means
+    I                  1.213      0.108     11.212      0.000
+    S                  0.740      0.031     24.052      0.000
+
+ Intercepts
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.000      0.000    999.000    999.000
+    NETPUSE_7          0.000      0.000    999.000    999.000
+    NETPUSE_8          0.000      0.000    999.000    999.000
+    NETPUSE_9          0.000      0.000    999.000    999.000
+    NETPUSE_10         0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    NETPUSE_5          0.074      0.006     12.114      0.000
+    NETPUSE_6          0.084      0.007     11.517      0.000
+    NETPUSE_7          0.086      0.008     10.180      0.000
+    NETPUSE_8          0.077      0.008      9.594      0.000
+    NETPUSE_9          0.064      0.006      9.926      0.000
+    NETPUSE_10         0.050      0.005     10.838      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    NETPUSE_5          0.962      0.003    304.903      0.000
+    NETPUSE_6          1.029      0.024     43.661      0.000
+    NETPUSE_7          1.039      0.045     22.903      0.000
+    NETPUSE_8          0.987      0.057     17.359      0.000
+    NETPUSE_9          0.896      0.058     15.570      0.000
+    NETPUSE_10         0.795      0.053     15.061      0.000
+
+ S        |
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.250      0.019     13.354      0.000
+    NETPUSE_7          0.505      0.042     11.899      0.000
+    NETPUSE_8          0.720      0.062     11.583      0.000
+    NETPUSE_9          0.871      0.071     12.217      0.000
+    NETPUSE_10         0.966      0.071     13.538      0.000
+
+ S        WITH
+    I                 -0.401      0.082     -4.883      0.000
+
+ Means
+    I                  0.486      0.082      5.929      0.000
+    S                  0.740      0.031     24.052      0.000
+
+ Intercepts
+    NETPUSE_5          0.000      0.000    999.000    999.000
+    NETPUSE_6          0.000      0.000    999.000    999.000
+    NETPUSE_7          0.000      0.000    999.000    999.000
+    NETPUSE_8          0.000      0.000    999.000    999.000
+    NETPUSE_9          0.000      0.000    999.000    999.000
+    NETPUSE_10         0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    NETPUSE_5          0.074      0.006     12.114      0.000
+    NETPUSE_6          0.084      0.007     11.517      0.000
+    NETPUSE_7          0.086      0.008     10.180      0.000
+    NETPUSE_8          0.077      0.008      9.594      0.000
+    NETPUSE_9          0.064      0.006      9.926      0.000
+    NETPUSE_10         0.050      0.005     10.838      0.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    NETPUSE_           0.926      0.006    152.452      0.000
+    NETPUSE_           0.916      0.007    125.258      0.000
+    NETPUSE_           0.914      0.008    108.449      0.000
+    NETPUSE_           0.923      0.008    114.318      0.000
+    NETPUSE_           0.936      0.006    145.567      0.000
+    NETPUSE_           0.950      0.005    204.837      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    NETPUSE_           0.926      0.006    152.452      0.000
+    NETPUSE_           0.916      0.007    125.258      0.000
+    NETPUSE_           0.914      0.008    108.449      0.000
+    NETPUSE_           0.923      0.008    114.318      0.000
+    NETPUSE_           0.936      0.006    145.567      0.000
+    NETPUSE_           0.950      0.005    204.837      0.000
+
+
+     Beginning Time:  11:11:10
+        Ending Time:  11:11:18
+       Elapsed Time:  00:00:08
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

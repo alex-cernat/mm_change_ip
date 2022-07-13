@@ -1,0 +1,719 @@
+Mplus VERSION 8.6
+MUTHEN & MUTHEN
+07/13/2021   7:51 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w f2f_prop stabil;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   howlng_5
+   howlng_6
+   howlng_7;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(p567= 1 2);
+  WEIGHT IS pred_p567_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | howlng_5@0 howlng_6@1 howlng_7@2;;
+
+  howlng_5 (a);
+   howlng_6 (a);
+   howlng_7 (a);
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.
+*** WARNING
+  Data set contains unknown or missing values for variable P567.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  1695
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  2
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         360
+
+Number of dependent variables                                    3
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   HOWLNG_5    HOWLNG_6    HOWLNG_7
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_P56
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Cholesky                                                       OFF
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             7
+     Number of y missing data patterns           7
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+ HOWLNG_5       0.700
+ HOWLNG_6       0.631         0.753
+ HOWLNG_7       0.553         0.594         0.822
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 1
+
+
+           Means
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+               10.239         9.887         9.669
+
+
+           Covariances
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+ HOWLNG_5      91.431
+ HOWLNG_6      46.798        80.934
+ HOWLNG_7      51.550        58.581        77.771
+
+
+           Correlations
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+ HOWLNG_5       1.000
+ HOWLNG_6       0.544         1.000
+ HOWLNG_7       0.611         0.738         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 2
+
+
+           Means
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+               12.537        13.178        10.230
+
+
+           Covariances
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+ HOWLNG_5     118.216
+ HOWLNG_6      82.312       200.449
+ HOWLNG_7      83.990        74.119       113.715
+
+
+           Correlations
+              HOWLNG_5      HOWLNG_6      HOWLNG_7
+              ________      ________      ________
+ HOWLNG_5       1.000
+ HOWLNG_6       0.535         1.000
+ HOWLNG_7       0.724         0.491         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     HOWLNG_5             11.164       1.404       0.000    6.75%       3.000      6.000      8.000
+             252.000     101.445       2.309      56.000    0.40%      10.000     18.000
+     HOWLNG_6             11.480       3.396       0.000    4.80%       3.000      6.000      9.000
+             271.000     134.386      24.686     120.000    0.37%      10.000     20.000
+     HOWLNG_7              9.809       2.376       0.000    6.42%       3.000      6.000      7.000
+             296.000      91.962      10.028      80.000    0.34%      10.000     15.000
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -4112.146  489927           520
+           -4112.146  484687           306
+           -4112.146  752476           614
+           -4112.146  123985           248
+           -4112.146  604861           800
+           -4112.146  965639           463
+           -4112.146  801065           393
+           -4112.146  967237           48
+           -4112.146  603842           61
+           -4112.146  22075            659
+           -4112.146  276696           676
+           -4112.146  520865           763
+           -4112.146  790059           469
+           -4112.146  875667           367
+           -4112.146  4091             548
+           -4112.146  781190           219
+           -4112.146  699810           571
+           -4112.146  281462           285
+           -4112.146  85114            385
+           -4112.146  399380           436
+           -4112.146  275475           413
+           -4112.146  788796           145
+           -4112.146  349562           359
+           -4112.146  502532           445
+           -4112.146  836515           341
+           -4112.146  573096           20
+           -4112.146  393232           152
+           -4112.146  626087           314
+           -4112.146  266038           672
+           -4112.146  251641           784
+           -4112.146  281558           184
+           -4112.146  1548             384
+           -4112.146  642909           251
+           -4112.146  92091            649
+           -4112.146  625191           350
+           -4112.146  608496           4
+           -4112.146  944186           541
+           -4112.146  345070           114
+           -4112.146  971853           402
+           -4112.146  891347           504
+           -4112.146  49293            707
+           -4112.146  345974           622
+           -4112.146  153942           31
+           -4112.146  570908           98
+           -4112.146  915107           54
+           -4112.146  473942           574
+           -4112.146  62835            642
+           -4112.146  264935           281
+           -4112.146  579995           183
+           -4112.146  802682           419
+           -4112.146  193569           440
+           -4112.146  881886           608
+           -4112.146  76337            76
+           -4112.146  900631           774
+           -4112.146  303634           169
+           -4112.146  164305           128
+           -4112.146  238906           430
+           -4112.146  112586           494
+           -4112.146  836066           372
+           -4112.146  682718           733
+           -4112.146  220492           743
+           -4112.146  804561           59
+           -4112.146  801717           364
+           -4112.146  319144           176
+           -4112.146  501995           791
+           -4112.146  970689           266
+           -4112.146  40340            188
+           -4112.146  547702           767
+           -4112.146  534483           290
+           -4112.146  294811           637
+           -4112.146  568405           233
+           -4112.146  797594           234
+           -4112.146  531546           702
+           -4112.146  246261           38
+           -4112.146  58507            793
+           -4112.146  312754           562
+           -4112.146  232559           136
+           -4112.146  608849           224
+           -4112.146  848890           95
+           -4112.146  373505           88
+           -4112.146  965994           396
+           -4112.146  224950           455
+           -4112.146  921023           782
+           -4112.146  802779           122
+           -4112.146  206099           363
+           -4112.146  712531           631
+           -4112.146  622860           259
+           -4112.146  417035           149
+           -4112.146  937885           426
+           -4112.146  791285           416
+           -4112.146  350608           334
+           -4112.146  824956           607
+           -4112.146  266008           656
+           -4112.146  192071           142
+           -4112.146  957392           79
+           -4112.146  132336           362
+           -4112.146  322790           636
+           -4112.146  364676           27
+           -4112.146  508482           446
+           -4112.146  496710           386
+           -4112.146  534864           307
+           -4112.146  951709           348
+           -4112.146  804104           566
+           -4112.146  291149           536
+           -4112.146  791396           243
+           -4112.146  175199           247
+           -4112.146  526324           178
+           -4112.146  127215           9
+           -4112.146  552272           654
+           -4112.146  566739           575
+           -4112.146  392751           480
+           -4112.146  618760           489
+           -4112.146  92689            304
+           -4112.146  399671           13
+           -4112.146  499150           216
+           -4112.146  399508           415
+           -4112.146  247912           537
+           -4112.146  407108           366
+           -4112.146  89970            223
+           -4112.146  926762           704
+           -4112.146  507154           387
+           -4112.146  545140           278
+           -4112.146  521575           313
+           -4112.146  440368           797
+           -4112.146  298275           418
+           -4112.146  780698           337
+           -4112.146  314034           513
+           -4112.146  584397           428
+           -4112.146  248742           556
+           -4112.146  939870           655
+           -4112.146  626891           32
+           -4112.146  227563           63
+           -4112.146  190339           102
+           -4112.146  958107           790
+           -4112.146  464179           106
+           -4112.146  425982           485
+           -4112.146  392766           331
+           -4112.146  354559           73
+           -4112.146  202790           198
+           -4112.146  669639           699
+           -4112.146  349360           464
+           -4112.146  518828           432
+           -4112.146  85734            411
+           -4112.146  438144           271
+           -4112.146  668003           647
+           -4112.146  312587           775
+           -4112.146  263268           165
+           -4112.146  455617           242
+           -4112.146  117731           570
+           -4112.146  570681           777
+           -4112.146  109946           771
+           -4112.146  519357           559
+           -4112.146  858804           534
+           -4112.146  641794           591
+           -4112.146  358074           560
+           -4112.146  14262            781
+           -4112.146  333082           578
+           -4112.146  760878           249
+           -4112.146  107446           12
+           -4112.146  793035           187
+           -4112.146  163110           584
+           -4112.146  595153           230
+           -4112.146  648555           113
+           -4112.146  42523            730
+           -4112.146  882750           646
+           -4112.146  279850           555
+           -4112.146  407168           44
+           -4112.146  349263           263
+           -4112.146  7959             256
+           -4112.146  204959           695
+           -4112.146  766903           505
+           -4112.146  468036           131
+           -4112.146  220454           288
+           -4112.146  609185           181
+           -4112.146  835767           210
+           -4112.146  966014           37
+           -4112.146  798821           423
+           -4112.146  131856           90
+           -4112.146  92564            583
+           -4112.146  241197           747
+           -4112.146  91231            727
+           -4112.146  59963            670
+           -4112.146  278661           674
+           -4112.146  626208           698
+           -4112.146  650354           577
+           -4112.146  617658           660
+           -4112.146  964570           701
+           -4112.146  88437            761
+           -4112.146  475420           71
+           -4112.146  545108           667
+           -4112.146  25127            107
+           -4112.146  948615           140
+           -4112.146  657994           788
+           -4112.146  118438           601
+           -4112.146  36714            201
+           -4112.146  342019           301
+           -4112.146  371246           101
+           -4112.146  700349           401
+           -4112.146  294669           501
+
+Unperturbed starting value run did not converge or was rejected in the third stage.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        9
+
+Loglikelihood
+
+          H0 Value                       -4112.146
+          H0 Scaling Correction Factor     16.1792
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    8242.291
+          Bayesian (BIC)                  8277.266
+          Sample-Size Adjusted BIC        8248.714
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        210.00000          0.58333
+       2        150.00000          0.41667
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    HOWLNG_5           1.000      0.000    999.000    999.000
+    HOWLNG_6           1.000      0.000    999.000    999.000
+    HOWLNG_7           1.000      0.000    999.000    999.000
+
+ S        |
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           1.000      0.000    999.000    999.000
+    HOWLNG_7           2.000      0.000    999.000    999.000
+
+ S        WITH
+    I               -355.636    364.818     -0.975      0.330
+
+ Means
+    I                 -7.684     10.322     -0.744      0.457
+    S                 18.137      9.603      1.889      0.059
+
+ Intercepts
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           0.000      0.000    999.000    999.000
+    HOWLNG_7           0.000      0.000    999.000    999.000
+
+ Variances
+    I                403.568    372.220      1.084      0.278
+    S                364.664    357.263      1.021      0.307
+
+ Residual Variances
+    HOWLNG_5          18.137      9.603      1.889      0.059
+    HOWLNG_6          18.137      9.603      1.889      0.059
+    HOWLNG_7          18.137      9.603      1.889      0.059
+
+Latent Class 2 (2)
+
+ I        |
+    HOWLNG_5           1.000      0.000    999.000    999.000
+    HOWLNG_6           1.000      0.000    999.000    999.000
+    HOWLNG_7           1.000      0.000    999.000    999.000
+
+ S        |
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           1.000      0.000    999.000    999.000
+    HOWLNG_7           2.000      0.000    999.000    999.000
+
+ S        WITH
+    I               -266.501    280.009     -0.952      0.341
+
+ Means
+    I                 -0.945      8.938     -0.106      0.916
+    S                 18.137      9.603      1.889      0.059
+
+ Intercepts
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           0.000      0.000    999.000    999.000
+    HOWLNG_7           0.000      0.000    999.000    999.000
+
+ Variances
+    I                295.513    253.463      1.166      0.244
+    S                364.664    357.263      1.021      0.307
+
+ Residual Variances
+    HOWLNG_5          18.137      9.603      1.889      0.059
+    HOWLNG_6          18.137      9.603      1.889      0.059
+    HOWLNG_7          18.137      9.603      1.889      0.059
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.336      0.118      2.841      0.004
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.197E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    HOWLNG_5           0.978      0.010    102.828      0.000
+    HOWLNG_6           2.318      1.076      2.155      0.031
+    HOWLNG_7           0.939      0.254      3.692      0.000
+
+ S        |
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           2.204      1.066      2.066      0.039
+    HOWLNG_7           1.785      0.298      5.982      0.000
+
+ S        WITH
+    I                 -0.927      0.081    -11.435      0.000
+
+ Means
+    I                 -0.382      0.339     -1.128      0.259
+    S                  0.950      0.043     22.304      0.000
+
+ Intercepts
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           0.000      0.000    999.000    999.000
+    HOWLNG_7           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    HOWLNG_5           0.043      0.019      2.311      0.021
+    HOWLNG_6           0.242      0.127      1.895      0.058
+    HOWLNG_7           0.040      0.014      2.869      0.004
+
+Latent Class 2 (2)
+
+ I        |
+    HOWLNG_5           0.971      0.017     55.600      0.000
+    HOWLNG_6           1.426      0.810      1.761      0.078
+    HOWLNG_7           0.647      0.358      1.805      0.071
+
+ S        |
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           1.584      0.673      2.352      0.019
+    HOWLNG_7           1.437      0.336      4.274      0.000
+
+ S        WITH
+    I                 -0.812      0.183     -4.434      0.000
+
+ Means
+    I                 -0.055      0.497     -0.111      0.912
+    S                  0.950      0.043     22.304      0.000
+
+ Intercepts
+    HOWLNG_5           0.000      0.000    999.000    999.000
+    HOWLNG_6           0.000      0.000    999.000    999.000
+    HOWLNG_7           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    HOWLNG_5           0.058      0.034      1.706      0.088
+    HOWLNG_6           0.125      0.069      1.821      0.069
+    HOWLNG_7           0.026      0.015      1.757      0.079
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    HOWLNG_5           0.957      0.019     51.414      0.000
+    HOWLNG_6           0.758      0.127      5.950      0.000
+    HOWLNG_7           0.960      0.014     69.542      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    HOWLNG_5           0.942      0.034     27.800      0.000
+    HOWLNG_6           0.875      0.069     12.765      0.000
+    HOWLNG_7           0.974      0.015     66.654      0.000
+
+
+     Beginning Time:  07:51:54
+        Ending Time:  07:51:59
+       Elapsed Time:  00:00:05
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

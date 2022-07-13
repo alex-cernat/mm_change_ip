@@ -1,0 +1,963 @@
+Mplus VERSION 8.6
+MUTHEN & MUTHEN
+07/12/2021  10:11 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   jbsemp_7
+   jbsemp_8
+   jbsemp_9
+   jbsemp_10;
+
+   CATEGORICAL ARE
+   jbsemp_7
+   jbsemp_8
+   jbsemp_9
+   jbsemp_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(all= 1 2);
+  WEIGHT IS pred_all_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | jbsemp_7@0 jbsemp_8@1 jbsemp_9@2 jbsemp_10@3;
+   %c#1%
+  [s] ;
+   s ;
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] ;
+   s ;
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.
+*** WARNING
+  Data set contains unknown or missing values for variable ALL.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  91
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  905
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1061
+
+Number of dependent variables                                    4
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   JBSEMP_7    JBSEMP_8    JBSEMP_9    JBSEMP_1
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_ALL
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            15
+     Number of y missing data patterns           0
+     Number of u missing data patterns          15
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+ JBSEMP_7       0.621
+ JBSEMP_8       0.475         0.598
+ JBSEMP_9       0.421         0.459         0.568
+ JBSEMP_1       0.375         0.409         0.434         0.672
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    JBSEMP_7
+      Category 1    0.164          135.219
+      Category 2    0.836          688.621
+    JBSEMP_8
+      Category 1    0.182          133.689
+      Category 2    0.818          599.405
+    JBSEMP_9
+      Category 1    0.180          120.232
+      Category 2    0.820          546.485
+    JBSEMP_1
+      Category 1    0.157          102.005
+      Category 2    0.843          546.873
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -1287.735  941525           609
+           -1287.744  165853           105
+           -1287.744  765586           709
+           -1287.744  377504           294
+           -1287.744  563584           657
+           -1288.077  unperturbed      0
+           -1288.216  783102           433
+           -1289.035  405079           68
+           -1289.843  109946           771
+           -1290.911  167409           772
+           -1291.261  415502           194
+           -1291.729  760531           550
+           -1291.884  964570           701
+           -1291.884  313407           132
+           -1292.548  686384           690
+           -1292.686  878749           728
+           -1293.677  937225           394
+           -1293.996  576726           280
+           -1294.084  370481           742
+           -1294.884  85114            385
+           -1295.428  674171           195
+           -1297.133  850545           357
+           -1298.493  127215           9
+           -1299.236  789985           67
+           -1299.875  303634           169
+           -1300.229  903633           553
+           -1300.543  170118           238
+           -1302.093  801065           393
+           -1303.991  154575           539
+           -1304.268  859432           770
+           -1304.287  605565           404
+           -1304.294  888905           444
+           -1305.261  900631           774
+           -1307.826  371737           532
+           -1307.893  566739           575
+           -1308.248  520177           262
+           -1310.377  521575           313
+           -1310.517  614535           449
+           -1311.447  662983           666
+           -1312.217  326091           759
+           -1313.247  609185           181
+           -1314.307  68985            17
+           -1314.849  392766           331
+           -1315.468  760850           739
+           -1315.892  590834           785
+           -1316.282  137305           379
+           -1316.307  284109           82
+           -1316.369  49221            254
+           -1317.597  821011           161
+           -1318.619  947714           573
+           -1318.914  724519           333
+           -1319.351  496703           758
+           -1320.262  607072           717
+           -1321.026  132336           362
+           -1321.531  791285           416
+           -1321.637  316165           299
+           -1322.014  197223           332
+           -1322.378  762461           425
+           -1323.039  650354           577
+           -1323.366  539389           544
+           -1323.545  345726           461
+           -1323.832  484687           306
+           -1324.692  830529           279
+           -1326.015  960438           116
+           -1326.297  117731           570
+           -1326.962  775881           778
+           -1326.978  659773           663
+           -1327.600  58507            793
+           -1327.743  55115            408
+           -1327.890  995249           525
+           -1329.176  237332           661
+           -1329.395  209031           632
+           -1329.842  331681           549
+           -1329.985  392751           480
+           -1330.051  185071           370
+           -1331.295  341960           685
+           -1331.478  529496           343
+           -1331.482  763285           620
+           -1331.686  848163           47
+           -1332.050  414284           158
+           -1332.773  354624           448
+           -1333.417  456213           160
+           -1333.519  829540           324
+           -1333.614  945065           255
+           -1333.688  418686           338
+           -1333.741  961454           665
+           -1333.964  279850           555
+           -1334.605  595153           230
+           -1335.559  484501           163
+           -1336.409  953843           651
+           -1336.806  278661           674
+           -1336.911  751054           117
+           -1337.037  153053           378
+           -1337.309  710445           792
+           -1337.798  294669           501
+           -1337.894  373505           88
+           -1338.100  195763           358
+           -1338.358  483369           270
+           -1338.375  900268           327
+           -1339.096  402224           91
+           -1339.111  848590           694
+           -1339.237  124999           96
+           -1340.183  569833           85
+           -1340.247  345974           622
+           -1341.623  12477            155
+           -1341.701  396795           323
+           -1342.799  354395           486
+           -1342.996  369602           146
+           -1343.591  283492           435
+           -1344.109  856612           700
+           -1344.861  850840           232
+           -1344.878  926283           269
+           -1346.450  682718           733
+           -1346.938  551340           766
+           -1347.803  534483           290
+           -1348.878  992389           77
+           -1349.253  190339           102
+           -1349.579  913639           162
+           -1349.654  915642           40
+           -1350.167  321390           133
+           -1350.351  348637           749
+           -1350.584  972873           157
+           -1351.175  568405           233
+           -1351.475  266340           683
+           -1353.200  930323           267
+           -1353.310  391179           78
+           -1354.978  100874           108
+           -1355.075  7959             256
+           -1357.189  422103           62
+           -1358.087  897782           545
+           -1358.227  416463           467
+           -1358.551  887580           493
+           -1360.054  462821           745
+           -1361.441  910224           580
+           -1361.638  629320           222
+           -1361.676  66276            217
+           -1362.351  742609           531
+           -1363.021  637095           207
+           -1363.522  70118            104
+           -1363.845  97300            640
+           -1364.320  872743           374
+           -1366.441  246575           291
+           -1366.691  314757           345
+           -1368.963  723035           538
+           -1369.097  778953           635
+           -1372.532  425929           508
+           -1374.038  216565           474
+           -1374.290  798821           423
+           -1376.069  415931           10
+           -1376.236  238906           430
+           -1377.937  376411           473
+           -1381.752  378393           509
+           -1383.137  314034           513
+           -1384.385  106561           686
+           -1385.573  481835           57
+           -1387.464  804660           260
+           -1389.242  966014           37
+           -1390.882  194143           510
+           -1393.935  319575           499
+           -1394.042  838615           677
+           -1394.131  551639           55
+           -1395.080  692169           308
+           -1395.768  252949           487
+           -1396.348  188498           258
+           -1397.041  592219           119
+           -1401.330  126371           526
+           -1413.169  112586           494
+           -1432.683  783110           72
+
+32 perturbed starting value run(s) did not converge or were rejected in the third stage.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+     THE STANDARD ERRORS OF THE MODEL PARAMETER ESTIMATES MAY NOT BE
+     TRUSTWORTHY FOR SOME PARAMETERS DUE TO A NON-POSITIVE DEFINITE
+     FIRST-ORDER DERIVATIVE PRODUCT MATRIX.  THIS MAY BE DUE TO THE STARTING
+     VALUES BUT MAY ALSO BE AN INDICATION OF MODEL NONIDENTIFICATION.  THE
+     CONDITION NUMBER IS       0.252D-13.  PROBLEM INVOLVING THE FOLLOWING PARAMETER:
+     Parameter 9, %C#2%: S
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       11
+
+Loglikelihood
+
+          H0 Value                       -1287.735
+          H0 Scaling Correction Factor      1.2201
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    2597.470
+          Bayesian (BIC)                  2652.107
+          Sample-Size Adjusted BIC        2617.169
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                              6.730
+          Degrees of Freedom                    20
+          P-Value                           0.9975
+
+          Likelihood Ratio Chi-Square
+
+          Value                              9.351
+          Degrees of Freedom                    20
+          P-Value                           0.9785
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                            111.212
+          Degrees of Freedom                    99
+          P-Value                           0.1890
+
+          Likelihood Ratio Chi-Square
+
+          Value                             80.211
+          Degrees of Freedom                    99
+          P-Value                           0.9166
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        710.00000          0.66918
+       2        351.00000          0.33082
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    JBSEMP_7           1.000      0.000    999.000    999.000
+    JBSEMP_8           1.000      0.000    999.000    999.000
+    JBSEMP_9           1.000      0.000    999.000    999.000
+    JBSEMP_10          1.000      0.000    999.000    999.000
+
+ S        |
+    JBSEMP_7           0.000      0.000    999.000    999.000
+    JBSEMP_8           1.000      0.000    999.000    999.000
+    JBSEMP_9           2.000      0.000    999.000    999.000
+    JBSEMP_10          3.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 18.624     93.105      0.200      0.841
+
+ Means
+    I                  2.865      7.587      0.378      0.706
+    S                  3.031      4.566      0.664      0.507
+
+ Thresholds
+    JBSEMP_7$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_8$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_9$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_1$1       -14.964      1.878     -7.970      0.000
+
+ Variances
+    I                446.121    423.167      1.054      0.292
+    S                  5.235     11.133      0.470      0.638
+
+Latent Class 2 (2)
+
+ I        |
+    JBSEMP_7           1.000      0.000    999.000    999.000
+    JBSEMP_8           1.000      0.000    999.000    999.000
+    JBSEMP_9           1.000      0.000    999.000    999.000
+    JBSEMP_10          1.000      0.000    999.000    999.000
+
+ S        |
+    JBSEMP_7           0.000      0.000    999.000    999.000
+    JBSEMP_8           1.000      0.000    999.000    999.000
+    JBSEMP_9           2.000      0.000    999.000    999.000
+    JBSEMP_10          3.000      0.000    999.000    999.000
+
+ S        WITH
+    I               1949.063    342.454      5.691      0.000
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                112.629      7.851     14.346      0.000
+
+ Thresholds
+    JBSEMP_7$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_8$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_9$1       -14.964      1.878     -7.970      0.000
+    JBSEMP_1$1       -14.964      1.878     -7.970      0.000
+
+ Variances
+    I                294.815     72.391      4.073      0.000
+    S              13420.820   1815.746      7.391      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.704      0.084      8.365      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.252E-13
+       (ratio of smallest to largest eigenvalue)
+
+
+RESULTS IN PROBABILITY SCALE
+
+                    Estimate
+
+Latent Class 1 (1)
+
+ JBSEMP_7
+    Category 1         0.200
+    Category 2         0.800
+ JBSEMP_8
+    Category 1         0.173
+    Category 2         0.827
+ JBSEMP_9
+    Category 1         0.153
+    Category 2         0.847
+ JBSEMP_10
+    Category 1         0.138
+    Category 2         0.862
+
+Latent Class 2 (2)
+
+ JBSEMP_7
+    Category 1         0.193
+    Category 2         0.807
+ JBSEMP_8
+    Category 1         0.171
+    Category 2         0.829
+ JBSEMP_9
+    Category 1         0.171
+    Category 2         0.829
+ JBSEMP_10
+    Category 1         0.171
+    Category 2         0.829
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    JBSEMP_7           0.996      0.003    288.028      0.000
+    JBSEMP_8           0.952      0.210      4.545      0.000
+    JBSEMP_9           0.905      0.379      2.385      0.017
+    JBSEMP_10          0.856      0.509      1.683      0.092
+
+ S        |
+    JBSEMP_7           0.000      0.000    999.000    999.000
+    JBSEMP_8           0.103      0.104      0.995      0.320
+    JBSEMP_9           0.196      0.158      1.238      0.216
+    JBSEMP_10          0.278      0.177      1.575      0.115
+
+ S        WITH
+    I                  0.385      1.623      0.237      0.812
+
+ Means
+    I                  0.136      0.298      0.456      0.648
+    S                  1.325      0.635      2.087      0.037
+
+ Thresholds
+    JBSEMP_7$1        -0.706      0.344     -2.052      0.040
+    JBSEMP_8$1        -0.675      0.285     -2.367      0.018
+    JBSEMP_9$1        -0.641      0.292     -2.192      0.028
+    JBSEMP_1$1        -0.607      0.332     -1.827      0.068
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    JBSEMP_7           0.994      0.001    738.050      0.000
+    JBSEMP_8           0.129      0.010     12.521      0.000
+    JBSEMP_9           0.069      0.006     11.724      0.000
+    JBSEMP_10          0.047      0.004     11.459      0.000
+
+ S        |
+    JBSEMP_7           0.000      0.000    999.000    999.000
+    JBSEMP_8           0.873      0.010     86.040      0.000
+    JBSEMP_9           0.932      0.006    161.478      0.000
+    JBSEMP_10          0.954      0.004    236.939      0.000
+
+ S        WITH
+    I                  0.980      0.000   2067.534      0.000
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                  0.972      0.005    196.302      0.000
+
+ Thresholds
+    JBSEMP_7$1        -0.867      0.037    -23.629      0.000
+    JBSEMP_8$1        -0.113      0.011    -10.392      0.000
+    JBSEMP_9$1        -0.060      0.006     -9.887      0.000
+    JBSEMP_1$1        -0.041      0.004     -9.714      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    JBSEMP_7           0.993      0.007    144.014      0.000
+    JBSEMP_8           0.993      0.005    184.041      0.000
+    JBSEMP_9           0.994      0.005    187.649      0.000
+    JBSEMP_1           0.995      0.006    172.569      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    JBSEMP_7           0.989      0.003    369.025      0.000
+    JBSEMP_8           1.000      0.000   ********      0.000
+    JBSEMP_9           1.000      0.000   ********      0.000
+    JBSEMP_1           1.000      0.000   ********      0.000
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS 1 (1)
+
+
+           NU
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ JBSEMP_7           0             0
+ JBSEMP_8           0             0
+ JBSEMP_9           0             0
+ JBSEMP_1           0             0
+
+
+           THETA
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+ JBSEMP_7           0
+ JBSEMP_8           0             0
+ JBSEMP_9           0             0             0
+ JBSEMP_1           0             0             0             0
+
+
+           ALPHA
+              I             S
+              ________      ________
+                    1             2
+
+
+           BETA
+              I             S
+              ________      ________
+ I                  0             0
+ S                  0             0
+
+
+           PSI
+              I             S
+              ________      ________
+ I                  3
+ S                  4             5
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS 2 (2)
+
+
+           NU
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ JBSEMP_7           0             0
+ JBSEMP_8           0             0
+ JBSEMP_9           0             0
+ JBSEMP_1           0             0
+
+
+           THETA
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+ JBSEMP_7           0
+ JBSEMP_8           0             0
+ JBSEMP_9           0             0             0
+ JBSEMP_1           0             0             0             0
+
+
+           ALPHA
+              I             S
+              ________      ________
+                    0             6
+
+
+           BETA
+              I             S
+              ________      ________
+ I                  0             0
+ S                  0             0
+
+
+           PSI
+              I             S
+              ________      ________
+ I                  7
+ S                  8             9
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS INDICATOR MODEL PART
+
+
+           TAU(U) FOR LATENT CLASS 1 (1)
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                   10            10            10            10
+
+
+           TAU(U) FOR LATENT CLASS 2 (2)
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                   10            10            10            10
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS REGRESSION MODEL PART
+
+
+           ALPHA(C)
+              C#1           C#2
+              ________      ________
+                   11             0
+
+
+           GAMMA(C)
+              I             S
+              ________      ________
+ C#1                0             0
+ C#2                0             0
+
+
+     STARTING VALUES FOR LATENT CLASS 1 (1)
+
+
+           NU
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ JBSEMP_7       1.000         0.000
+ JBSEMP_8       1.000         1.000
+ JBSEMP_9       1.000         2.000
+ JBSEMP_1       1.000         3.000
+
+
+           THETA
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+ JBSEMP_7       1.000
+ JBSEMP_8       0.000         1.000
+ JBSEMP_9       0.000         0.000         1.000
+ JBSEMP_1       0.000         0.000         0.000         1.000
+
+
+           ALPHA
+              I             S
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              I             S
+              ________      ________
+ I              0.000         0.000
+ S              0.000         0.000
+
+
+           PSI
+              I             S
+              ________      ________
+ I              0.050
+ S              0.000         0.050
+
+
+     STARTING VALUES FOR LATENT CLASS 2 (2)
+
+
+           NU
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              I             S
+              ________      ________
+ JBSEMP_7       1.000         0.000
+ JBSEMP_8       1.000         1.000
+ JBSEMP_9       1.000         2.000
+ JBSEMP_1       1.000         3.000
+
+
+           THETA
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+ JBSEMP_7       1.000
+ JBSEMP_8       0.000         1.000
+ JBSEMP_9       0.000         0.000         1.000
+ JBSEMP_1       0.000         0.000         0.000         1.000
+
+
+           ALPHA
+              I             S
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              I             S
+              ________      ________
+ I              0.000         0.000
+ S              0.000         0.000
+
+
+           PSI
+              I             S
+              ________      ________
+ I              0.050
+ S              0.000         0.050
+
+
+     STARTING VALUES FOR LATENT CLASS INDICATOR MODEL PART
+
+
+           TAU(U) FOR LATENT CLASS 1 (1)
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+               -1.580        -1.580        -1.580        -1.580
+
+
+           TAU(U) FOR LATENT CLASS 2 (2)
+              JBSEMP_7      JBSEMP_8      JBSEMP_9      JBSEMP_1
+              ________      ________      ________      ________
+               -1.580        -1.580        -1.580        -1.580
+
+
+     STARTING VALUES FOR LATENT CLASS REGRESSION MODEL PART
+
+
+           ALPHA(C)
+              C#1           C#2
+              ________      ________
+                0.000         0.000
+
+
+           GAMMA(C)
+              I             S
+              ________      ________
+ C#1            0.000         0.000
+ C#2            0.000         0.000
+
+
+     Beginning Time:  10:11:51
+        Ending Time:  10:12:51
+       Elapsed Time:  00:01:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

@@ -1,0 +1,854 @@
+Mplus VERSION 8.7
+MUTHEN & MUTHEN
+11/04/2021   1:22 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = flex_time/data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   finnow_5
+   finnow_6
+   finnow_7
+   finnow_8
+   finnow_9
+   finnow_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(all= 1 2);
+  WEIGHT IS pred_all_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | finnow_5@0 finnow_6 finnow_7 finnow_8 finnow_9 finnow_10@1;;
+
+  finnow_5 (a);
+   finnow_6 (a);
+   finnow_7 (a);
+   finnow_8 (a);
+   finnow_9 (a);
+   finnow_10 (a);
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+  s BY finnow_6 (j)
+   finnow_7 (k)
+   finnow_8 (l)
+   finnow_9 (m);
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+  s BY finnow_6 (j)
+   finnow_7 (k)
+   finnow_8 (l)
+   finnow_9 (m);
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.  Consider using the
+  SUBPOPULATION option to restrict the analysis to observations with a positive weight.
+*** WARNING
+  Data set contains unknown or missing values for variable ALL.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  91
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  6
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1960
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   FINNOW_5    FINNOW_6    FINNOW_7    FINNOW_8    FINNOW_9    FINNOW_10
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_ALL
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Cholesky                                                       OFF
+
+Input data file(s)
+  flex_time/data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            61
+     Number of y missing data patterns          61
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+ FINNOW_5       0.505
+ FINNOW_6       0.425         0.505
+ FINNOW_7       0.351         0.381         0.590
+ FINNOW_8       0.325         0.357         0.477         0.564
+ FINNOW_9       0.307         0.335         0.445         0.474         0.543
+ FINNOW_1       0.286         0.311         0.398         0.427         0.441
+
+
+           Covariance Coverage
+              FINNOW_1
+              ________
+ FINNOW_1       0.632
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 1
+
+
+           Means
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+                2.204         2.230         2.175         2.018         1.984
+
+
+           Means
+              FINNOW_1
+              ________
+                2.038
+
+
+           Covariances
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+ FINNOW_5       1.110
+ FINNOW_6       0.747         1.152
+ FINNOW_7       0.695         0.759         1.124
+ FINNOW_8       0.643         0.587         0.687         0.939
+ FINNOW_9       0.554         0.524         0.587         0.599         0.786
+ FINNOW_1       0.500         0.618         0.622         0.580         0.583
+
+
+           Covariances
+              FINNOW_1
+              ________
+ FINNOW_1       0.956
+
+
+           Correlations
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+ FINNOW_5       1.000
+ FINNOW_6       0.660         1.000
+ FINNOW_7       0.623         0.667         1.000
+ FINNOW_8       0.629         0.565         0.669         1.000
+ FINNOW_9       0.593         0.551         0.625         0.697         1.000
+ FINNOW_1       0.485         0.589         0.600         0.612         0.672
+
+
+           Correlations
+              FINNOW_1
+              ________
+ FINNOW_1       1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 2
+
+
+           Means
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+                2.375         2.402         2.245         2.161         2.056
+
+
+           Means
+              FINNOW_1
+              ________
+                2.108
+
+
+           Covariances
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+ FINNOW_5       1.040
+ FINNOW_6       0.668         1.093
+ FINNOW_7       0.632         0.651         0.899
+ FINNOW_8       0.597         0.622         0.635         0.857
+ FINNOW_9       0.557         0.507         0.555         0.581         0.803
+ FINNOW_1       0.468         0.511         0.516         0.545         0.536
+
+
+           Covariances
+              FINNOW_1
+              ________
+ FINNOW_1       0.800
+
+
+           Correlations
+              FINNOW_5      FINNOW_6      FINNOW_7      FINNOW_8      FINNOW_9
+              ________      ________      ________      ________      ________
+ FINNOW_5       1.000
+ FINNOW_6       0.627         1.000
+ FINNOW_7       0.653         0.657         1.000
+ FINNOW_8       0.633         0.643         0.723         1.000
+ FINNOW_9       0.609         0.541         0.653         0.701         1.000
+ FINNOW_1       0.513         0.547         0.608         0.658         0.668
+
+
+           Correlations
+              FINNOW_1
+              ________
+ FINNOW_1       1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     FINNOW_5              2.217       0.627       1.000   25.76%       1.000      2.000      2.000
+             990.000       1.087      -0.062       5.000    3.33%       2.000      3.000
+     FINNOW_6              2.290       0.530       1.000   25.56%       1.000      2.000      2.000
+             990.000       1.145      -0.349       5.000    3.43%       3.000      3.000
+     FINNOW_7              2.167       0.718       1.000   28.35%       1.000      2.000      2.000
+            1157.000       1.037       0.116       5.000    3.63%       2.000      3.000
+     FINNOW_8              2.088       0.703       1.000   30.29%       1.000      2.000      2.000
+            1106.000       0.934       0.180       5.000    2.35%       2.000      3.000
+     FINNOW_9              2.009       0.715       1.000   31.27%       1.000      2.000      2.000
+            1065.000       0.797       0.263       5.000    1.31%       2.000      3.000
+     FINNOW_10             2.077       0.711       1.000   31.34%       1.000      2.000      2.000
+            1238.000       0.920       0.205       5.000    2.18%       2.000      3.000
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+          -10316.332  879211           453
+          -10316.332  667250           318
+          -10316.332  921023           782
+          -10316.332  910224           580
+          -10316.332  404042           675
+          -10316.332  509733           130
+          -10316.332  673496           218
+          -10316.332  275475           413
+          -10316.332  798821           423
+          -10316.332  210870           383
+          -10316.332  349360           464
+          -10316.332  903420           5
+          -10316.332  260601           36
+          -10316.332  355254           796
+          -10316.332  238906           430
+          -10316.332  481835           57
+          -10316.332  136842           58
+          -10316.332  765392           382
+          -10316.332  278661           674
+          -10316.332  485256           371
+          -10316.332  547702           767
+          -10316.332  805935           615
+          -10316.332  851945           18
+          -10316.332  760850           739
+          -10316.332  820977           776
+          -10316.332  392766           331
+          -10316.332  533738           11
+          -10316.332  972430           491
+          -10316.332  831410           567
+          -10316.332  478421           311
+          -10316.332  514326           325
+          -10316.332  913639           162
+          -10316.332  185071           370
+          -10316.332  520865           763
+          -10316.332  227563           63
+          -10316.332  166851           638
+          -10316.332  496710           386
+          -10316.332  57226            208
+          -10316.332  152496           123
+          -10316.332  978781           497
+          -10316.332  608496           4
+          -10316.332  46502            714
+          -10316.332  42523            730
+          -10316.332  891531           206
+          -10316.332  153394           429
+          -10316.332  216565           474
+          -10316.332  679832           302
+          -10316.332  781190           219
+          -10316.332  471438           252
+          -10316.332  282464           283
+          -10316.332  192071           142
+          -10316.332  22874            588
+          -10316.332  848969           173
+          -10316.332  689529           516
+          -10316.332  231281           542
+          -10316.332  838615           677
+          -10316.332  700349           401
+          -10316.332  226322           478
+          -10316.332  93468            3
+          -10316.332  563584           657
+          -10316.332  232226           235
+          -10316.332  468036           131
+          -10316.332  358074           560
+          -10316.332  521575           313
+          -10316.332  329127           185
+          -10316.332  195763           358
+          -10316.332  132336           362
+          -10316.332  160326           546
+          -10316.332  602032           648
+          -10316.332  644297           340
+          -10316.332  436460           89
+          -10316.332  85114            385
+          -10316.332  714997           399
+          -10316.332  375590           438
+          -10316.332  754100           56
+          -10316.332  723035           538
+          -10316.332  88437            761
+          -10316.332  570782           193
+          -10316.332  253358           2
+          -10316.332  848331           137
+          -10316.332  266038           672
+          -10316.332  284384           600
+          -10316.332  790452           303
+          -10316.332  531546           702
+          -10316.332  887676           22
+          -10316.332  862607           468
+          -10316.332  371737           532
+          -10316.332  413564           535
+          -10316.332  948615           140
+          -10316.332  405371           569
+          -10316.332  810705           626
+          -10316.332  373815           618
+          -10316.332  425982           485
+          -10316.332  92689            304
+          -10316.332  148918           682
+          -10316.332  629320           222
+          -10316.332  751054           117
+          -10316.332  804561           59
+          -10316.332  414828           322
+          -10316.332  875667           367
+          -10316.332  118421           139
+          -10316.332  370481           742
+          -10316.332  535804           111
+          -10316.332  562716           300
+          -10316.332  291112           645
+          -10316.332  127362           757
+          -10316.332  437181           135
+          -10316.332  170954           86
+          -10316.332  686482           215
+          -10316.332  922042           492
+          -10316.332  314034           513
+          -10316.332  804104           566
+          -10316.332  435287           623
+          -10316.332  267983           228
+          -10316.332  53621            483
+          -10316.332  369602           146
+          -10316.332  383902           673
+          -10316.332  106561           686
+          -10316.332  21345            199
+          -10316.332  150531           154
+          -10316.332  181293           212
+          -10316.332  505244           582
+          -10316.332  669639           699
+          -10316.332  341041           34
+          -10316.332  668003           647
+          -10316.332  765586           709
+          -10316.332  478341           731
+          -10316.332  202790           198
+          -10316.332  499150           216
+          -10316.332  840031           276
+          -10316.332  172913           557
+          -10316.332  354208           196
+          -10316.332  688839           273
+          -10316.332  316165           299
+          -10316.332  878749           728
+          -10316.332  596257           405
+          -10316.332  953843           651
+          -10316.332  702492           718
+          -10316.332  918558           412
+          -10316.332  78862            529
+          -10316.332  967237           48
+          -10316.332  251641           784
+          -10316.332  637095           207
+          -10316.332  579138           706
+          -10316.332  414284           158
+          -10316.332  197223           332
+          -10316.332  699554           427
+          -10316.332  25127            107
+          -10316.332  69413            472
+          -10316.332  65651            214
+          -10316.332  648555           113
+          -10316.332  637345           19
+          -10316.332  563002           360
+          -10316.332  360419           356
+          -10316.332  134830           780
+          -10316.332  383979           603
+          -10316.332  782200           84
+          -10316.332  539751           459
+          -10316.332  642909           251
+          -10316.332  22075            659
+          -10316.332  595619           779
+          -10316.332  508482           446
+          -10316.332  422103           62
+          -10316.332  158612           581
+          -10316.332  373702           669
+          -10316.332  848590           694
+          -10316.332  349263           263
+          -10316.332  418686           338
+          -10316.332  268896           124
+          -10316.332  471398           74
+          -10316.332  204959           695
+          -10316.332  286735           175
+          -10316.332  92564            583
+          -10316.332  354559           73
+          -10316.332  370466           41
+          -10316.332  580539           786
+          -10316.332  505879           424
+          -10316.332  930323           267
+          -10316.332  370957           554
+          -10316.332  484406           421
+          -10316.332  351807           617
+          -10316.332  14262            781
+          -10316.332  109946           771
+          -10316.332  319575           499
+          -10316.332  155622           507
+          -10316.332  995875           547
+          -10316.332  392418           28
+          -10316.332  568405           233
+          -10316.332  157351           579
+          -10316.332  937588           293
+          -10316.332  701525           239
+          -10316.332  67009            564
+          -10316.332  607072           717
+          -10316.332  36714            201
+          -10316.332  342019           301
+          -10316.332  371246           101
+          -10316.332  118438           601
+          -10316.332  294669           501
+          -10316.332  964570           701
+
+Unperturbed starting value run did not converge or was rejected in the third stage.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       13
+
+Loglikelihood
+
+          H0 Value                      -10316.332
+          H0 Scaling Correction Factor      2.6386
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   20658.663
+          Bayesian (BIC)                 20731.212
+          Sample-Size Adjusted BIC       20689.911
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1400.00000          0.71429
+       2        560.00000          0.28571
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    FINNOW_5           1.000      0.000    999.000    999.000
+    FINNOW_6           1.000      0.000    999.000    999.000
+    FINNOW_7           1.000      0.000    999.000    999.000
+    FINNOW_8           1.000      0.000    999.000    999.000
+    FINNOW_9           1.000      0.000    999.000    999.000
+    FINNOW_10          1.000      0.000    999.000    999.000
+
+ S        |
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.219      0.087      2.532      0.011
+    FINNOW_7           0.435      0.078      5.579      0.000
+    FINNOW_8           0.597      0.057     10.538      0.000
+    FINNOW_9           0.736      0.054     13.655      0.000
+    FINNOW_10          1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.471      0.068     -6.939      0.000
+
+ Means
+    I                  2.015      0.039     51.390      0.000
+    S                  0.308      0.016     19.510      0.000
+
+ Intercepts
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.000      0.000    999.000    999.000
+    FINNOW_7           0.000      0.000    999.000    999.000
+    FINNOW_8           0.000      0.000    999.000    999.000
+    FINNOW_9           0.000      0.000    999.000    999.000
+    FINNOW_10          0.000      0.000    999.000    999.000
+
+ Variances
+    I                  0.901      0.062     14.450      0.000
+    S                  0.836      0.080     10.443      0.000
+
+ Residual Variances
+    FINNOW_5           0.308      0.016     19.510      0.000
+    FINNOW_6           0.308      0.016     19.510      0.000
+    FINNOW_7           0.308      0.016     19.510      0.000
+    FINNOW_8           0.308      0.016     19.510      0.000
+    FINNOW_9           0.308      0.016     19.510      0.000
+    FINNOW_10          0.308      0.016     19.510      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    FINNOW_5           1.000      0.000    999.000    999.000
+    FINNOW_6           1.000      0.000    999.000    999.000
+    FINNOW_7           1.000      0.000    999.000    999.000
+    FINNOW_8           1.000      0.000    999.000    999.000
+    FINNOW_9           1.000      0.000    999.000    999.000
+    FINNOW_10          1.000      0.000    999.000    999.000
+
+ S        |
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.219      0.087      2.532      0.011
+    FINNOW_7           0.435      0.078      5.579      0.000
+    FINNOW_8           0.597      0.057     10.538      0.000
+    FINNOW_9           0.736      0.054     13.655      0.000
+    FINNOW_10          1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.530      0.076     -6.930      0.000
+
+ Means
+    I                  2.047      0.050     40.984      0.000
+    S                  0.308      0.016     19.510      0.000
+
+ Intercepts
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.000      0.000    999.000    999.000
+    FINNOW_7           0.000      0.000    999.000    999.000
+    FINNOW_8           0.000      0.000    999.000    999.000
+    FINNOW_9           0.000      0.000    999.000    999.000
+    FINNOW_10          0.000      0.000    999.000    999.000
+
+ Variances
+    I                  0.907      0.082     11.022      0.000
+    S                  0.836      0.080     10.443      0.000
+
+ Residual Variances
+    FINNOW_5           0.308      0.016     19.510      0.000
+    FINNOW_6           0.308      0.016     19.510      0.000
+    FINNOW_7           0.308      0.016     19.510      0.000
+    FINNOW_8           0.308      0.016     19.510      0.000
+    FINNOW_9           0.308      0.016     19.510      0.000
+    FINNOW_10          0.308      0.016     19.510      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.916      0.066     13.941      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.726E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    FINNOW_5           0.863      0.010     83.674      0.000
+    FINNOW_6           0.930      0.024     39.145      0.000
+    FINNOW_7           0.970      0.030     32.737      0.000
+    FINNOW_8           0.977      0.037     26.703      0.000
+    FINNOW_9           0.964      0.040     24.358      0.000
+    FINNOW_10          0.904      0.047     19.142      0.000
+
+ S        |
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.196      0.082      2.381      0.017
+    FINNOW_7           0.407      0.081      5.039      0.000
+    FINNOW_8           0.562      0.069      8.185      0.000
+    FINNOW_9           0.684      0.070      9.796      0.000
+    FINNOW_10          0.870      0.048     18.199      0.000
+
+ S        WITH
+    I                 -0.542      0.052    -10.446      0.000
+
+ Means
+    I                  2.123      0.083     25.711      0.000
+    S                  0.337      0.023     14.631      0.000
+
+ Intercepts
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.000      0.000    999.000    999.000
+    FINNOW_7           0.000      0.000    999.000    999.000
+    FINNOW_8           0.000      0.000    999.000    999.000
+    FINNOW_9           0.000      0.000    999.000    999.000
+    FINNOW_10          0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    FINNOW_5           0.255      0.018     14.295      0.000
+    FINNOW_6           0.295      0.026     11.472      0.000
+    FINNOW_7           0.322      0.019     16.732      0.000
+    FINNOW_8           0.326      0.021     15.779      0.000
+    FINNOW_9           0.318      0.022     14.318      0.000
+    FINNOW_10          0.279      0.021     13.243      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    FINNOW_5           0.864      0.012     73.562      0.000
+    FINNOW_6           0.942      0.033     28.855      0.000
+    FINNOW_7           0.997      0.038     26.005      0.000
+    FINNOW_8           1.015      0.043     23.545      0.000
+    FINNOW_9           1.011      0.048     20.996      0.000
+    FINNOW_10          0.957      0.057     16.873      0.000
+
+ S        |
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.198      0.084      2.373      0.018
+    FINNOW_7           0.417      0.085      4.920      0.000
+    FINNOW_8           0.582      0.073      7.974      0.000
+    FINNOW_9           0.715      0.074      9.656      0.000
+    FINNOW_10          0.919      0.053     17.413      0.000
+
+ S        WITH
+    I                 -0.609      0.050    -12.261      0.000
+
+ Means
+    I                  2.150      0.118     18.213      0.000
+    S                  0.337      0.023     14.631      0.000
+
+ Intercepts
+    FINNOW_5           0.000      0.000    999.000    999.000
+    FINNOW_6           0.000      0.000    999.000    999.000
+    FINNOW_7           0.000      0.000    999.000    999.000
+    FINNOW_8           0.000      0.000    999.000    999.000
+    FINNOW_9           0.000      0.000    999.000    999.000
+    FINNOW_10          0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    FINNOW_5           0.253      0.020     12.489      0.000
+    FINNOW_6           0.301      0.029     10.354      0.000
+    FINNOW_7           0.338      0.023     14.927      0.000
+    FINNOW_8           0.350      0.023     15.445      0.000
+    FINNOW_9           0.347      0.024     14.180      0.000
+    FINNOW_10          0.311      0.024     13.106      0.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    FINNOW_5           0.745      0.018     41.837      0.000
+    FINNOW_6           0.705      0.026     27.383      0.000
+    FINNOW_7           0.678      0.019     35.310      0.000
+    FINNOW_8           0.674      0.021     32.648      0.000
+    FINNOW_9           0.682      0.022     30.752      0.000
+    FINNOW_1           0.721      0.021     34.231      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    FINNOW_5           0.747      0.020     36.781      0.000
+    FINNOW_6           0.699      0.029     24.030      0.000
+    FINNOW_7           0.662      0.023     29.269      0.000
+    FINNOW_8           0.650      0.023     28.680      0.000
+    FINNOW_9           0.653      0.024     26.683      0.000
+    FINNOW_1           0.689      0.024     29.057      0.000
+
+
+     Beginning Time:  13:22:42
+        Ending Time:  13:22:57
+       Elapsed Time:  00:00:15
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

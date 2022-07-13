@@ -1,0 +1,872 @@
+Mplus VERSION 8.7
+MUTHEN & MUTHEN
+11/04/2021  11:38 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = flex_time/data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   finfut_5
+   finfut_6
+   finfut_7
+   finfut_8
+   finfut_9
+   finfut_10;
+
+   CATEGORICAL ARE
+   finfut_5
+   finfut_6
+   finfut_7
+   finfut_8
+   finfut_9
+   finfut_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(all= 1 2);
+  WEIGHT IS pred_all_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | finfut_5@0 finfut_6 finfut_7 finfut_8 finfut_9 finfut_10@1;
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+  s BY finfut_6 (j)
+   finfut_7 (k)
+   finfut_8 (l)
+   finfut_9 (m);
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+  s BY finfut_6 (j)
+   finfut_7 (k)
+   finfut_8 (l)
+   finfut_9 (m);
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.  Consider using the
+  SUBPOPULATION option to restrict the analysis to observations with a positive weight.
+*** WARNING
+  Data set contains unknown or missing values for variable ALL.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  91
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  20
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1946
+
+Number of dependent variables                                    6
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   FINFUT_5    FINFUT_6    FINFUT_7    FINFUT_8    FINFUT_9    FINFUT_1
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_ALL
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  flex_time/data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            61
+     Number of y missing data patterns           0
+     Number of u missing data patterns          61
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              FINFUT_5      FINFUT_6      FINFUT_7      FINFUT_8      FINFUT_9
+              ________      ________      ________      ________      ________
+ FINFUT_5       0.501
+ FINFUT_6       0.420         0.506
+ FINFUT_7       0.345         0.378         0.587
+ FINFUT_8       0.319         0.354         0.471         0.562
+ FINFUT_9       0.300         0.331         0.437         0.466         0.538
+ FINFUT_1       0.284         0.310         0.392         0.422         0.433
+
+
+           Covariance Coverage
+              FINFUT_1
+              ________
+ FINFUT_1       0.625
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    FINFUT_5
+      Category 1    0.154          244.416
+      Category 2    0.633         1004.234
+      Category 3    0.213          338.714
+    FINFUT_6
+      Category 1    0.167          264.183
+      Category 2    0.629          996.338
+      Category 3    0.204          322.649
+    FINFUT_7
+      Category 1    0.168          207.474
+      Category 2    0.678          838.740
+      Category 3    0.154          190.516
+    FINFUT_8
+      Category 1    0.184          205.368
+      Category 2    0.685          765.321
+      Category 3    0.131          146.592
+    FINFUT_9
+      Category 1    0.162          166.442
+      Category 2    0.685          703.621
+      Category 3    0.153          156.767
+    FINFUT_1
+      Category 1    0.168          158.051
+      Category 2    0.671          630.746
+      Category 3    0.161          150.921
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -7114.924  677062           680
+           -7114.924  462228           298
+           -7114.924  604861           800
+           -7114.924  341041           34
+           -7114.924  618760           489
+           -7114.924  567165           319
+           -7114.924  849670           347
+           -7114.924  766903           505
+           -7114.924  458181           189
+           -7114.924  506886           576
+           -7114.924  473942           574
+           -7114.924  307843           664
+           -7114.924  992389           77
+           -7114.924  971693           470
+           -7114.924  370481           742
+           -7114.924  781489           627
+           -7114.924  347515           24
+           -7114.924  359578           458
+           -7114.924  978781           497
+           -7114.924  830529           279
+           -7114.924  529455           268
+           -7114.924  836515           341
+           -7114.924  840031           276
+           -7114.924  677720           681
+           -7114.924  284384           600
+           -7114.924  603842           61
+           -7114.924  856536           144
+           -7114.924  405371           569
+           -7114.924  22089            143
+           -7114.924  552272           654
+           -7114.924  551639           55
+           -7114.924  371737           532
+           -7114.924  283492           435
+           -7114.924  741484           441
+           -7114.924  248742           556
+           -7114.924  278661           674
+           -7114.924  640833           434
+           -7114.924  264935           281
+           -7114.924  783110           72
+           -7114.924  281462           285
+           -7114.924  920593           611
+           -7114.924  284109           82
+           -7114.924  150531           154
+           -7114.924  92091            649
+           -7114.924  252949           487
+           -7114.924  629320           222
+           -7114.924  967902           52
+           -7114.924  246261           38
+           -7114.924  631413           439
+           -7114.924  241197           747
+           -7114.924  856612           700
+           -7114.924  512403           719
+           -7114.924  970689           266
+           -7114.924  312754           562
+           -7114.924  443442           380
+           -7114.924  995913           787
+           -7114.924  318230           46
+           -7114.924  995249           525
+           -7114.924  576220           115
+           -7114.924  848331           137
+           -7114.924  317640           437
+           -7114.924  626208           698
+           -7114.924  227563           63
+           -7114.924  798839           312
+           -7114.924  595153           230
+           -7114.924  185071           370
+           -7114.924  566687           597
+           -7114.924  871851           257
+           -7114.924  948615           140
+           -7114.924  699554           427
+           -7114.924  863691           481
+           -7114.924  717754           180
+           -7114.924  645664           39
+           -7114.924  930872           277
+           -7114.924  778953           635
+           -7114.924  860772           174
+           -7114.924  273992           349
+           -7114.924  76974            16
+           -7114.924  665121           417
+           -7114.924  830570           369
+           -7114.924  859432           770
+           -7114.924  848163           47
+           -7114.924  556929           734
+           -7114.924  354395           486
+           -7114.924  67009            564
+           -7114.924  637095           207
+           -7114.924  35191            703
+           -7114.924  650371           14
+           -7114.924  942358           644
+           -7114.924  109357           765
+           -7114.924  539389           544
+           -7114.924  264081           186
+           -7114.924  370466           41
+           -7114.924  488581           688
+           -7114.924  871438           561
+           -7114.924  462953           7
+           -7114.924  496703           758
+           -7114.924  871722           355
+           -7114.924  308582           752
+           -7114.924  509733           130
+           -7114.924  662718           460
+           -7114.924  662983           666
+           -7114.924  366706           29
+           -7114.924  483369           270
+           -7114.924  846194           93
+           -7114.924  548673           732
+           -7114.924  502532           445
+           -7114.924  647617           725
+           -7114.924  580405           286
+           -7114.924  838615           677
+           -7114.924  701525           239
+           -7114.924  582296           452
+           -7114.924  742688           594
+           -7114.924  549244           756
+           -7114.924  322790           636
+           -7114.924  182524           373
+           -7114.924  484406           421
+           -7114.924  485256           371
+           -7114.924  621542           375
+           -7114.924  484687           306
+           -7114.924  863094           147
+           -7114.924  292884           103
+           -7114.924  146900           391
+           -7114.924  355254           796
+           -7114.924  436460           89
+           -7114.924  408713           450
+           -7114.924  673496           218
+           -7114.924  566739           575
+           -7114.924  507154           387
+           -7114.924  579995           183
+           -7114.924  669639           699
+           -7114.924  117391           710
+           -7114.924  195873           6
+           -7114.924  113138           585
+           -7114.924  166851           638
+           -7114.924  793487           595
+           -7114.924  264901           634
+           -7114.924  387701           275
+           -7114.924  569338           755
+           -7114.924  696773           80
+           -7114.924  702492           718
+           -7114.924  505244           582
+           -7114.924  314757           345
+           -7114.924  173440           328
+           -7114.924  704798           530
+           -7114.924  373702           669
+           -7114.924  181293           212
+           -7114.924  996231           310
+           -7114.924  65651            214
+           -7114.924  688839           273
+           -7114.924  46502            714
+           -7114.924  392751           480
+           -7114.924  434915           552
+           -7114.924  931874           141
+           -7114.924  193569           440
+           -7114.924  137377           397
+           -7114.924  79212            517
+           -7114.924  147440           514
+           -7114.924  580539           786
+           -7114.924  790452           303
+           -7114.924  25127            107
+           -7114.924  237332           661
+           -7114.924  636396           168
+           -7114.924  648555           113
+           -7114.924  190339           102
+           -7114.924  642386           662
+           -7114.924  563002           360
+           -7114.924  752476           614
+           -7114.924  77210            712
+           -7114.924  692169           308
+           -7114.924  857799           315
+           -7114.924  17896            592
+           -7114.924  626891           32
+           -7114.924  939870           655
+           -7114.924  485483           498
+           -7114.924  967237           48
+           -7114.924  188498           258
+           -7114.924  354624           448
+           -7114.924  606576           151
+           -7114.924  58507            793
+           -7114.924  12477            155
+           -7114.924  316165           299
+           -7114.924  105435           265
+           -7114.924  192071           142
+           -7114.924  793035           187
+           -7114.924  488125           368
+           -7114.924  608849           224
+           -7114.924  15270            610
+           -7114.924  168762           200
+           -7114.924  860029           760
+           -7114.924  177936           726
+           -7114.924  587946           120
+           -7114.924  875667           367
+           -7114.924  178181           753
+           -7114.924  568405           233
+           -7114.924  153394           429
+           -7114.924  641794           591
+           -7114.925  285380           1
+           -7114.925  216565           474
+           -7114.925  157351           579
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+          H0 Value                       -7114.924
+          H0 Scaling Correction Factor      1.8805
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   14257.848
+          Bayesian (BIC)                 14335.877
+          Sample-Size Adjusted BIC       14291.399
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes**
+
+          Pearson Chi-Square
+
+          Value                           2285.426
+          Degrees of Freedom                  1405
+          P-Value                           0.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            841.834
+          Degrees of Freedom                  1405
+          P-Value                           1.0000
+
+** Of the 3987 cells in the latent class indicator table, 22
+   were deleted in the calculation of chi-square due to extreme values.
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                           3681.334
+          Degrees of Freedom                  6395
+          P-Value                           1.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                           2400.791
+          Degrees of Freedom                  6395
+          P-Value                           1.0000
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1385.00000          0.71172
+       2        561.00000          0.28828
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    FINFUT_5           1.000      0.000    999.000    999.000
+    FINFUT_6           1.000      0.000    999.000    999.000
+    FINFUT_7           1.000      0.000    999.000    999.000
+    FINFUT_8           1.000      0.000    999.000    999.000
+    FINFUT_9           1.000      0.000    999.000    999.000
+    FINFUT_10          1.000      0.000    999.000    999.000
+
+ S        |
+    FINFUT_5           0.000      0.000    999.000    999.000
+    FINFUT_6           0.109      0.214      0.508      0.611
+    FINFUT_7           0.848      0.174      4.870      0.000
+    FINFUT_8           1.159      0.231      5.012      0.000
+    FINFUT_9           1.050      0.163      6.453      0.000
+    FINFUT_10          1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -1.024      0.437     -2.342      0.019
+
+ Means
+    I                 -0.088      0.134     -0.657      0.511
+    S                 -0.425      0.108     -3.926      0.000
+
+ Thresholds
+    FINFUT_5$1        -2.649      0.153    -17.277      0.000
+    FINFUT_5$2         2.128      0.156     13.684      0.000
+    FINFUT_6$1        -2.649      0.153    -17.277      0.000
+    FINFUT_6$2         2.128      0.156     13.684      0.000
+    FINFUT_7$1        -2.649      0.153    -17.277      0.000
+    FINFUT_7$2         2.128      0.156     13.684      0.000
+    FINFUT_8$1        -2.649      0.153    -17.277      0.000
+    FINFUT_8$2         2.128      0.156     13.684      0.000
+    FINFUT_9$1        -2.649      0.153    -17.277      0.000
+    FINFUT_9$2         2.128      0.156     13.684      0.000
+    FINFUT_1$1        -2.649      0.153    -17.277      0.000
+    FINFUT_1$2         2.128      0.156     13.684      0.000
+
+ Variances
+    I                  3.804      0.585      6.503      0.000
+    S                  1.379      0.620      2.223      0.026
+
+Latent Class 2 (2)
+
+ I        |
+    FINFUT_5           1.000      0.000    999.000    999.000
+    FINFUT_6           1.000      0.000    999.000    999.000
+    FINFUT_7           1.000      0.000    999.000    999.000
+    FINFUT_8           1.000      0.000    999.000    999.000
+    FINFUT_9           1.000      0.000    999.000    999.000
+    FINFUT_10          1.000      0.000    999.000    999.000
+
+ S        |
+    FINFUT_5           0.000      0.000    999.000    999.000
+    FINFUT_6           0.109      0.214      0.508      0.611
+    FINFUT_7           0.848      0.174      4.870      0.000
+    FINFUT_8           1.159      0.231      5.012      0.000
+    FINFUT_9           1.050      0.163      6.453      0.000
+    FINFUT_10          1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -1.572      0.547     -2.873      0.004
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                 -0.425      0.108     -3.926      0.000
+
+ Thresholds
+    FINFUT_5$1        -2.649      0.153    -17.277      0.000
+    FINFUT_5$2         2.128      0.156     13.684      0.000
+    FINFUT_6$1        -2.649      0.153    -17.277      0.000
+    FINFUT_6$2         2.128      0.156     13.684      0.000
+    FINFUT_7$1        -2.649      0.153    -17.277      0.000
+    FINFUT_7$2         2.128      0.156     13.684      0.000
+    FINFUT_8$1        -2.649      0.153    -17.277      0.000
+    FINFUT_8$2         2.128      0.156     13.684      0.000
+    FINFUT_9$1        -2.649      0.153    -17.277      0.000
+    FINFUT_9$2         2.128      0.156     13.684      0.000
+    FINFUT_1$1        -2.649      0.153    -17.277      0.000
+    FINFUT_1$2         2.128      0.156     13.684      0.000
+
+ Variances
+    I                  4.693      0.708      6.629      0.000
+    S                  1.379      0.620      2.223      0.026
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.904      0.066     13.740      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.160E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+RESULTS IN PROBABILITY SCALE
+
+                    Estimate
+
+Latent Class 1 (1)
+
+ FINFUT_5
+    Category 1         0.164
+    Category 2         0.638
+    Category 3         0.198
+ FINFUT_6
+    Category 1         0.164
+    Category 2         0.646
+    Category 3         0.189
+ FINFUT_7
+    Category 1         0.185
+    Category 2         0.667
+    Category 3         0.148
+ FINFUT_8
+    Category 1         0.204
+    Category 2         0.655
+    Category 3         0.141
+ FINFUT_9
+    Category 1         0.197
+    Category 2         0.660
+    Category 3         0.143
+ FINFUT_10
+    Category 1         0.194
+    Category 2         0.662
+    Category 3         0.144
+
+Latent Class 2 (2)
+
+ FINFUT_5
+    Category 1         0.171
+    Category 2         0.608
+    Category 3         0.222
+ FINFUT_6
+    Category 1         0.170
+    Category 2         0.619
+    Category 3         0.212
+ FINFUT_7
+    Category 1         0.175
+    Category 2         0.669
+    Category 3         0.155
+ FINFUT_8
+    Category 1         0.187
+    Category 2         0.672
+    Category 3         0.141
+ FINFUT_9
+    Category 1         0.182
+    Category 2         0.673
+    Category 3         0.145
+ FINFUT_10
+    Category 1         0.180
+    Category 2         0.672
+    Category 3         0.148
+
+
+LATENT CLASS INDICATOR ODDS RATIOS FOR THE LATENT CLASSES
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+Latent Class 1 Compared to Latent Class 2
+
+ FINFUT_5
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+ FINFUT_6
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+ FINFUT_7
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+ FINFUT_8
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+ FINFUT_9
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+ FINFUT_1
+    Category > 1       1.000      0.000      1.000      1.000
+    Category > 2       1.000      0.000      1.000      1.000
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    FINFUT_5           0.732      0.026     28.044      0.000
+    FINFUT_6           0.743      0.041     18.111      0.000
+    FINFUT_7           0.774      0.052     14.892      0.000
+    FINFUT_8           0.761      0.057     13.435      0.000
+    FINFUT_9           0.767      0.057     13.561      0.000
+    FINFUT_10          0.770      0.056     13.681      0.000
+
+ S        |
+    FINFUT_5           0.000      0.000    999.000    999.000
+    FINFUT_6           0.049      0.098      0.495      0.621
+    FINFUT_7           0.395      0.084      4.694      0.000
+    FINFUT_8           0.531      0.084      6.306      0.000
+    FINFUT_9           0.485      0.095      5.110      0.000
+    FINFUT_10          0.463      0.098      4.712      0.000
+
+ S        WITH
+    I                 -0.447      0.113     -3.941      0.000
+
+ Means
+    I                 -0.045      0.069     -0.655      0.513
+    S                 -0.362      0.094     -3.858      0.000
+
+ Thresholds
+    FINFUT_5$1        -0.994      0.055    -17.931      0.000
+    FINFUT_5$2         0.799      0.065     12.318      0.000
+    FINFUT_6$1        -1.009      0.065    -15.446      0.000
+    FINFUT_6$2         0.811      0.056     14.438      0.000
+    FINFUT_7$1        -1.051      0.061    -17.256      0.000
+    FINFUT_7$2         0.845      0.061     13.837      0.000
+    FINFUT_8$1        -1.033      0.063    -16.345      0.000
+    FINFUT_8$2         0.830      0.061     13.662      0.000
+    FINFUT_9$1        -1.042      0.064    -16.161      0.000
+    FINFUT_9$2         0.837      0.060     13.881      0.000
+    FINFUT_1$1        -1.045      0.064    -16.245      0.000
+    FINFUT_1$2         0.840      0.060     13.931      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    FINFUT_5           0.767      0.024     32.171      0.000
+    FINFUT_6           0.783      0.047     16.690      0.000
+    FINFUT_7           0.863      0.053     16.325      0.000
+    FINFUT_8           0.871      0.059     14.635      0.000
+    FINFUT_9           0.870      0.057     15.132      0.000
+    FINFUT_10          0.869      0.057     15.312      0.000
+
+ S        |
+    FINFUT_5           0.000      0.000    999.000    999.000
+    FINFUT_6           0.046      0.094      0.492      0.623
+    FINFUT_7           0.396      0.087      4.547      0.000
+    FINFUT_8           0.547      0.087      6.313      0.000
+    FINFUT_9           0.495      0.102      4.855      0.000
+    FINFUT_10          0.471      0.106      4.448      0.000
+
+ S        WITH
+    I                 -0.618      0.080     -7.760      0.000
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                 -0.362      0.094     -3.858      0.000
+
+ Thresholds
+    FINFUT_5$1        -0.937      0.056    -16.719      0.000
+    FINFUT_5$2         0.753      0.060     12.484      0.000
+    FINFUT_6$1        -0.957      0.072    -13.324      0.000
+    FINFUT_6$2         0.769      0.052     14.843      0.000
+    FINFUT_7$1        -1.055      0.061    -17.194      0.000
+    FINFUT_7$2         0.847      0.062     13.700      0.000
+    FINFUT_8$1        -1.065      0.061    -17.485      0.000
+    FINFUT_8$2         0.855      0.065     13.185      0.000
+    FINFUT_9$1        -1.064      0.060    -17.616      0.000
+    FINFUT_9$2         0.855      0.064     13.281      0.000
+    FINFUT_1$1        -1.062      0.060    -17.677      0.000
+    FINFUT_1$2         0.853      0.064     13.265      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    FINFUT_5           0.536      0.038     14.022      0.000
+    FINFUT_6           0.522      0.038     13.853      0.000
+    FINFUT_7           0.482      0.032     15.031      0.000
+    FINFUT_8           0.499      0.037     13.541      0.000
+    FINFUT_9           0.491      0.037     13.186      0.000
+    FINFUT_1           0.488      0.036     13.442      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    FINFUT_5           0.588      0.037     16.086      0.000
+    FINFUT_6           0.570      0.042     13.563      0.000
+    FINFUT_7           0.478      0.033     14.461      0.000
+    FINFUT_8           0.469      0.038     12.389      0.000
+    FINFUT_9           0.469      0.036     13.174      0.000
+    FINFUT_1           0.471      0.035     13.431      0.000
+
+
+     Beginning Time:  11:38:08
+        Ending Time:  11:47:42
+       Elapsed Time:  00:09:34
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

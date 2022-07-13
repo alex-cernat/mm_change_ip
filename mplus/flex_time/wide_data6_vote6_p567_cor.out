@@ -1,0 +1,750 @@
+Mplus VERSION 8.7
+MUTHEN & MUTHEN
+11/05/2021   9:19 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = flex_time/data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   vote6_5
+   vote6_6
+   vote6_7;
+
+   CATEGORICAL ARE
+   vote6_5
+   vote6_6
+   vote6_7;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(p567= 1 2);
+  WEIGHT IS pred_p567_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | vote6_5@0 vote6_6 vote6_7@1;
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i (c);
+   i (d);
+  s BY vote6_6 (j);
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i (c);
+   i (d);
+  s BY vote6_6 (j);
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.  Consider using the
+  SUBPOPULATION option to restrict the analysis to observations with a positive weight.
+*** WARNING
+  Data set contains unknown or missing values for variable P567.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  529
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  4
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1524
+
+Number of dependent variables                                    3
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   VOTE6_5     VOTE6_6     VOTE6_7
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_P56
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            2
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+Cholesky                                                        ON
+
+Input data file(s)
+  flex_time/data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             7
+     Number of y missing data patterns           0
+     Number of u missing data patterns           7
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              VOTE6_5       VOTE6_6       VOTE6_7
+              ________      ________      ________
+ VOTE6_5        0.650
+ VOTE6_6        0.547         0.650
+ VOTE6_7        0.452         0.490         0.761
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    VOTE6_5
+      Category 1    0.092          119.617
+      Category 2    0.367          475.816
+      Category 3    0.285          370.050
+      Category 4    0.255          331.002
+    VOTE6_6
+      Category 1    0.106          136.506
+      Category 2    0.298          382.608
+      Category 3    0.301          386.450
+      Category 4    0.294          377.485
+    VOTE6_7
+      Category 1    0.107          110.926
+      Category 2    0.361          373.198
+      Category 3    0.318          328.104
+      Category 4    0.214          220.889
+
+
+SAMPLE STATISTICS
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -4840.615  118421           139
+           -4840.615  286735           175
+           -4840.615  79212            517
+           -4840.615  314084           81
+           -4840.615  567165           319
+           -4840.615  253358           2
+           -4840.615  266340           683
+           -4840.616  120506           45
+           -4840.616  411615           171
+           -4840.616  752769           253
+           -4840.617  838615           677
+           -4840.617  124999           96
+           -4840.617  213189           605
+           -4840.617  802256           477
+           -4840.617  308582           752
+           -4840.617  217744           326
+           -4840.617  820977           776
+           -4840.617  766903           505
+           -4840.618  89970            223
+           -4840.618  264081           186
+           -4840.618  647617           725
+           -4840.618  602032           648
+           -4840.618  155622           507
+           -4840.618  614535           449
+           -4840.618  178031           720
+           -4840.618  484406           421
+           -4840.618  971853           402
+           -4840.618  920593           611
+           -4840.618  692169           308
+           -4840.618  260953           589
+           -4840.618  383986           159
+           -4840.618  340112           126
+           -4840.618  951709           348
+           -4840.619  622860           259
+           -4840.619  282464           283
+           -4840.619  738393           619
+           -4840.619  481835           57
+           -4840.619  602797           336
+           -4840.619  77210            712
+           -4840.619  726035           191
+           -4840.620  158612           581
+           -4840.620  778953           635
+           -4840.620  35191            703
+           -4840.621  138695           783
+           -4840.621  164305           128
+           -4840.621  350608           334
+           -4840.621  378393           509
+           -4840.621  677720           681
+           -4840.621  715255           523
+           -4840.621  760531           550
+           -4840.621  605565           404
+           -4840.622  621542           375
+           -4840.622  195763           358
+           -4840.623  933578           506
+           -4840.623  373505           88
+           -4840.624  374219           353
+           -4840.624  848356           602
+           -4840.624  320494           465
+           -4840.624  967237           48
+           -4840.624  940533           764
+           -4840.624  930323           267
+           -4840.624  43523            297
+           -4840.625  850840           232
+           -4840.625  440368           797
+           -4840.625  605358           321
+           -4840.625  879338           309
+           -4840.625  644297           340
+           -4840.625  898745           466
+           -4840.626  582296           452
+           -4840.626  831410           567
+           -4840.626  805935           615
+           -4840.626  399848           220
+           -4840.627  529455           268
+           -4840.627  422103           62
+           -4840.627  587946           120
+           -4840.627  710445           792
+           -4840.627  303634           169
+           -4840.627  754100           56
+           -4840.627  440841           118
+           -4840.628  88437            761
+           -4840.628  168762           200
+           -4840.628  604861           800
+           -4840.628  850545           357
+           -4840.628  835767           210
+           -4840.628  193847           354
+           -4840.629  533738           11
+           -4840.629  97158            205
+           -4840.629  217130           443
+           -4840.629  840031           276
+           -4840.629  824126           287
+           -4840.629  922596           456
+           -4840.629  502495           724
+           -4840.629  915642           40
+           -4840.629  163110           584
+           -4840.629  849670           347
+           -4840.629  192191           629
+           -4840.629  404426           344
+           -4840.629  486646           586
+           -4840.629  566687           597
+           -4840.629  126371           526
+           -4840.629  646573           741
+           -4840.629  848890           95
+           -4840.629  27071            15
+           -4840.629  441191           361
+           -4840.629  355254           796
+           -4840.629  910224           580
+           -4840.629  926797           406
+           -4840.629  637095           207
+           -4840.629  659832           754
+           -4840.630  937885           426
+           -4840.630  629320           222
+           -4840.630  871851           257
+           -4840.630  85114            385
+           -4840.630  379729           512
+           -4840.630  631413           439
+           -4840.630  775881           778
+           -4840.630  376411           473
+           -4840.630  669639           699
+           -4840.630  862607           468
+           -4840.630  377584           630
+           -4840.630  505879           424
+           -4840.630  847088           750
+           -4840.630  499150           216
+           -4840.630  765586           709
+           -4840.630  51375            148
+           -4840.630  371737           532
+           -4840.630  137305           379
+           -4840.630  804561           59
+           -4840.630  654136           167
+           -4840.630  667250           318
+           -4840.630  746978           410
+           -4840.630  17896            592
+           -4840.630  891347           504
+           -4840.630  714997           399
+           -4840.630  926762           704
+           -4840.630  902278           21
+           -4840.630  195873           6
+           -4840.630  263221           447
+           -4840.630  372176           23
+           -4840.630  695155           150
+           -4840.630  341960           685
+           -4840.630  458181           189
+           -4840.630  407108           366
+           -4840.630  782821           272
+           -4840.630  127215           9
+           -4840.630  822698           621
+           -4840.630  751153           110
+           -4840.630  597614           284
+           -4840.630  167409           772
+           -4840.630  860772           174
+           -4840.630  276102           599
+           -4840.630  359578           458
+           -4840.630  804104           566
+           -4840.630  404042           675
+           -4840.630  566739           575
+           -4840.630  534483           290
+           -4840.630  512836           289
+           -4840.630  603842           61
+           -4840.630  97300            640
+           -4840.630  264935           281
+           -4840.630  58507            793
+           -4840.630  829540           324
+           -4840.630  496881           192
+           -4840.630  804660           260
+           -4840.630  715561           125
+           -4840.630  987090           70
+           -4840.630  728038           177
+           -4840.630  618000           190
+           -4840.630  130011           587
+           -4840.630  784664           75
+           -4840.630  821011           161
+           -4840.911  852283           616
+           -4841.006  391949           295
+           -4841.015  399508           415
+           -4841.054  318230           46
+           -4843.061  unperturbed      0
+           -4843.061  407168           44
+           -4843.061  939709           112
+           -4843.061  846194           93
+           -4843.061  712702           684
+           -4843.061  204959           695
+           -4843.062  762461           425
+           -4843.062  166851           638
+           -4843.062  327475           518
+           -4843.062  488581           688
+           -4843.062  749635           420
+           -4843.062  745972           521
+           -4843.062  502157           799
+           -4843.062  881886           608
+           -4843.062  836515           341
+           -4843.063  961454           665
+           -4843.265  345726           461
+           -4843.336  68850            462
+           -4843.577  579138           706
+           -4843.772  438144           271
+           -4843.796  860029           760
+
+4 perturbed starting value run(s) did not converge or were rejected in the third stage.
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       10
+
+Loglikelihood
+
+          H0 Value                       -4840.615
+          H0 Scaling Correction Factor      1.4215
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    9701.230
+          Bayesian (BIC)                  9754.521
+          Sample-Size Adjusted BIC        9722.754
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                            250.688
+          Degrees of Freedom                   116
+          P-Value                           0.0000
+
+          Likelihood Ratio Chi-Square
+
+          Value                            144.726
+          Degrees of Freedom                   116
+          P-Value                           0.0365
+
+Chi-Square Test for MCAR under the Unrestricted Latent Class Indicator Model
+
+          Pearson Chi-Square
+
+          Value                            105.701
+          Degrees of Freedom                   107
+          P-Value                           0.5173
+
+          Likelihood Ratio Chi-Square
+
+          Value                            113.696
+          Degrees of Freedom                   107
+          P-Value                           0.3107
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1068.00000          0.70079
+       2        456.00000          0.29921
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    VOTE6_5            1.000      0.000    999.000    999.000
+    VOTE6_6            1.000      0.000    999.000    999.000
+    VOTE6_7            1.000      0.000    999.000    999.000
+
+ S        |
+    VOTE6_5            0.000      0.000    999.000    999.000
+    VOTE6_6           -1.875      1.485     -1.263      0.207
+    VOTE6_7            1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.817      0.493     -1.657      0.098
+
+ Means
+    I                  0.045      0.238      0.190      0.849
+    S                 -0.163      0.105     -1.547      0.122
+
+ Thresholds
+    VOTE6_5$1         -5.137      0.279    -18.391      0.000
+    VOTE6_5$2         -0.595      0.199     -2.993      0.003
+    VOTE6_5$3          2.597      0.217     11.984      0.000
+    VOTE6_6$1         -5.137      0.279    -18.391      0.000
+    VOTE6_6$2         -0.595      0.199     -2.993      0.003
+    VOTE6_6$3          2.597      0.217     11.984      0.000
+    VOTE6_7$1         -5.137      0.279    -18.391      0.000
+    VOTE6_7$2         -0.595      0.199     -2.993      0.003
+    VOTE6_7$3          2.597      0.217     11.984      0.000
+
+ Variances
+    I                 12.537      1.353      9.266      0.000
+    S                  0.053      0.062      0.858      0.391
+
+Latent Class 2 (2)
+
+ I        |
+    VOTE6_5            1.000      0.000    999.000    999.000
+    VOTE6_6            1.000      0.000    999.000    999.000
+    VOTE6_7            1.000      0.000    999.000    999.000
+
+ S        |
+    VOTE6_5            0.000      0.000    999.000    999.000
+    VOTE6_6           -1.875      1.485     -1.263      0.207
+    VOTE6_7            1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.817      0.493     -1.657      0.098
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                 -0.163      0.105     -1.547      0.122
+
+ Thresholds
+    VOTE6_5$1         -5.137      0.279    -18.391      0.000
+    VOTE6_5$2         -0.595      0.199     -2.993      0.003
+    VOTE6_5$3          2.597      0.217     11.984      0.000
+    VOTE6_6$1         -5.137      0.279    -18.391      0.000
+    VOTE6_6$2         -0.595      0.199     -2.993      0.003
+    VOTE6_6$3          2.597      0.217     11.984      0.000
+    VOTE6_7$1         -5.137      0.279    -18.391      0.000
+    VOTE6_7$2         -0.595      0.199     -2.993      0.003
+    VOTE6_7$3          2.597      0.217     11.984      0.000
+
+ Variances
+    I                 12.537      1.353      9.266      0.000
+    S                  0.053      0.062      0.858      0.391
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.851      0.063     13.461      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.170E-08
+       (ratio of smallest to largest eigenvalue)
+
+
+RESULTS IN PROBABILITY SCALE
+
+                    Estimate
+
+Latent Class 1 (1)
+
+ VOTE6_5
+    Category 1         0.096
+    Category 2         0.340
+    Category 3         0.305
+    Category 4         0.260
+ VOTE6_6
+    Category 1         0.104
+    Category 2         0.310
+    Category 3         0.283
+    Category 4         0.303
+ VOTE6_7
+    Category 1         0.091
+    Category 2         0.358
+    Category 3         0.316
+    Category 4         0.235
+
+Latent Class 2 (2)
+
+ VOTE6_5
+    Category 1         0.098
+    Category 2         0.343
+    Category 3         0.304
+    Category 4         0.256
+ VOTE6_6
+    Category 1         0.106
+    Category 2         0.312
+    Category 3         0.283
+    Category 4         0.299
+ VOTE6_7
+    Category 1         0.093
+    Category 2         0.361
+    Category 3         0.315
+    Category 4         0.231
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    VOTE6_5            0.890      0.010     89.156      0.000
+    VOTE6_6            0.811      0.032     25.399      0.000
+    VOTE6_7            0.938      0.033     28.008      0.000
+
+ S        |
+    VOTE6_5            0.000      0.000    999.000    999.000
+    VOTE6_6           -0.099      0.035     -2.796      0.005
+    VOTE6_7            0.061      0.037      1.666      0.096
+
+ S        WITH
+    I                 -1.000      0.000  *********      0.000
+
+ Means
+    I                  0.013      0.067      0.190      0.849
+    S                 -0.706      0.247     -2.863      0.004
+
+ Thresholds
+    VOTE6_5$1         -1.291      0.056    -23.031      0.000
+    VOTE6_5$2         -0.150      0.049     -3.041      0.002
+    VOTE6_5$3          0.653      0.055     11.796      0.000
+    VOTE6_6$1         -1.176      0.062    -18.898      0.000
+    VOTE6_6$2         -0.136      0.046     -2.954      0.003
+    VOTE6_6$3          0.595      0.047     12.773      0.000
+    VOTE6_7$1         -1.361      0.068    -19.880      0.000
+    VOTE6_7$2         -0.158      0.053     -2.967      0.003
+    VOTE6_7$3          0.688      0.054     12.735      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+Latent Class 2 (2)
+
+ I        |
+    VOTE6_5            0.890      0.010     89.156      0.000
+    VOTE6_6            0.811      0.032     25.399      0.000
+    VOTE6_7            0.938      0.033     28.008      0.000
+
+ S        |
+    VOTE6_5            0.000      0.000    999.000    999.000
+    VOTE6_6           -0.099      0.035     -2.796      0.005
+    VOTE6_7            0.061      0.037      1.666      0.096
+
+ S        WITH
+    I                 -1.000      0.000  *********      0.000
+
+ Means
+    I                  0.000      0.000    999.000    999.000
+    S                 -0.706      0.247     -2.863      0.004
+
+ Thresholds
+    VOTE6_5$1         -1.291      0.056    -23.031      0.000
+    VOTE6_5$2         -0.150      0.049     -3.041      0.002
+    VOTE6_5$3          0.653      0.055     11.796      0.000
+    VOTE6_6$1         -1.176      0.062    -18.898      0.000
+    VOTE6_6$2         -0.136      0.046     -2.954      0.003
+    VOTE6_6$3          0.595      0.047     12.773      0.000
+    VOTE6_7$1         -1.361      0.068    -19.880      0.000
+    VOTE6_7$2         -0.158      0.053     -2.967      0.003
+    VOTE6_7$3          0.688      0.054     12.735      0.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    VOTE6_5            0.792      0.018     44.578      0.000
+    VOTE6_6            0.828      0.017     49.450      0.000
+    VOTE6_7            0.769      0.021     37.314      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    VOTE6_5            0.792      0.018     44.578      0.000
+    VOTE6_6            0.828      0.017     49.450      0.000
+    VOTE6_7            0.769      0.021     37.314      0.000
+
+Available post-processing tools
+
+  Latent class indicator odds ratios
+
+     Beginning Time:  21:19:58
+        Ending Time:  21:22:30
+       Elapsed Time:  00:02:32
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

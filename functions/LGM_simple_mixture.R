@@ -12,11 +12,13 @@ LGM_simple_mixture <- function(df_use,
                        mean_eq = F,
                        var_eq = F,
                        cor_eq = F,
-                       weights = F) {
+                       weights = F,
+                       path = "./mplus/") {
 
 
-  base_text <- MplusAutomation::prepareMplusData(df_use,
-                                                 filename = "./mplus/data.dta")
+  base_text <-
+    MplusAutomation::prepareMplusData(df_use,
+                                      filename = str_c(path, "data.dta"))
 
   base_text <- str_remove_all(base_text, '\\"') %>%
     str_c(collapse = " \n ") %>%
@@ -51,27 +53,37 @@ LGM_simple_mixture <- function(df_use,
   syn_weights <- str_c("WEIGHT IS ", weights, "; \n ")
   }
 
-  # make MLR if continious
+  # make MLR if continuous
     syn_mlr <- " \n ANALYSIS: \n \n
     TYPE = MIXTURE; \n
     ESTIMATOR = MLR; \n
     ALGORITHM = INTEGRATION; \n
     Processors = 8(starts); \n
-    STARTS = 400 100;"
+    STARTS = 800 200;"
 
 
   syn_model <- "\n \n Model:\n\n
     %OVERALL% \n\n" %>%
     str_c("i s | ",
-    str_c(var_nms, "@",  as.numeric(waves) - 5, collapse = " "),
-    "; \n ")
+    str_c(var_nms, "@",  as.numeric(waves) - min(as.numeric(waves)),
+          collapse = " "),
+    ";")
+
+    # restrict residual to be equal if continuous to help estimation
+    if (categorical == F) {
+      syn_model <- str_c(syn_model,
+                         "; \n  \n",
+                         str_c(var_nms, " (a); \n",
+                               collapse = " "))
+
+    }
 
     grp_restriction <- str_c("\n %c#", 1:2, "% \n",
                              "[s] ; \n s ; \n s WITH i ; \n i ;",
                              collapse = " \n ")
 
 
-  ### add restrictions deending on the model
+  ### add restrictions depending on the model
 
 
   if(mean_eq == T) {
@@ -117,7 +129,7 @@ LGM_simple_mixture <- function(df_use,
 
   # write .inp file
   write.table(out,
-              str_c("./mplus/", nm, "_", vars_use, "_",
+              str_c(path, nm, "_", vars_use, "_",
                     group_var, "_", model, ".inp"),
                 quote = F,
                 row.names = F,

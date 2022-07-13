@@ -1,0 +1,773 @@
+Mplus VERSION 8.7
+MUTHEN & MUTHEN
+11/05/2021   8:21 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Your title goes here
+
+   DATA: FILE = flex_time/data.dta;
+
+   VARIABLE:
+
+   NAMES = pidp gridmode mm hidp_5 hidp_6 hidp_7 hidp_8 hidp_9 hidp_10 indmode_5
+       indmode_6 indmode_7 indmode_8 indmode_9 indmode_10 mode_type_all mode_type_no9
+       mode_type_567 mode_type_7 all no9 p567 p7 switch_all switch_no9 switch_567
+       switch_7 lkmove_5 xpmove_5 caruse_5 mobuse_5 netpuse_5 aidxhh_5 jbhas_5 j2has_5
+       finnow_5 finfut_5 howlng_5 vote1_5 vote6_5 scsf1_5 scsf2a_5 scsf2b_5 scsf3a_5
+       scsf3b_5 scsf4a_5 scsf4b_5 scsf5_5 scsf6a_5 scsf6b_5 scsf6c_5 scsf7_5 scghqa_5
+       scghqb_5 scghqc_5 scghqd_5 scghqe_5 scghqf_5 scghqg_5 scghqh_5 scghqi_5
+       scghqj_5 scghqk_5 scghql_5 lkmove_6 xpmove_6 caruse_6 mobuse_6 netpuse_6
+       aidxhh_6 jbhas_6 j2has_6 finnow_6 finfut_6 howlng_6 vote1_6 vote6_6 scsf1_6
+       scsf2a_6 scsf2b_6 scsf3a_6 scsf3b_6 scsf4a_6 scsf4b_6 scsf5_6 scsf6a_6 scsf6b_6
+       scsf6c_6 scsf7_6 scghqa_6 scghqb_6 scghqc_6 scghqd_6 scghqe_6 scghqf_6 scghqg_6
+       scghqh_6 scghqi_6 scghqj_6 scghqk_6 scghql_6 lkmove_7 xpmove_7 caruse_7
+       mobuse_7 netpuse_7 smoker_7 aidxhh_7 jbhas_7 jbterm1_7 jbsemp_7 j2has_7
+       fiyrdia_7 finnow_7 finfut_7 howlng_7 vote1_7 vote6_7 scsf2a_7 scsf2b_7 scsf3a_7
+       scsf3b_7 scsf4a_7 scsf4b_7 scsf5_7 scsf6a_7 scsf6b_7 scsf6c_7 scsf7_7 scghqa_7
+       scghqb_7 scghqc_7 scghqd_7 scghqe_7 scghqf_7 scghqg_7 scghqh_7 scghqi_7
+       scghqj_7 scghqk_7 scghql_7 scsf1_7 lkmove_8 xpmove_8 caruse_8 mobuse_8
+       netpuse_8 smoker_8 aidxhh_8 jbhas_8 jbterm1_8 jbsemp_8 j2has_8 fiyrdia_8
+       finnow_8 finfut_8 scsf2a_8 scsf2b_8 scsf3a_8 scsf3b_8 scsf4a_8 scsf4b_8 scsf5_8
+       scsf6a_8 scsf6b_8 scsf6c_8 scsf7_8 scghqa_8 scghqb_8 scghqc_8 scghqd_8 scghqe_8
+       scghqf_8 scghqg_8 scghqh_8 scghqi_8 scghqj_8 scghqk_8 scghql_8 scsf1_8 mobuse_9
+       netpuse_9 smoker_9 jbhas_9 jbterm1_9 jbsemp_9 j2has_9 fiyrdia_9 finnow_9
+       finfut_9 lkmove_10 xpmove_10 mobuse_10 netpuse_10 smoker_10 aidxhh_10 jbhas_10
+       jbterm1_10 jbsemp_10 j2has_10 fiyrdia_10 finnow_10 finfut_10 scsf1_10 scsf2a_10
+       scsf2b_10 scsf3a_10 scsf3b_10 scsf4a_10 scsf4b_10 scsf5_10 scsf6a_10 scsf6b_10
+       scsf6c_10 scsf7_10 scghqa_10 scghqb_10 scghqc_10 scghqd_10 scghqe_10 scghqf_10
+       scghqg_10 scghqh_10 scghqi_10 scghqj_10 scghqk_10 scghql_10 edu agecat female
+       partner sf1 longill london north urban refresh Higher A level GCSE Other age_35
+       age_55 age_75 age_102 pred_all pred_no9 pred_p567 pred_p7 pred_all_w pred_no9_w
+       pred_p567_w pred_p7_w;
+
+   MISSING=.;
+
+   USEVARIABLES ARE
+   scsf5_5
+   scsf5_6
+   scsf5_7
+   scsf5_8
+   scsf5_10;
+   CLASSES = c(2);
+
+    KNOWNCLASS = c(no9= 1 2);
+  WEIGHT IS pred_no9_w;
+
+   ANALYSIS:
+
+
+      TYPE = MIXTURE;
+
+      ESTIMATOR = MLR;
+
+      ALGORITHM = INTEGRATION;
+
+      Processors = 8(starts);
+
+      STARTS = 800 200;
+
+   Model:
+
+
+      %OVERALL%
+
+  i s | scsf5_5@0 scsf5_6 scsf5_7 scsf5_8 scsf5_10@1;;
+
+  scsf5_5 (a);
+   scsf5_6 (a);
+   scsf5_7 (a);
+   scsf5_8 (a);
+   scsf5_10 (a);
+
+   %c#1%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   %c#2%
+  [s] (a);
+   s (b);
+   s WITH i ;
+   i ;
+
+   OUTPUT: SAMPSTAT;
+
+                                  STDYX;
+
+
+
+
+*** WARNING
+  One or more observations has a value of 0 for the WEIGHT variable.  Consider using the
+  SUBPOPULATION option to restrict the analysis to observations with a positive weight.
+*** WARNING
+  Data set contains unknown or missing values for variable NO9.
+  This variable is used to determine the KNOWNCLASS specification.
+  Number of such cases:  111
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  101
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Your title goes here
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1845
+
+Number of dependent variables                                    5
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   SCSF5_5     SCSF5_6     SCSF5_7     SCSF5_8     SCSF5_10
+
+Continuous latent variables
+   I           S
+
+Categorical latent variables
+   C
+
+  Knownclass            C
+
+Variables with special functions
+
+  Weight variable       PRED_NO9
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                        800
+  Number of final stage optimizations                          200
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Cholesky                                                       OFF
+
+Input data file(s)
+  flex_time/data.dta
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            31
+     Number of y missing data patterns          31
+     Number of u missing data patterns           0
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+ SCSF5_5        0.385
+ SCSF5_6        0.292         0.457
+ SCSF5_7        0.266         0.340         0.598
+ SCSF5_8        0.254         0.328         0.478         0.584
+ SCSF5_10       0.224         0.289         0.403         0.435         0.648
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 1
+
+
+           Means
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+                1.999         1.992         1.934         2.007         2.085
+
+
+           Covariances
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+ SCSF5_5        1.597
+ SCSF5_6        0.928         1.367
+ SCSF5_7        0.769         0.777         1.343
+ SCSF5_8        0.882         0.747         0.817         1.450
+ SCSF5_10       0.960         0.923         0.769         0.945         1.407
+
+
+           Correlations
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+ SCSF5_5        1.000
+ SCSF5_6        0.628         1.000
+ SCSF5_7        0.525         0.573         1.000
+ SCSF5_8        0.580         0.531         0.586         1.000
+ SCSF5_10       0.641         0.666         0.560         0.662         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR CLASS 2
+
+
+           Means
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+                1.770         1.840         1.668         1.784         1.842
+
+
+           Covariances
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+ SCSF5_5        0.989
+ SCSF5_6        0.616         1.113
+ SCSF5_7        0.481         0.526         0.891
+ SCSF5_8        0.541         0.618         0.482         1.029
+ SCSF5_10       0.540         0.612         0.383         0.582         1.040
+
+
+           Correlations
+              SCSF5_5       SCSF5_6       SCSF5_7       SCSF5_8       SCSF5_10
+              ________      ________      ________      ________      ________
+ SCSF5_5        1.000
+ SCSF5_6        0.587         1.000
+ SCSF5_7        0.512         0.529         1.000
+ SCSF5_8        0.537         0.578         0.503         1.000
+ SCSF5_10       0.532         0.569         0.398         0.562         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     SCSF5_5               1.893       1.250       1.000   56.34%       1.000      1.000      1.000
+             710.000       1.373       0.555       5.000    3.10%       2.000      2.000
+     SCSF5_6               1.942       1.030       1.000   52.61%       1.000      1.000      1.000
+             844.000       1.306      -0.047       5.000    2.49%       2.000      2.000
+     SCSF5_7               1.829       1.271       1.000   56.97%       1.000      1.000      1.000
+            1104.000       1.220       0.661       5.000    2.45%       2.000      2.000
+     SCSF5_8               1.923       1.120       1.000   54.50%       1.000      1.000      1.000
+            1077.000       1.297       0.299       5.000    2.14%       2.000      2.000
+     SCSF5_10              1.975       0.982       1.000   52.42%       1.000      1.000      1.000
+            1196.000       1.297      -0.088       5.000    2.51%       2.000      2.000
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -9042.556  308582           752
+           -9042.556  617658           660
+           -9042.556  715561           125
+           -9042.556  232226           235
+           -9042.556  714455           476
+           -9042.556  67009            564
+           -9042.556  414828           322
+           -9042.556  682718           733
+           -9042.556  607072           717
+           -9042.556  900631           774
+           -9042.556  685657           69
+           -9042.556  354559           73
+           -9042.556  411615           171
+           -9042.556  563584           657
+           -9042.556  794236           127
+           -9042.556  109357           765
+           -9042.556  408713           450
+           -9042.556  772131           407
+           -9042.556  467339           66
+           -9042.556  784664           75
+           -9042.556  638611           524
+           -9042.556  804104           566
+           -9042.556  244349           736
+           -9042.556  568859           49
+           -9042.556  301180           236
+           -9042.556  105435           265
+           -9042.556  46502            714
+           -9042.556  85734            411
+           -9042.556  871851           257
+           -9042.556  415931           10
+           -9042.556  331681           549
+           -9042.556  942358           644
+           -9042.556  215353           164
+           -9042.556  609089           241
+           -9042.556  539751           459
+           -9042.556  399671           13
+           -9042.556  114433           708
+           -9042.556  484501           163
+           -9042.556  782821           272
+           -9042.556  748692           204
+           -9042.556  370957           554
+           -9042.556  536551           696
+           -9042.556  53621            483
+           -9042.556  152496           123
+           -9042.556  147440           514
+           -9042.556  15270            610
+           -9042.556  404426           344
+           -9042.556  374219           353
+           -9042.556  760850           739
+           -9042.556  303834           798
+           -9042.556  519357           559
+           -9042.556  413564           535
+           -9042.556  486646           586
+           -9042.556  22874            588
+           -9042.556  903420           5
+           -9042.556  677062           680
+           -9042.556  407168           44
+           -9042.556  484687           306
+           -9042.556  686482           215
+           -9042.556  565819           65
+           -9042.556  204959           695
+           -9042.556  264081           186
+           -9042.556  988761           475
+           -9042.556  535063           329
+           -9042.556  298553           773
+           -9042.556  474357           789
+           -9042.556  871438           561
+           -9042.556  22075            659
+           -9042.556  72866            692
+           -9042.556  641794           591
+           -9042.556  920593           611
+           -9042.556  7959             256
+           -9042.556  434915           552
+           -9042.556  696830           668
+           -9042.556  266038           672
+           -9042.556  175199           247
+           -9042.556  117731           570
+           -9042.556  506886           576
+           -9042.556  650354           577
+           -9042.556  213532           503
+           -9042.556  343926           624
+           -9042.556  178031           720
+           -9042.556  673496           218
+           -9042.556  997222           229
+           -9042.556  950604           172
+           -9042.556  326091           759
+           -9042.556  802682           419
+           -9042.556  642909           251
+           -9042.556  264901           634
+           -9042.556  82357            339
+           -9042.556  752769           253
+           -9042.556  476498           179
+           -9042.556  570782           193
+           -9042.556  996231           310
+           -9042.556  284716           713
+           -9042.556  570681           777
+           -9042.556  533738           11
+           -9042.556  298275           418
+           -9042.556  941525           609
+           -9042.556  836515           341
+           -9042.556  625191           350
+           -9042.556  900268           327
+           -9042.556  76451            211
+           -9042.556  359578           458
+           -9042.556  278661           674
+           -9042.556  957392           79
+           -9042.556  485256           371
+           -9042.556  371246           101
+           -9042.556  399380           436
+           -9042.556  617243           237
+           -9042.556  340112           126
+           -9042.556  79212            517
+           -9042.556  765586           709
+           -9042.556  654136           167
+           -9042.556  50887            389
+           -9042.556  140442           500
+           -9042.556  712531           631
+           -9042.556  549244           756
+           -9042.556  344422           296
+           -9042.556  78862            529
+           -9042.556  964570           701
+           -9042.556  960438           116
+           -9042.556  965994           396
+           -9042.556  392418           28
+           -9042.556  887676           22
+           -9042.556  699834           723
+           -9042.556  399508           415
+           -9042.556  154575           539
+           -9042.556  545108           667
+           -9042.556  375590           438
+           -9042.556  882750           646
+           -9042.556  327140           678
+           -9042.556  865906           641
+           -9042.556  178181           753
+           -9042.556  665121           417
+           -9042.556  970689           266
+           -9042.556  85114            385
+           -9042.556  195353           225
+           -9042.556  442072           625
+           -9042.556  961454           665
+           -9042.556  462821           745
+           -9042.556  728038           177
+           -9042.556  802256           477
+           -9042.556  592219           119
+           -9042.556  51375            148
+           -9042.556  928287           197
+           -9042.556  358488           264
+           -9042.556  910224           580
+           -9042.556  717754           180
+           -9042.556  792389           746
+           -9042.556  252949           487
+           -9042.556  714997           399
+           -9042.556  422103           62
+           -9042.556  576726           280
+           -9042.556  461866           722
+           -9042.556  891531           206
+           -9042.556  118421           139
+           -9042.556  939021           8
+           -9042.556  551340           766
+           -9042.556  849670           347
+           -9042.556  745972           521
+           -9042.556  405079           68
+           -9042.556  848356           602
+           -9042.556  124999           96
+           -9042.556  43523            297
+           -9042.556  132336           362
+           -9042.556  502532           445
+           -9042.556  402224           91
+           -9042.556  247224           94
+           -9042.556  314084           81
+           -9042.556  351622           551
+           -9042.556  55115            408
+           -9042.556  393232           152
+           -9042.556  153394           429
+           -9042.556  863094           147
+           -9042.556  158612           581
+           -9042.556  485483           498
+           -9042.556  366706           29
+           -9042.556  66276            217
+           -9042.556  605358           321
+           -9042.556  354208           196
+           -9042.556  640833           434
+           -9042.556  496881           192
+           -9042.556  635245           121
+           -9042.556  23012            352
+           -9042.556  853195           431
+           -9042.556  260601           36
+           -9042.556  972430           491
+           -9042.556  780698           337
+           -9042.556  879338           309
+           -9042.556  669634           335
+           -9042.556  76974            16
+           -9042.556  81117            305
+           -9042.556  193847           354
+           -9042.556  294669           501
+           -9042.556  342019           301
+           -9042.556  unperturbed      0
+           -9042.556  700349           401
+           -9042.556  118438           601
+           -9042.556  36714            201
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       12
+
+Loglikelihood
+
+          H0 Value                       -9042.556
+          H0 Scaling Correction Factor      2.8410
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   18109.111
+          Bayesian (BIC)                 18175.354
+          Sample-Size Adjusted BIC       18137.230
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1       1305.00000          0.70732
+       2        540.00000          0.29268
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SCSF5_5            1.000      0.000    999.000    999.000
+    SCSF5_6            1.000      0.000    999.000    999.000
+    SCSF5_7            1.000      0.000    999.000    999.000
+    SCSF5_8            1.000      0.000    999.000    999.000
+    SCSF5_10           1.000      0.000    999.000    999.000
+
+ S        |
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.495      0.108      4.583      0.000
+    SCSF5_7            0.226      0.122      1.862      0.063
+    SCSF5_8            0.510      0.116      4.379      0.000
+    SCSF5_10           1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.130      0.108     -1.206      0.228
+
+ Means
+    I                  1.797      0.057     31.363      0.000
+    S                  0.487      0.029     16.827      0.000
+
+ Intercepts
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.000      0.000    999.000    999.000
+    SCSF5_7            0.000      0.000    999.000    999.000
+    SCSF5_8            0.000      0.000    999.000    999.000
+    SCSF5_10           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  0.940      0.111      8.445      0.000
+    S                  0.274      0.129      2.131      0.033
+
+ Residual Variances
+    SCSF5_5            0.487      0.029     16.827      0.000
+    SCSF5_6            0.487      0.029     16.827      0.000
+    SCSF5_7            0.487      0.029     16.827      0.000
+    SCSF5_8            0.487      0.029     16.827      0.000
+    SCSF5_10           0.487      0.029     16.827      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    SCSF5_5            1.000      0.000    999.000    999.000
+    SCSF5_6            1.000      0.000    999.000    999.000
+    SCSF5_7            1.000      0.000    999.000    999.000
+    SCSF5_8            1.000      0.000    999.000    999.000
+    SCSF5_10           1.000      0.000    999.000    999.000
+
+ S        |
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.495      0.108      4.583      0.000
+    SCSF5_7            0.226      0.122      1.862      0.063
+    SCSF5_8            0.510      0.116      4.379      0.000
+    SCSF5_10           1.000      0.000    999.000    999.000
+
+ S        WITH
+    I                 -0.045      0.093     -0.485      0.627
+
+ Means
+    I                  1.593      0.052     30.635      0.000
+    S                  0.487      0.029     16.827      0.000
+
+ Intercepts
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.000      0.000    999.000    999.000
+    SCSF5_7            0.000      0.000    999.000    999.000
+    SCSF5_8            0.000      0.000    999.000    999.000
+    SCSF5_10           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  0.523      0.086      6.061      0.000
+    S                  0.274      0.129      2.131      0.033
+
+ Residual Variances
+    SCSF5_5            0.487      0.029     16.827      0.000
+    SCSF5_6            0.487      0.029     16.827      0.000
+    SCSF5_7            0.487      0.029     16.827      0.000
+    SCSF5_8            0.487      0.029     16.827      0.000
+    SCSF5_10           0.487      0.029     16.827      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1                0.882      0.066     13.367      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.301E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1 (1)
+
+ I        |
+    SCSF5_5            0.812      0.019     42.008      0.000
+    SCSF5_6            0.830      0.040     20.519      0.000
+    SCSF5_7            0.825      0.031     26.391      0.000
+    SCSF5_8            0.830      0.041     20.314      0.000
+    SCSF5_10           0.808      0.054     14.865      0.000
+
+ S        |
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.222      0.083      2.667      0.008
+    SCSF5_7            0.101      0.061      1.646      0.100
+    SCSF5_8            0.228      0.093      2.444      0.015
+    SCSF5_10           0.436      0.104      4.208      0.000
+
+ S        WITH
+    I                 -0.255      0.159     -1.604      0.109
+
+ Means
+    I                  1.854      0.116     15.986      0.000
+    S                  0.930      0.238      3.900      0.000
+
+ Intercepts
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.000      0.000    999.000    999.000
+    SCSF5_7            0.000      0.000    999.000    999.000
+    SCSF5_8            0.000      0.000    999.000    999.000
+    SCSF5_10           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCSF5_5            0.341      0.031     10.875      0.000
+    SCSF5_6            0.356      0.025     14.498      0.000
+    SCSF5_7            0.352      0.027     13.262      0.000
+    SCSF5_8            0.356      0.025     14.457      0.000
+    SCSF5_10           0.338      0.028     11.929      0.000
+
+Latent Class 2 (2)
+
+ I        |
+    SCSF5_5            0.720      0.032     22.358      0.000
+    SCSF5_6            0.712      0.054     13.250      0.000
+    SCSF5_7            0.722      0.042     17.150      0.000
+    SCSF5_8            0.711      0.052     13.645      0.000
+    SCSF5_10           0.662      0.063     10.441      0.000
+
+ S        |
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.255      0.094      2.728      0.006
+    SCSF5_7            0.118      0.072      1.650      0.099
+    SCSF5_8            0.262      0.105      2.486      0.013
+    SCSF5_10           0.479      0.110      4.353      0.000
+
+ S        WITH
+    I                 -0.120      0.222     -0.538      0.590
+
+ Means
+    I                  2.204      0.180     12.268      0.000
+    S                  0.930      0.238      3.900      0.000
+
+ Intercepts
+    SCSF5_5            0.000      0.000    999.000    999.000
+    SCSF5_6            0.000      0.000    999.000    999.000
+    SCSF5_7            0.000      0.000    999.000    999.000
+    SCSF5_8            0.000      0.000    999.000    999.000
+    SCSF5_10           0.000      0.000    999.000    999.000
+
+ Variances
+    I                  1.000      0.000    999.000    999.000
+    S                  1.000      0.000    999.000    999.000
+
+ Residual Variances
+    SCSF5_5            0.482      0.046     10.405      0.000
+    SCSF5_6            0.472      0.036     13.088      0.000
+    SCSF5_7            0.485      0.038     12.933      0.000
+    SCSF5_8            0.470      0.036     12.951      0.000
+    SCSF5_10           0.408      0.042      9.667      0.000
+
+
+R-SQUARE
+
+Class 1
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCSF5_5            0.659      0.031     21.004      0.000
+    SCSF5_6            0.644      0.025     26.178      0.000
+    SCSF5_7            0.648      0.027     24.397      0.000
+    SCSF5_8            0.644      0.025     26.111      0.000
+    SCSF5_10           0.662      0.028     23.401      0.000
+
+Class 2
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    SCSF5_5            0.518      0.046     11.179      0.000
+    SCSF5_6            0.528      0.036     14.662      0.000
+    SCSF5_7            0.515      0.038     13.723      0.000
+    SCSF5_8            0.530      0.036     14.581      0.000
+    SCSF5_10           0.592      0.042     14.029      0.000
+
+
+     Beginning Time:  20:21:09
+        Ending Time:  20:21:16
+       Elapsed Time:  00:00:07
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen
